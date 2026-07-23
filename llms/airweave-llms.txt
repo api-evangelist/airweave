@@ -1,0 +1,119 @@
+# Airweave
+
+## Instructions for AI Agents
+
+- For clean Markdown of any page, append `.md` to the page URL
+- For section-specific indexes, append `/llms.txt` to any section URL
+- For AI client integration (Claude Code, Cursor, etc.), connect to the MCP server at https://docs.airweave.ai/_mcp/server
+
+## Docs
+
+- [Welcome to Airweave](https://docs.airweave.ai/welcome.md)
+- [Quickstart](https://docs.airweave.ai/quickstart.md)
+- [Concepts](https://docs.airweave.ai/concepts.md)
+- [Search](https://docs.airweave.ai/search.md): Search API reference for Airweave
+- [MCP Server](https://docs.airweave.ai/mcp-server.md): Serve your Airweave collection through an MCP server so that AI assistants like Cursor, Claude Desktop, VS Code, or OpenAI can query it directly.
+- [CLI](https://docs.airweave.ai/cli.md): Search your Airweave collections, manage sources, and trigger syncs, all from the terminal.
+- [Agent Skills](https://docs.airweave.ai/skills.md): Reusable skills that teach AI agents how to set up, search, and work with Airweave, installable with a single command.
+- [Airweave Connect](https://docs.airweave.ai/connect.md): Let your users connect their own data sources with a pre-built, embeddable UI component. No auth UI to build.
+- [Webhooks Overview](https://docs.airweave.ai/webhooks/overview.md): Real-time notifications for sync, source connection, and collection lifecycle events via webhooks
+- [Types & Formats](https://docs.airweave.ai/webhooks/types-and-formats.md): Event payload structures and delivery format
+- [Setup Guide](https://docs.airweave.ai/webhooks/setup.md): Create webhooks and start receiving events
+- [Add New Connector](https://docs.airweave.ai/add-new-source.md)
+- [Rate Limits](https://docs.airweave.ai/rate-limits.md)
+- [LlamaIndex](https://docs.airweave.ai/framework-integrations/llamaindex.md): Connect your LlamaIndex agent to Airweave for semantic search across all your synced data sources.
+- [Vercel AI SDK](https://docs.airweave.ai/framework-integrations/vercel-ai-sdk.md): Add Airweave search to your Vercel AI SDK agents with a single function call.
+- [Google Antigravity](https://docs.airweave.ai/framework-integrations/google-antigravity.md): Airweave is available natively in the Antigravity MCP Store, giving your coding agents the ability to search and retrieve context across all your apps and databases.
+- [Pipedream](https://docs.airweave.ai/framework-integrations/pipedream.md): Connect Airweave with your Pipedream workflows to empower your agents and automations with intelligent, context-aware data from all your connected apps and databases.
+- [Sim](https://docs.airweave.ai/framework-integrations/sim.md): Search your Airweave collections directly from Sim workflows using the native Airweave block.
+- [Authentication Providers](https://docs.airweave.ai/auth-providers.md): Reuse existing data source connections from third-party platforms instead of requiring users to authenticate again.
+- [Composio Integration Guide](https://docs.airweave.ai/auth-providers/composio.md): Step-by-step guide to integrate Composio as an authentication provider for Airweave
+- [Pipedream Integration Guide](https://docs.airweave.ai/auth-providers/pipedream.md): Step-by-step guide to integrate Pipedream as an authentication provider for Airweave
+- [Direct OAuth](https://docs.airweave.ai/direct-oauth.md): Connect sources using browser OAuth flow with URL-based connections or BYOC (Bring Your Own Credentials).
+- [Direct Token Injection](https://docs.airweave.ai/direct-token-injection.md): Create source connections or trigger syncs by supplying OAuth&nbsp;2.0 tokens directly.
+- [Connectors](https://docs.airweave.ai/connectors/overview.md): Connect your apps, databases, and documents to make them searchable
+- [Airtable](https://docs.airweave.ai/docs/connectors/airtable.md): Airtable integration with Airweave
+- [Apollo](https://docs.airweave.ai/docs/connectors/apollo.md): Apollo integration with Airweave
+- [Asana](https://docs.airweave.ai/docs/connectors/asana.md): Asana integration with Airweave
+- [Attio](https://docs.airweave.ai/docs/connectors/attio.md): Attio integration with Airweave
+- [Bitbucket](https://docs.airweave.ai/docs/connectors/bitbucket.md): Bitbucket integration with Airweave
+- [Box](https://docs.airweave.ai/docs/connectors/box.md): Box integration with Airweave
+- [Calcom](https://docs.airweave.ai/docs/connectors/calcom.md): Calcom integration with Airweave
+- [Clickup](https://docs.airweave.ai/docs/connectors/clickup.md): Clickup integration with Airweave
+- [Coda](https://docs.airweave.ai/docs/connectors/coda.md): Coda integration with Airweave
+- [Confluence](https://docs.airweave.ai/docs/connectors/confluence.md): Confluence integration with Airweave
+- [Ctti](https://docs.airweave.ai/docs/connectors/ctti.md): Ctti integration with Airweave
+- [Document360](https://docs.airweave.ai/docs/connectors/document-360.md): Document360 integration with Airweave
+- [Dropbox](https://docs.airweave.ai/docs/connectors/dropbox.md): Dropbox integration with Airweave
+- [Fireflies](https://docs.airweave.ai/docs/connectors/fireflies.md): Fireflies integration with Airweave
+- [Freshdesk](https://docs.airweave.ai/docs/connectors/freshdesk.md): Freshdesk integration with Airweave
+- [Github](https://docs.airweave.ai/docs/connectors/github.md): Github integration with Airweave
+- [Gitlab](https://docs.airweave.ai/docs/connectors/gitlab.md): Gitlab integration with Airweave
+- [Gmail](https://docs.airweave.ai/docs/connectors/gmail.md): Gmail integration with Airweave
+- [Google Calendar](https://docs.airweave.ai/docs/connectors/google-calendar.md): Google Calendar integration with Airweave
+- [Google Docs](https://docs.airweave.ai/docs/connectors/google-docs.md): Google Docs integration with Airweave
+- [Google Drive](https://docs.airweave.ai/docs/connectors/google-drive.md): Google Drive integration with Airweave
+- [Google Slides](https://docs.airweave.ai/docs/connectors/google-slides.md): Google Slides integration with Airweave
+- [Hubspot](https://docs.airweave.ai/docs/connectors/hubspot.md): Hubspot integration with Airweave
+- [Intercom](https://docs.airweave.ai/docs/connectors/intercom.md): Intercom integration with Airweave
+- [Jira](https://docs.airweave.ai/docs/connectors/jira.md): Jira integration with Airweave
+- [Linear](https://docs.airweave.ai/docs/connectors/linear.md): Linear integration with Airweave
+- [Monday](https://docs.airweave.ai/docs/connectors/monday.md): Monday integration with Airweave
+- [Notion](https://docs.airweave.ai/docs/connectors/notion.md): Notion integration with Airweave
+- [Onedrive](https://docs.airweave.ai/docs/connectors/onedrive.md): Onedrive integration with Airweave
+- [Onenote](https://docs.airweave.ai/docs/connectors/onenote.md): Onenote integration with Airweave
+- [Outlook Calendar](https://docs.airweave.ai/docs/connectors/outlook-calendar.md): Outlook Calendar integration with Airweave
+- [Outlook Mail](https://docs.airweave.ai/docs/connectors/outlook-mail.md): Outlook Mail integration with Airweave
+- [Pipedrive](https://docs.airweave.ai/docs/connectors/pipedrive.md): Pipedrive integration with Airweave
+- [Powerpoint](https://docs.airweave.ai/docs/connectors/powerpoint.md): Powerpoint integration with Airweave
+- [Salesforce](https://docs.airweave.ai/docs/connectors/salesforce.md): Salesforce integration with Airweave
+- [Servicenow](https://docs.airweave.ai/docs/connectors/servicenow.md): Servicenow integration with Airweave
+- [Sharepoint](https://docs.airweave.ai/docs/connectors/sharepoint.md): Sharepoint integration with Airweave
+- [Shopify](https://docs.airweave.ai/docs/connectors/shopify.md): Shopify integration with Airweave
+- [Slab](https://docs.airweave.ai/docs/connectors/slab.md): Slab integration with Airweave
+- [Slack](https://docs.airweave.ai/docs/connectors/slack.md): Slack integration with Airweave
+- [Slite](https://docs.airweave.ai/docs/connectors/slite.md): Slite integration with Airweave
+- [Stripe](https://docs.airweave.ai/docs/connectors/stripe.md): Stripe integration with Airweave
+- [Teams](https://docs.airweave.ai/docs/connectors/teams.md): Teams integration with Airweave
+- [Todoist](https://docs.airweave.ai/docs/connectors/todoist.md): Todoist integration with Airweave
+- [Trello](https://docs.airweave.ai/docs/connectors/trello.md): Trello integration with Airweave
+- [Word](https://docs.airweave.ai/docs/connectors/word.md): Word integration with Airweave
+- [Zendesk](https://docs.airweave.ai/docs/connectors/zendesk.md): Zendesk integration with Airweave
+- [Zoho Crm](https://docs.airweave.ai/docs/connectors/zoho-crm.md): Zoho Crm integration with Airweave
+- [Zoom](https://docs.airweave.ai/docs/connectors/zoom.md): Zoom integration with Airweave
+
+## API Docs
+
+- API Reference > Collections [List Collections](https://docs.airweave.ai/api-reference/collections/list-collections-get.md)
+- API Reference > Collections [Get Collection](https://docs.airweave.ai/api-reference/collections/get-collections-readable-id-get.md)
+- API Reference > Collections [Create Collection](https://docs.airweave.ai/api-reference/collections/create-collections-post.md)
+- API Reference > Collections [Update Collection](https://docs.airweave.ai/api-reference/collections/update-collections-readable-id-patch.md)
+- API Reference > Collections [Delete Collection](https://docs.airweave.ai/api-reference/collections/delete-collections-readable-id-delete.md)
+- API Reference > Collections [Instant Search](https://docs.airweave.ai/api-reference/collections/instant.md)
+- API Reference > Collections [Classic Search](https://docs.airweave.ai/api-reference/collections/classic.md)
+- API Reference > Collections [Agentic Search](https://docs.airweave.ai/api-reference/collections/agentic.md)
+- API Reference > Collections [Stream Agentic Search](https://docs.airweave.ai/api-reference/collections/stream-agentic.md)
+- API Reference > Source Connections [List Source Connections](https://docs.airweave.ai/api-reference/source-connections/list-source-connections-get.md)
+- API Reference > Source Connections [Get Source Connection](https://docs.airweave.ai/api-reference/source-connections/get-source-connections-source-connection-id-get.md)
+- API Reference > Source Connections [List Sync Jobs](https://docs.airweave.ai/api-reference/source-connections/get-source-connection-jobs-source-connections-source-connection-id-jobs-get.md)
+- API Reference > Source Connections [Create Source Connection](https://docs.airweave.ai/api-reference/source-connections/create-source-connections-post.md)
+- API Reference > Source Connections [Update Source Connection](https://docs.airweave.ai/api-reference/source-connections/update-source-connections-source-connection-id-patch.md)
+- API Reference > Source Connections [Run Sync](https://docs.airweave.ai/api-reference/source-connections/run-source-connections-source-connection-id-run-post.md)
+- API Reference > Source Connections [Cancel Sync Job](https://docs.airweave.ai/api-reference/source-connections/cancel-job-source-connections-source-connection-id-jobs-job-id-cancel-post.md)
+- API Reference > Source Connections [Delete Source Connection](https://docs.airweave.ai/api-reference/source-connections/delete-source-connections-source-connection-id-delete.md)
+- API Reference > Sources [List Sources](https://docs.airweave.ai/api-reference/sources/list-sources-get.md)
+- API Reference > Sources [Get Source](https://docs.airweave.ai/api-reference/sources/get-sources-short-name-get.md)
+- API Reference > Webhooks [List Messages](https://docs.airweave.ai/api-reference/webhooks/get-messages-webhooks-messages-get.md)
+- API Reference > Webhooks [Get Message](https://docs.airweave.ai/api-reference/webhooks/get-message-webhooks-messages-message-id-get.md)
+- API Reference > Webhooks [List Subscriptions](https://docs.airweave.ai/api-reference/webhooks/get-subscriptions-webhooks-subscriptions-get.md)
+- API Reference > Webhooks [Get Subscription](https://docs.airweave.ai/api-reference/webhooks/get-subscription-webhooks-subscriptions-subscription-id-get.md)
+- API Reference > Webhooks [Create Subscription](https://docs.airweave.ai/api-reference/webhooks/create-subscription-webhooks-subscriptions-post.md)
+- API Reference > Webhooks [Update Subscription](https://docs.airweave.ai/api-reference/webhooks/patch-subscription-webhooks-subscriptions-subscription-id-patch.md)
+- API Reference > Webhooks [Recover Failed Messages](https://docs.airweave.ai/api-reference/webhooks/recover-failed-messages-webhooks-subscriptions-subscription-id-recover-post.md)
+- API Reference > Webhooks [Delete Subscription](https://docs.airweave.ai/api-reference/webhooks/delete-subscription-webhooks-subscriptions-subscription-id-delete.md)
+
+## OpenAPI Specification
+
+The raw OpenAPI 3.1 specification for this API is available at:
+- [OpenAPI JSON](https://docs.airweave.ai/openapi.json)
+- [OpenAPI YAML](https://docs.airweave.ai/openapi.yaml)

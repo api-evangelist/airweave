@@ -1,0 +1,42 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.airweave.ai/
+authentication:
+  style: api-key
+  header: x-api-key
+  notes: >-
+    REST API uses an x-api-key header (see authentication/airweave-authentication.yml).
+    The MCP server and Connect widget additionally support OAuth 2.0 via Auth0.
+idempotency:
+  supported: false
+  notes: >-
+    Airweave does not document an idempotency-key contract for its public REST API as of
+    this capture. Resource creation is not de-duplicated via a client-supplied key.
+pagination:
+  style: offset-limit
+  request_params: [limit, offset]
+  notes: Search and list endpoints accept limit/offset; search results carry breadcrumb + system metadata.
+versioning:
+  scheme: unversioned-path
+  notes: The public API is served under https://api.airweave.ai without a version path segment.
+rate_limiting:
+  headers: [RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset]
+  over_limit_status: 429
+  retry_header: Retry-After
+  see: rate-limits/airweave-rate-limits.yml
+error_envelope:
+  format: custom-json
+  notes: >-
+    Errors are JSON objects with a human-readable message (not RFC 9457 problem+json).
+    Typed responses: NotFoundErrorResponse (404), ConflictErrorResponse (409),
+    ValidationErrorResponse/HTTPValidationError (422), RateLimitErrorResponse (429).
+  see: errors/airweave-problem-types.yml
+webhooks:
+  provider: svix
+  signature: svix-signature (HMAC-SHA256)
+  see: asyncapi/airweave-webhooks.yml
+cross_links:
+  authentication: authentication/airweave-authentication.yml
+  errors: errors/airweave-problem-types.yml
+  lifecycle: lifecycle/airweave-lifecycle.yml
+  rate_limits: rate-limits/airweave-rate-limits.yml

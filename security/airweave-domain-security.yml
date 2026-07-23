@@ -1,0 +1,22 @@
+generated: '2026-07-17'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: airweave.ai
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 15 18:03:00 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: api.airweave.ai
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 13 11:15:36 2026 GMT
+  hsts: null
+domains:
+- domain: airweave.ai
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

@@ -1,0 +1,941 @@
+openapi: 3.1.0
+info:
+  title: API Reference collections webhooks API
+  version: 1.0.0
+servers:
+- url: https://api.airweave.ai
+  description: Production
+- url: http://localhost:8001
+  description: Local
+tags:
+- name: webhooks
+paths:
+  /webhooks/messages:
+    get:
+      operationId: get-messages-webhooks-messages-get
+      summary: List Messages
+      description: 'Retrieve all webhook messages for your organization.
+
+
+        Webhook messages represent payloads that were sent (or attempted to be sent)
+
+        to your subscribed endpoints. Each message contains the event type, payload data,
+
+        and delivery status information.
+
+
+        Use the `event_types` query parameter to filter messages by specific event types,
+
+        such as `sync.completed` or `sync.failed`.'
+      tags:
+      - webhooks
+      parameters:
+      - name: event_types
+        in: query
+        description: Filter messages by event type(s). Accepts multiple values, e.g., `?event_types=sync.completed&event_types=sync.failed`.
+        required: false
+        schema:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of webhook messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebhookMessage'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+  /webhooks/messages/{message_id}:
+    get:
+      operationId: get-message-webhooks-messages-message-id-get
+      summary: Get Message
+      description: 'Retrieve a specific webhook message by its ID.
+
+
+        Returns the full message details including the event type, payload data,
+
+        timestamp, and delivery channel information. Use this to inspect the
+
+        exact payload that was sent to your webhook endpoints.
+
+
+        Use `include_attempts=true` to also retrieve delivery attempts for this message,
+
+        which include HTTP response codes, response bodies, and timestamps for debugging
+
+        delivery failures.'
+      tags:
+      - webhooks
+      parameters:
+      - name: message_id
+        in: path
+        description: The unique identifier of the message to retrieve (UUID).
+        required: true
+        schema:
+          type: string
+      - name: include_attempts
+        in: query
+        description: Include delivery attempts for this message. Each attempt includes the HTTP response code, response body, and timestamp.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Webhook message details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookMessageWithAttempts'
+        '404':
+          description: Message Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+  /webhooks/subscriptions:
+    get:
+      operationId: get-subscriptions-webhooks-subscriptions-get
+      summary: List Subscriptions
+      description: 'List all webhook subscriptions for your organization.
+
+
+        Returns all configured webhook endpoints, including their URLs, subscribed
+
+        event types, and current status (enabled/disabled). Use this to audit
+
+        your webhook configuration or find a specific subscription.'
+      tags:
+      - webhooks
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of webhook subscriptions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebhookSubscription'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+    post:
+      operationId: create-subscription-webhooks-subscriptions-post
+      summary: Create Subscription
+      description: 'Create a new webhook subscription.
+
+
+        Webhook subscriptions allow you to receive real-time notifications when events
+
+        occur in Airweave. When you create a subscription, you specify:
+
+
+        - **URL**: The HTTPS endpoint where events will be delivered
+
+        - **Event Types**: Which events you want to receive (e.g., `sync.completed`, `sync.failed`)
+
+        - **Secret** (optional): A custom signing secret for verifying webhook signatures
+
+
+        After creation, Airweave will send HTTP POST requests to your URL whenever
+
+        matching events occur. Each request includes a signature header for verification.'
+      tags:
+      - webhooks
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Created subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscription'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSubscriptionRequest'
+  /webhooks/subscriptions/{subscription_id}:
+    get:
+      operationId: get-subscription-webhooks-subscriptions-subscription-id-get
+      summary: Get Subscription
+      description: 'Retrieve a specific webhook subscription with its recent delivery attempts.
+
+
+        Returns the subscription configuration along with a history of message delivery
+
+        attempts. This is useful for debugging delivery issues or verifying that your
+
+        endpoint is correctly receiving events.
+
+
+        Use `include_secret=true` to also retrieve the signing secret for webhook
+
+        signature verification. Keep this secret secure.'
+      tags:
+      - webhooks
+      parameters:
+      - name: subscription_id
+        in: path
+        description: The unique identifier of the subscription to retrieve (UUID).
+        required: true
+        schema:
+          type: string
+      - name: include_secret
+        in: query
+        description: Include the signing secret for webhook signature verification. Keep this secret secure and use it to verify the 'svix-signature' header.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Subscription with delivery attempts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscriptionDetail'
+        '404':
+          description: Subscription Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+    patch:
+      operationId: patch-subscription-webhooks-subscriptions-subscription-id-patch
+      summary: Update Subscription
+      description: 'Update an existing webhook subscription.
+
+
+        Use this endpoint to modify a subscription''s configuration. You can:
+
+
+        - **Change the URL**: Update where events are delivered
+
+        - **Update event types**: Modify which events trigger notifications
+
+        - **Enable/disable**: Temporarily pause delivery without deleting the subscription
+
+        - **Recover messages**: When re-enabling, optionally recover missed messages
+
+
+        Only include the fields you want to change. Omitted fields will retain their
+
+        current values.
+
+
+        When re-enabling a subscription (`disabled: false`), you can optionally provide
+
+        `recover_since` to automatically retry all messages that were generated while
+
+        the subscription was disabled.'
+      tags:
+      - webhooks
+      parameters:
+      - name: subscription_id
+        in: path
+        description: The unique identifier of the subscription to update (UUID).
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Updated subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscription'
+        '404':
+          description: Subscription Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchSubscriptionRequest'
+    delete:
+      operationId: delete-subscription-webhooks-subscriptions-subscription-id-delete
+      summary: Delete Subscription
+      description: 'Permanently delete a webhook subscription.
+
+
+        Once deleted, Airweave will stop sending events to this endpoint immediately.
+
+        This action cannot be undone. Any pending message deliveries will be cancelled.
+
+
+        If you want to temporarily stop receiving events, consider disabling the
+
+        subscription instead using the PATCH endpoint.'
+      tags:
+      - webhooks
+      parameters:
+      - name: subscription_id
+        in: path
+        description: The unique identifier of the subscription to delete (UUID).
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Deleted subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscription'
+        '404':
+          description: Subscription Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+  /webhooks/subscriptions/{subscription_id}/recover:
+    post:
+      operationId: recover-failed-messages-webhooks-subscriptions-subscription-id-recover-post
+      summary: Recover Failed Messages
+      description: 'Retry failed message deliveries for a webhook subscription.
+
+
+        Triggers a recovery process that replays all failed messages within the
+
+        specified time window. This is useful when:
+
+
+        - Your endpoint was temporarily down and you want to catch up
+
+        - You''ve fixed a bug in your webhook handler
+
+        - You want to reprocess events after re-enabling a disabled subscription
+
+
+        Messages are retried in chronological order. Successfully delivered messages
+
+        are skipped; only failed or pending messages are retried.'
+      tags:
+      - webhooks
+      parameters:
+      - name: subscription_id
+        in: path
+        description: The unique identifier of the subscription to recover messages for (UUID).
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Recovery task information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecoveryTask'
+        '404':
+          description: Subscription Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecoverMessagesRequest'
+components:
+  schemas:
+    HealthStatus:
+      type: string
+      enum:
+      - healthy
+      - degraded
+      - failing
+      - unknown
+      description: Health status of a webhook subscription based on recent delivery attempts.
+      title: HealthStatus
+    ValidationErrorDetail:
+      type: object
+      properties:
+        loc:
+          type: array
+          items:
+            type: string
+          description: Location of the error (e.g., ['body', 'url'])
+        msg:
+          type: string
+          description: Human-readable error message
+        type:
+          type: string
+          description: Error type identifier
+      required:
+      - loc
+      - msg
+      - type
+      description: Details about a validation error for a specific field.
+      title: ValidationErrorDetail
+    CreateSubscriptionRequest:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The HTTPS URL where webhook events will be delivered. Must be a publicly accessible endpoint that returns a 2xx status code.
+        event_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventType'
+          description: 'List of event types to subscribe to. Events not in this list will not be delivered to this subscription. Available types: `sync.pending`, `sync.running`, `sync.completed`, `sync.failed`, `sync.cancelled`, `source_connection.created`, `source_connection.auth_completed`, `source_connection.deleted`, `collection.created`, `collection.updated`, `collection.deleted`.'
+        secret:
+          type:
+          - string
+          - 'null'
+          description: Optional custom signing secret for webhook signature verification. If not provided, a secure secret will be auto-generated. Must be at least 24 characters if specified.
+      required:
+      - url
+      - event_types
+      description: 'Create a new webhook subscription.
+
+
+        Webhook subscriptions define where Airweave should send event notifications.
+
+        You can subscribe to specific event types to receive only the events you care about.'
+      title: CreateSubscriptionRequest
+    WebhookMessageWithAttempts:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this message (UUID format)
+        event_type:
+          type: string
+          description: The type of event (e.g., 'sync.completed', 'sync.failed')
+        payload:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: The event payload data, matching what is delivered to webhooks. Structure varies by event_type.
+        timestamp:
+          type: string
+          format: date-time
+          description: When this message was created (ISO 8601 format, UTC)
+        channels:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Channels this message was sent to (typically matches the event type)
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Tags associated with this message for filtering
+        delivery_attempts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DeliveryAttempt'
+          description: Delivery attempts for this message.
+      required:
+      - id
+      - event_type
+      - payload
+      - timestamp
+      description: A webhook message with delivery attempts.
+      title: WebhookMessageWithAttempts
+    WebhookSubscriptionDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this subscription (UUID format)
+        url:
+          type: string
+          description: The URL where webhook events are delivered
+        filter_types:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Event types this subscription is filtered to receive. See EventType enum for all available types.
+        disabled:
+          type: boolean
+          default: false
+          description: Whether this subscription is currently disabled. Disabled subscriptions do not receive event deliveries.
+        description:
+          type:
+          - string
+          - 'null'
+          description: Optional human-readable description of this subscription
+        created_at:
+          type: string
+          format: date-time
+          description: When this subscription was created (ISO 8601 format, UTC)
+        updated_at:
+          type: string
+          format: date-time
+          description: When this subscription was last updated (ISO 8601 format, UTC)
+        health_status:
+          $ref: '#/components/schemas/HealthStatus'
+          description: 'Health status of this subscription based on recent delivery attempts. Values: ''healthy'' (all recent deliveries succeeded), ''degraded'' (mix of successes and failures), ''failing'' (consecutive failures beyond threshold), ''unknown'' (no delivery data yet).'
+        delivery_attempts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DeliveryAttempt'
+          description: Recent delivery attempts for this subscription.
+        secret:
+          type:
+          - string
+          - 'null'
+          description: The signing secret for webhook signature verification. Only included when include_secret=true is passed to the API. Keep this secret secure.
+      required:
+      - id
+      - url
+      - created_at
+      - updated_at
+      description: 'Full subscription detail, including delivery attempts and signing secret.
+
+
+        Returned by ``GET /subscriptions/{id}`` only.'
+      title: WebhookSubscriptionDetail
+    RecoveryTask:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this recovery task (Svix internal ID)
+        status:
+          type: string
+          description: 'Recovery task status: ''running'' or ''completed'''
+      required:
+      - id
+      - status
+      description: 'Information about a message recovery task.
+
+
+        When you trigger a recovery of failed messages, this object is returned
+
+        to track the recovery progress. The status indicates whether the recovery
+
+        is still in progress or has completed.'
+      title: RecoveryTask
+    ValidationErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorDetail'
+          description: List of validation errors
+      required:
+      - detail
+      description: 'Response returned when request validation fails (HTTP 422).
+
+
+        This occurs when the request body contains invalid data, such as
+
+        malformed URLs, invalid event types, or missing required fields.'
+      title: ValidationErrorResponse
+    WebhookSubscription:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this subscription (UUID format)
+        url:
+          type: string
+          description: The URL where webhook events are delivered
+        filter_types:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Event types this subscription is filtered to receive. See EventType enum for all available types.
+        disabled:
+          type: boolean
+          default: false
+          description: Whether this subscription is currently disabled. Disabled subscriptions do not receive event deliveries.
+        description:
+          type:
+          - string
+          - 'null'
+          description: Optional human-readable description of this subscription
+        created_at:
+          type: string
+          format: date-time
+          description: When this subscription was created (ISO 8601 format, UTC)
+        updated_at:
+          type: string
+          format: date-time
+          description: When this subscription was last updated (ISO 8601 format, UTC)
+        health_status:
+          $ref: '#/components/schemas/HealthStatus'
+          description: 'Health status of this subscription based on recent delivery attempts. Values: ''healthy'' (all recent deliveries succeeded), ''degraded'' (mix of successes and failures), ''failing'' (consecutive failures beyond threshold), ''unknown'' (no delivery data yet).'
+      required:
+      - id
+      - url
+      - created_at
+      - updated_at
+      description: 'A webhook subscription (endpoint) configuration.
+
+
+        This is the lightweight representation returned by list, create, update,
+
+        and delete endpoints.  For the full detail view (delivery attempts,
+
+        signing secret) see ``WebhookSubscriptionDetail``.'
+      title: WebhookSubscription
+    RecoverMessagesRequest:
+      type: object
+      properties:
+        since:
+          type: string
+          format: date-time
+          description: Start of the recovery time window (inclusive). All failed messages from this time onward will be retried.
+        until:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: End of the recovery time window (exclusive). If not specified, recovers all failed messages up to now.
+      required:
+      - since
+      description: 'Request to retry failed message deliveries.
+
+
+        Use this to replay events that failed to deliver during a specific time window,
+
+        for example after fixing an issue with your webhook endpoint.'
+      title: RecoverMessagesRequest
+    DeliveryAttempt:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this delivery attempt
+        message_id:
+          type: string
+          description: The event message that was being delivered
+        endpoint_id:
+          type: string
+          description: The subscription endpoint this was delivered to
+        response:
+          type:
+          - string
+          - 'null'
+          description: The response body returned by your webhook endpoint (truncated to 1KB)
+        response_status_code:
+          type: integer
+          description: HTTP status code returned by your webhook endpoint. 2xx codes indicate success; other codes trigger retries.
+        status:
+          type: string
+          description: 'Delivery status: `success` (2xx response), `pending` (awaiting delivery), or `failed` (non-2xx response or timeout)'
+        timestamp:
+          type: string
+          format: date-time
+          description: When this delivery attempt occurred (ISO 8601 format, UTC)
+        url:
+          type:
+          - string
+          - 'null'
+          description: The URL that was called
+      required:
+      - id
+      - message_id
+      - endpoint_id
+      - response_status_code
+      - status
+      - timestamp
+      description: 'A delivery attempt for a webhook message.
+
+
+        Each time Airweave attempts to deliver a message to your webhook endpoint,
+
+        a delivery attempt is recorded. Failed attempts are automatically retried
+
+        with exponential backoff.'
+      title: DeliveryAttempt
+    WebhookMessage:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this message (UUID format)
+        event_type:
+          type: string
+          description: The type of event (e.g., 'sync.completed', 'sync.failed')
+        payload:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: The event payload data, matching what is delivered to webhooks. Structure varies by event_type.
+        timestamp:
+          type: string
+          format: date-time
+          description: When this message was created (ISO 8601 format, UTC)
+        channels:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Channels this message was sent to (typically matches the event type)
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Tags associated with this message for filtering
+      required:
+      - id
+      - event_type
+      - payload
+      - timestamp
+      description: 'A webhook message that was sent (or attempted) to webhook subscribers.
+
+
+        The payload contains the actual event data matching the webhook delivery format.'
+      title: WebhookMessage
+    EventType:
+      type: string
+      enum:
+      - sync.pending
+      - sync.running
+      - sync.cancelling
+      - sync.completed
+      - sync.failed
+      - sync.cancelled
+      - entity.batch_processed
+      - query.processed
+      - access_control.batch_processed
+      - collection.created
+      - collection.updated
+      - collection.deleted
+      - source_connection.created
+      - source_connection.auth_completed
+      - source_connection.deleted
+      - organization.created
+      - organization.deleted
+      - organization.member_added
+      - organization.member_removed
+      - search.started
+      - search.completed
+      - search.failed
+      - search.reranking
+      - search.thinking
+      - search.tool_called
+      title: EventType
+    NotFoundErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message describing what was not found
+      required:
+      - detail
+      description: Response returned when a resource is not found (HTTP 404).
+      title: NotFoundErrorResponse
+    PatchSubscriptionRequest:
+      type: object
+      properties:
+        url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: New URL for webhook delivery. Must be a publicly accessible HTTPS endpoint.
+        event_types:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/EventType'
+          description: New list of event types to subscribe to. This replaces the existing list entirely.
+        disabled:
+          type:
+          - boolean
+          - 'null'
+          description: Set to `true` to pause delivery to this subscription, or `false` to resume. Disabled subscriptions will not receive events.
+        recover_since:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: 'When re-enabling a subscription (`disabled: false`), optionally recover failed messages from this timestamp. Only applies when enabling.'
+      description: 'Update an existing webhook subscription.
+
+
+        All fields are optional. Only provided fields will be updated;
+
+        omitted fields retain their current values.
+
+
+        When re-enabling a subscription (setting `disabled: false`), you can optionally
+
+        provide `recover_since` to replay messages that were missed while disabled.'
+      title: PatchSubscriptionRequest
+    RateLimitErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message explaining the rate limit
+      required:
+      - detail
+      description: 'Response returned when rate limit is exceeded (HTTP 429).
+
+
+        The API enforces rate limits to ensure fair usage. When exceeded,
+
+        wait for the duration specified in the Retry-After header before retrying.'
+      title: RateLimitErrorResponse
+  securitySchemes:
+    default:
+      type: apiKey
+      in: header
+      name: x-api-key

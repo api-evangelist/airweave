@@ -1,0 +1,21 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.airweave.ai/
+versioning:
+  scheme: unversioned-path
+  current: null
+  notes: Public API served under https://api.airweave.ai with no version path segment; SDKs are versioned on npm/PyPI.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No published deprecation policy or RFC 8594 Sunset/Deprecation header support found.
+sla:
+  url: null
+status_page: null
+deprecated_operations: []
+open_source:
+  repo: https://github.com/airweave-ai/airweave
+  license: MIT
+notes: >-
+  Airweave is open-source (MIT). No dedicated status page (status.airweave.ai did not
+  resolve) or formal deprecation policy was found at capture time.

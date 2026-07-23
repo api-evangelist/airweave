@@ -1,0 +1,27 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/airweave-openapi.json
+format: custom-json          # not RFC 9457 problem+json
+envelope:
+  notes: Error responses are JSON objects carrying a human-readable message field.
+problems:
+  - status: 404
+    schema: NotFoundErrorResponse
+    title: Collection Not Found
+    remediation: Verify the collection readable_id / resource id exists and belongs to your organization.
+    source_operation: openapi/airweave-openapi.json#get-collections-readable-id-get
+  - status: 409
+    schema: ConflictErrorResponse
+    title: Sync Already Running
+    remediation: A sync job is already in progress for this source connection; wait for it to finish or cancel it before re-running.
+    source_operation: openapi/airweave-openapi.json#run-source-connections-source-connection-id-run-post
+  - status: 422
+    schema: ValidationErrorResponse
+    title: Validation Error
+    remediation: Request body/parameters failed validation; inspect the error detail loc/msg fields (HTTPValidationError).
+    source_operation: openapi/airweave-openapi.json#create-collections-post
+  - status: 429
+    schema: RateLimitErrorResponse
+    title: Rate Limit Exceeded
+    remediation: Respect RateLimit-* headers; back off for the seconds given in Retry-After. See rate-limits/airweave-rate-limits.yml.
+    source_operation: openapi/airweave-openapi.json#instant

@@ -1,0 +1,22 @@
+{
+  "provider": "airweave",
+  "sources": [
+    "airweave-collections-api-openapi.yml",
+    "airweave-collections-search-api-openapi.yml",
+    "airweave-source-connections-api-openapi.yml",
+    "airweave-sources-api-openapi.yml",
+    "airweave-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "airweave-collections-api-openapi.yml",
+    "airweave-collections-search-api-openapi.yml",
+    "airweave-source-connections-api-openapi.yml",
+    "airweave-sources-api-openapi.yml",
+    "airweave-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

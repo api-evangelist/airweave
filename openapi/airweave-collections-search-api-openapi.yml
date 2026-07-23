@@ -1,0 +1,918 @@
+openapi: 3.1.0
+info:
+  title: API Reference collections collections > search API
+  version: 1.0.0
+servers:
+- url: https://api.airweave.ai
+  description: Production
+- url: http://localhost:8001
+  description: Local
+tags:
+- name: collections > search
+paths:
+  /collections/{readable_id}/search/instant:
+    post:
+      operationId: instant
+      summary: Instant Search
+      description: Direct vector search.
+      tags:
+      - collections > search
+      parameters:
+      - name: readable_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchV2Response'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstantSearchRequest'
+  /collections/{readable_id}/search/classic:
+    post:
+      operationId: classic
+      summary: Classic Search
+      description: AI-optimized search.
+      tags:
+      - collections > search
+      parameters:
+      - name: readable_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchV2Response'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassicSearchRequest'
+  /collections/{readable_id}/search/agentic:
+    post:
+      operationId: agentic
+      summary: Agentic Search
+      description: Agent that iteratively searches, reads, navigates hierarchies, and collects results.
+      tags:
+      - collections > search
+      parameters:
+      - name: readable_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchV2Response'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgenticSearchRequest'
+  /collections/{readable_id}/search/agentic/stream:
+    post:
+      operationId: stream-agentic
+      summary: Stream Agentic Search
+      description: Streaming agentic search via Server-Sent Events. Returns real-time events as the agent searches.
+      tags:
+      - collections > search
+      parameters:
+      - name: readable_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: SSE stream of agentic search events.
+          content:
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/AgenticSearchEvent'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgenticSearchRequest'
+components:
+  schemas:
+    ReadToolStats:
+      type: object
+      properties:
+        found:
+          type: integer
+          description: Entities successfully read.
+        not_found:
+          type: integer
+          description: Entity IDs that weren't found.
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntitySummary'
+        context_label:
+          type:
+          - string
+          - 'null'
+      description: Stats from a read tool call.
+      title: ReadToolStats
+    AgenticSearchToolCallEventType:
+      type: string
+      enum:
+      - tool_call
+      title: AgenticSearchToolCallEventType
+    AgenticSearchRerankingEvent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AgenticSearchRerankingEventType'
+        duration_ms:
+          type: integer
+        diagnostics:
+          $ref: '#/components/schemas/AgenticSearchRerankingEventDiagnostics'
+      required:
+      - type
+      - duration_ms
+      - diagnostics
+      title: AgenticSearchRerankingEvent
+    SearchSystemMetadata:
+      type: object
+      properties:
+        source_name:
+          type: string
+          description: Name of the source this entity belongs to.
+        entity_type:
+          type: string
+          description: Type of the entity this entity represents in the source.
+        sync_id:
+          type:
+          - string
+          - 'null'
+          description: ID of the sync this entity belongs to (None for federated).
+        sync_job_id:
+          type:
+          - string
+          - 'null'
+          description: ID of the sync job this entity belongs to (None for federated).
+        chunk_index:
+          type: integer
+          description: Index of the chunk in the file.
+        original_entity_id:
+          type: string
+          description: Original entity ID
+      required:
+      - source_name
+      - entity_type
+      - chunk_index
+      - original_entity_id
+      description: System metadata in search result.
+      title: SearchSystemMetadata
+    AgenticSearchToolCallEventToolName:
+      type: string
+      enum:
+      - search
+      - read
+      - add_to_results
+      - remove_from_results
+      - count
+      - get_children
+      - get_siblings
+      - get_parent
+      - review_results
+      - return_results_to_user
+      title: AgenticSearchToolCallEventToolName
+    ValidationError:
+      type: object
+      properties:
+        loc:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorLocItems'
+        msg:
+          type: string
+        type:
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ReviewToolStats:
+      type: object
+      properties:
+        total_collected:
+          type: integer
+        entity_count:
+          type: integer
+        first_results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntitySummary'
+      description: Stats from review_results.
+      title: ReviewToolStats
+    HTTPValidationError:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+      title: HTTPValidationError
+    ValidationErrorLocItems:
+      oneOf:
+      - type: string
+      - type: integer
+      title: ValidationErrorLocItems
+    ClassicSearchRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          description: Search query text.
+        filter:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FilterGroup'
+          description: Filter groups (combined with OR).
+        limit:
+          type: integer
+          default: 100
+          description: Max results to return.
+        offset:
+          type: integer
+          default: 0
+          description: Number of results to skip.
+      required:
+      - query
+      description: Classic search request — LLM generates a search plan, execute against Vespa.
+      title: ClassicSearchRequest
+    airweave__domains__search__types__plan__RetrievalStrategy:
+      type: string
+      enum:
+      - semantic
+      - keyword
+      - hybrid
+      description: Supported retrieval strategies.
+      title: airweave__domains__search__types__plan__RetrievalStrategy
+    AgenticSearchErrorEventType:
+      type: string
+      enum:
+      - error
+      title: AgenticSearchErrorEventType
+    CollectToolStats:
+      type: object
+      properties:
+        added:
+          type: integer
+        already_collected:
+          type: integer
+        not_found:
+          type: integer
+        total_collected:
+          type: integer
+          description: Total results collected after this operation.
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntitySummary'
+      description: Stats from add_to_results or remove_from_results.
+      title: CollectToolStats
+    FilterGroup:
+      type: object
+      properties:
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterCondition'
+          description: Filter conditions within this group, combined with AND
+      required:
+      - conditions
+      description: "A group of filter conditions combined with AND.\n\nMultiple filter groups are combined with OR, allowing expressions like:\n(A AND B) OR (C AND D)\n\nExamples:\n    Single group (AND):\n        {\"conditions\": [\n            {\"field\": \"airweave_system_metadata.source_name\",\n             \"operator\": \"equals\", \"value\": \"slack\"},\n            {\"field\": \"airweave_system_metadata.entity_type\",\n             \"operator\": \"equals\", \"value\": \"SlackMessageEntity\"}\n        ]}\n\n    Multiple groups (OR between groups, AND within):\n        [\n            {\"conditions\": [{\"field\": \"name\", \"operator\": \"equals\",\n                             \"value\": \"doc1\"}]},\n            {\"conditions\": [{\"field\": \"name\", \"operator\": \"equals\",\n                             \"value\": \"doc2\"}]}\n        ]\n\n    Breadcrumb filtering:\n        {\"conditions\": [\n            {\"field\": \"breadcrumbs.name\", \"operator\": \"contains\",\n             \"value\": \"Engineering\"}\n        ]}"
+      title: FilterGroup
+    AgenticSearchDoneEvent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AgenticSearchDoneEventType'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+          description: Full result set.
+        duration_ms:
+          type: integer
+        diagnostics:
+          oneOf:
+          - $ref: '#/components/schemas/AgenticSearchDoneEventDiagnostics'
+          - type: 'null'
+      required:
+      - type
+      - results
+      - duration_ms
+      title: AgenticSearchDoneEvent
+    AgenticSearchStartedEvent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AgenticSearchStartedEventType'
+        request_id:
+          type: string
+        tier:
+          type: string
+        collection_readable_id:
+          type: string
+        query:
+          type: string
+        thinking:
+          type:
+          - boolean
+          - 'null'
+        filter:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AgenticSearchStartedEventFilterItems'
+        limit:
+          type:
+          - integer
+          - 'null'
+      required:
+      - type
+      - request_id
+      - tier
+      - collection_readable_id
+      - query
+      title: AgenticSearchStartedEvent
+    AgenticSearchDoneEventType:
+      type: string
+      enum:
+      - done
+      title: AgenticSearchDoneEventType
+    EntityTypeStats:
+      type: object
+      properties:
+        count:
+          type: integer
+        last_updated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      required:
+      - count
+      description: Statistics for a specific entity type.
+      title: EntityTypeStats
+    SearchBreadcrumb:
+      type: object
+      properties:
+        entity_id:
+          type: string
+          description: ID of the entity in the source.
+        name:
+          type: string
+          description: Display name of the entity.
+        entity_type:
+          type: string
+          description: Entity class name (e.g., 'AsanaProjectEntity').
+      required:
+      - entity_id
+      - name
+      - entity_type
+      description: Breadcrumb in search result.
+      title: SearchBreadcrumb
+    NavigateToolStats:
+      type: object
+      properties:
+        result_count:
+          type: integer
+        context_label:
+          type: string
+          description: Human-readable label, e.g. 'children of chan-engineering'.
+        first_results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntitySummary'
+      description: Stats from get_children, get_siblings, or get_parent.
+      title: NavigateToolStats
+    FilterOperator:
+      type: string
+      enum:
+      - equals
+      - not_equals
+      - contains
+      - greater_than
+      - less_than
+      - greater_than_or_equal
+      - less_than_or_equal
+      - in
+      - not_in
+      description: Supported filter operators.
+      title: FilterOperator
+    SearchV2Response:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+          description: Search results ordered by relevance.
+      description: Unified response for all search tiers.
+      title: SearchV2Response
+    AgenticSearchErrorEvent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AgenticSearchErrorEventType'
+        message:
+          type: string
+          description: Error message.
+        duration_ms:
+          type: integer
+      required:
+      - type
+      - message
+      title: AgenticSearchErrorEvent
+    AgenticSearchToolCallEventDiagnostics:
+      type: object
+      properties:
+        iteration:
+          type: integer
+        tool_call_id:
+          type: string
+        arguments:
+          $ref: '#/components/schemas/AgenticSearchToolCallEventDiagnosticsArguments'
+          description: Full LLM-generated tool input.
+        stats:
+          $ref: '#/components/schemas/AgenticSearchToolCallEventDiagnosticsStats'
+          description: Output stats. Shape depends on tool_name.
+      title: AgenticSearchToolCallEventDiagnostics
+    AgenticSearchRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          description: Search query text.
+        thinking:
+          type: boolean
+          default: false
+          description: Enable extended thinking / chain-of-thought.
+        filter:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FilterGroup'
+          description: Filter groups (combined with OR).
+        limit:
+          type:
+          - integer
+          - 'null'
+          description: Max results. None means agent decides.
+      required:
+      - query
+      description: Agentic search request — full agent loop with tool calling.
+      title: AgenticSearchRequest
+    AgenticSearchToolCallEvent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AgenticSearchToolCallEventType'
+        tool_name:
+          $ref: '#/components/schemas/AgenticSearchToolCallEventToolName'
+        duration_ms:
+          type: integer
+        diagnostics:
+          $ref: '#/components/schemas/AgenticSearchToolCallEventDiagnostics'
+      required:
+      - type
+      - tool_name
+      - duration_ms
+      - diagnostics
+      title: AgenticSearchToolCallEvent
+    EntitySummary:
+      type: object
+      properties:
+        total_entities:
+          type: integer
+          default: 0
+        by_type:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/EntityTypeStats'
+        entity_id:
+          type: string
+        name:
+          type: string
+        entity_type:
+          type: string
+        source_name:
+          type: string
+        relevance_score:
+          type:
+          - number
+          - 'null'
+          format: double
+      description: Entity state summary.
+      title: EntitySummary
+    CountToolStats:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Number of entities matching the filter.
+      description: Stats from a count tool call.
+      title: CountToolStats
+    FilterableField:
+      type: string
+      enum:
+      - entity_id
+      - name
+      - created_at
+      - updated_at
+      - breadcrumbs.entity_id
+      - breadcrumbs.name
+      - breadcrumbs.entity_type
+      - airweave_system_metadata.entity_type
+      - airweave_system_metadata.source_name
+      - airweave_system_metadata.original_entity_id
+      - airweave_system_metadata.chunk_index
+      - airweave_system_metadata.sync_id
+      - airweave_system_metadata.sync_job_id
+      description: 'Filterable fields in search.
+
+
+        Uses dot notation for nested fields (e.g., breadcrumbs.name,
+
+        airweave_system_metadata.source_name).'
+      title: FilterableField
+    AgenticSearchRerankingEventDiagnostics:
+      type: object
+      properties:
+        input_count:
+          type: integer
+        output_count:
+          type: integer
+        model:
+          type: string
+        top_relevance_score:
+          type: number
+          format: double
+        bottom_relevance_score:
+          type: number
+          format: double
+      title: AgenticSearchRerankingEventDiagnostics
+    FilterConditionValue:
+      oneOf:
+      - type: string
+      - type: integer
+      - type: boolean
+      - type: array
+        items:
+          type: string
+      - type: array
+        items:
+          type: integer
+      description: Value to compare against. Use a list for 'in' and 'not_in' operators.
+      title: FilterConditionValue
+    SearchResult:
+      type: object
+      properties:
+        entity_id:
+          type: string
+          description: Original entity ID.
+        name:
+          type: string
+          description: Entity display name.
+        relevance_score:
+          type: number
+          format: double
+          description: Relevance score from the search engine.
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchBreadcrumb'
+          description: Breadcrumbs showing entity hierarchy.
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the entity was created.
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the entity was last updated.
+        textual_representation:
+          type: string
+          description: Semantically searchable text content
+        airweave_system_metadata:
+          $ref: '#/components/schemas/SearchSystemMetadata'
+          description: System metadata
+        access:
+          $ref: '#/components/schemas/SearchAccessControl'
+          description: Access control
+        web_url:
+          type: string
+          description: URL to view the entity in its source application (e.g., Notion, Asana).
+        url:
+          type:
+          - string
+          - 'null'
+          description: Download URL for file entities. Only present for FileEntity types.
+        raw_source_fields:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: All source-specific fields.
+      required:
+      - entity_id
+      - name
+      - relevance_score
+      - breadcrumbs
+      - textual_representation
+      - airweave_system_metadata
+      - access
+      - web_url
+      - raw_source_fields
+      description: Search result.
+      title: SearchResult
+    AgenticSearchToolCallEventDiagnosticsArguments:
+      type: object
+      properties: {}
+      description: Full LLM-generated tool input.
+      title: AgenticSearchToolCallEventDiagnosticsArguments
+    AgenticSearchRerankingEventType:
+      type: string
+      enum:
+      - reranking
+      title: AgenticSearchRerankingEventType
+    AgenticSearchEvent:
+      oneOf:
+      - $ref: '#/components/schemas/AgenticSearchStartedEvent'
+      - $ref: '#/components/schemas/AgenticSearchThinkingEvent'
+      - $ref: '#/components/schemas/AgenticSearchToolCallEvent'
+      - $ref: '#/components/schemas/AgenticSearchRerankingEvent'
+      - $ref: '#/components/schemas/AgenticSearchDoneEvent'
+      - $ref: '#/components/schemas/AgenticSearchErrorEvent'
+      title: AgenticSearchEvent
+    AgenticSearchToolCallEventDiagnosticsStats:
+      oneOf:
+      - $ref: '#/components/schemas/SearchToolStats'
+      - $ref: '#/components/schemas/ReadToolStats'
+      - $ref: '#/components/schemas/CollectToolStats'
+      - $ref: '#/components/schemas/CountToolStats'
+      - $ref: '#/components/schemas/NavigateToolStats'
+      - $ref: '#/components/schemas/ReviewToolStats'
+      - $ref: '#/components/schemas/FinishToolStats'
+      - $ref: '#/components/schemas/ErrorToolStats'
+      description: Output stats. Shape depends on tool_name.
+      title: AgenticSearchToolCallEventDiagnosticsStats
+    ErrorToolStats:
+      type: object
+      properties:
+        error:
+          type: string
+      description: Stats when a tool call errors.
+      title: ErrorToolStats
+    AgenticSearchStartedEventType:
+      type: string
+      enum:
+      - started
+      title: AgenticSearchStartedEventType
+    FilterCondition:
+      type: object
+      properties:
+        field:
+          $ref: '#/components/schemas/FilterableField'
+          description: Field to filter on (use dot notation for nested fields).
+        operator:
+          $ref: '#/components/schemas/FilterOperator'
+          description: The comparison operator to use.
+        value:
+          $ref: '#/components/schemas/FilterConditionValue'
+          description: Value to compare against. Use a list for 'in' and 'not_in' operators.
+      required:
+      - field
+      - operator
+      - value
+      description: "A single filter condition.\n\nPydantic validates that:\n- ``field`` is a valid FilterableField enum value\n- ``operator`` is a valid FilterOperator enum value\n- ``value`` matches the expected types\n- The combination of field + operator + value is semantically valid\n\nInvalid filters raise ``pydantic.ValidationError`` automatically.\n\nExamples:\n    {\"field\": \"airweave_system_metadata.source_name\", \"operator\": \"equals\",\n     \"value\": \"notion\"}\n    {\"field\": \"created_at\", \"operator\": \"greater_than\",\n     \"value\": \"2024-01-01T00:00:00Z\"}\n    {\"field\": \"breadcrumbs.name\", \"operator\": \"contains\", \"value\": \"Engineering\"}"
+      title: FilterCondition
+    AgenticSearchThinkingEvent:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AgenticSearchThinkingEventType'
+        thinking:
+          type:
+          - string
+          - 'null'
+          description: Extended reasoning text from the LLM.
+        text:
+          type:
+          - string
+          - 'null'
+          description: Conversational text output before tool calls.
+        duration_ms:
+          type: integer
+        diagnostics:
+          $ref: '#/components/schemas/AgenticSearchThinkingEventDiagnostics'
+      required:
+      - type
+      - duration_ms
+      - diagnostics
+      title: AgenticSearchThinkingEvent
+    SearchAccessControl:
+      type: object
+      properties:
+        viewers:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Principal IDs who can view this entity. None if unknown.
+        is_public:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this entity is publicly accessible. None if unknown.
+      description: Access control in search result.
+      title: SearchAccessControl
+    AgenticSearchThinkingEventDiagnostics:
+      type: object
+      properties:
+        iteration:
+          type: integer
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+      title: AgenticSearchThinkingEventDiagnostics
+    AgenticSearchDoneEventDiagnostics:
+      type: object
+      properties:
+        total_iterations:
+          type: integer
+        all_seen_entity_ids:
+          type: array
+          items:
+            type: string
+        all_read_entity_ids:
+          type: array
+          items:
+            type: string
+        all_collected_entity_ids:
+          type: array
+          items:
+            type: string
+        max_iterations_hit:
+          type: boolean
+        total_llm_retries:
+          type: integer
+        stagnation_nudges_sent:
+          type: integer
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        cache_creation_input_tokens:
+          type: integer
+        cache_read_input_tokens:
+          type: integer
+      title: AgenticSearchDoneEventDiagnostics
+    SearchToolStats:
+      type: object
+      properties:
+        result_count:
+          type: integer
+          description: Total results returned.
+        new_results:
+          type: integer
+          description: Results not seen in previous searches.
+        first_results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntitySummary'
+      description: Stats from a search tool call.
+      title: SearchToolStats
+    FinishToolStats:
+      type: object
+      properties:
+        accepted:
+          type: boolean
+          description: Whether the agent accepted the result set.
+        total_collected:
+          type: integer
+        warning:
+          type:
+          - string
+          - 'null'
+          description: Warning if very few results collected relative to seen.
+      description: Stats from return_results_to_user.
+      title: FinishToolStats
+    InstantSearchRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          description: Search query text.
+        retrieval_strategy:
+          $ref: '#/components/schemas/airweave__domains__search__types__plan__RetrievalStrategy'
+          description: Which retrieval strategy to use.
+        filter:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FilterGroup'
+          description: Filter groups (combined with OR).
+        limit:
+          type: integer
+          default: 100
+          description: Max results to return.
+        offset:
+          type: integer
+          default: 0
+          description: Number of results to skip.
+      required:
+      - query
+      description: Instant search request — embed query, fire at Vespa, return results.
+      title: InstantSearchRequest
+    AgenticSearchStartedEventFilterItems:
+      type: object
+      properties: {}
+      title: AgenticSearchStartedEventFilterItems
+    AgenticSearchThinkingEventType:
+      type: string
+      enum:
+      - thinking
+      title: AgenticSearchThinkingEventType
+  securitySchemes:
+    default:
+      type: apiKey
+      in: header
+      name: x-api-key

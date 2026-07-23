@@ -1,0 +1,627 @@
+openapi: 3.1.0
+info:
+  title: API Reference collections API
+  version: 1.0.0
+servers:
+- url: https://api.airweave.ai
+  description: Production
+- url: http://localhost:8001
+  description: Local
+tags:
+- name: collections
+paths:
+  /collections:
+    get:
+      operationId: list-collections-get
+      summary: List Collections
+      description: 'Retrieve all collections belonging to your organization.
+
+
+        Collections are containers that group related data from one or more source
+
+        connections, enabling unified search across multiple data sources.
+
+
+        Results are sorted by creation date (newest first) and support pagination
+
+        and text search filtering.'
+      tags:
+      - collections
+      parameters:
+      - name: skip
+        in: query
+        description: Number of collections to skip for pagination
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        description: Maximum number of collections to return (1-1000)
+        required: false
+        schema:
+          type: integer
+          default: 100
+      - name: search
+        in: query
+        description: Search term to filter collections by name or readable_id
+        required: false
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Collection'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+    post:
+      operationId: create-collections-post
+      summary: Create Collection
+      description: 'Create a new collection in your organization.
+
+
+        Collections are containers for organizing and searching across data from multiple
+
+        sources. After creation, add source connections to begin syncing data.
+
+
+        The collection will be assigned a unique `readable_id` based on the name you provide,
+
+        which is used in URLs and API calls. You can optionally configure:
+
+
+        - **Sync schedule**: How frequently to automatically sync data from all sources
+
+        - **Custom readable_id**: Provide your own identifier (must be unique and URL-safe)'
+      tags:
+      - collections
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Created collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionCreate'
+  /collections/{readable_id}:
+    get:
+      operationId: get-collections-readable-id-get
+      summary: Get Collection
+      description: 'Retrieve details of a specific collection by its readable ID.
+
+
+        Returns the complete collection configuration including sync settings, status,
+
+        and metadata. Use this to check the current state of a collection or to get
+
+        configuration details before making updates.'
+      tags:
+      - collections
+      parameters:
+      - name: readable_id
+        in: path
+        description: The unique readable identifier of the collection (e.g., 'finance-data-ab123')
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Collection details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '404':
+          description: Collection Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+    patch:
+      operationId: update-collections-readable-id-patch
+      summary: Update Collection
+      description: 'Update an existing collection''s properties.
+
+
+        You can modify:
+
+        - **Name**: The display name shown in the UI
+
+        - **Sync configuration**: Schedule settings for automatic data synchronization
+
+
+        Note that the `readable_id` cannot be changed after creation to maintain stable
+
+        API endpoints and preserve existing integrations.'
+      tags:
+      - collections
+      parameters:
+      - name: readable_id
+        in: path
+        description: The unique readable identifier of the collection to update
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Updated collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '404':
+          description: Collection Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionUpdate'
+    delete:
+      operationId: delete-collections-readable-id-delete
+      summary: Delete Collection
+      description: 'Permanently delete a collection and all associated data.
+
+
+        This operation:
+
+        - Removes all synced data from the vector database
+
+        - Deletes all source connections within the collection
+
+        - Cancels any scheduled sync jobs
+
+        - Cleans up all related resources
+
+
+        **Warning**: This action cannot be undone. All data will be permanently deleted.'
+      tags:
+      - collections
+      parameters:
+      - name: readable_id
+        in: path
+        description: The unique readable identifier of the collection to delete
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Deleted collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '404':
+          description: Collection Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+components:
+  schemas:
+    CursorConfig:
+      type: object
+      properties:
+        skip_load:
+          type: boolean
+          default: false
+          description: Don't load cursor (fetch all entities)
+        skip_updates:
+          type: boolean
+          default: false
+          description: Don't persist cursor progress
+      description: Controls incremental sync cursor behavior.
+      title: CursorConfig
+    ValidationErrorLocItems:
+      oneOf:
+      - type: string
+      - type: integer
+      title: ValidationErrorLocItems
+    ValidationErrorDetail:
+      type: object
+      properties:
+        loc:
+          type: array
+          items:
+            type: string
+          description: Location of the error (e.g., ['body', 'url'])
+        msg:
+          type: string
+          description: Human-readable error message
+        type:
+          type: string
+          description: Error type identifier
+      required:
+      - loc
+      - msg
+      - type
+      description: Details about a validation error for a specific field.
+      title: ValidationErrorDetail
+    RateLimitErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message explaining the rate limit
+      required:
+      - detail
+      description: 'Response returned when rate limit is exceeded (HTTP 429).
+
+
+        The API enforces rate limits to ensure fair usage. When exceeded,
+
+        wait for the duration specified in the Retry-After header before retrying.'
+      title: RateLimitErrorResponse
+    DestinationConfig:
+      type: object
+      properties:
+        skip_vespa:
+          type: boolean
+          default: false
+          description: Skip writing to native Vespa
+        target_destinations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: If set, ONLY write to these destination UUIDs
+        exclude_destinations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Skip these destination UUIDs
+      description: Controls where entities are written.
+      title: DestinationConfig
+    CollectionStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - NEEDS SOURCE
+      - ERROR
+      description: Collection status enum.
+      title: CollectionStatus
+    ValidationError:
+      type: object
+      properties:
+        loc:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorLocItems'
+        msg:
+          type: string
+        type:
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    BehaviorConfig:
+      type: object
+      properties:
+        skip_hash_comparison:
+          type: boolean
+          default: false
+          description: Force INSERT for all entities
+        replay_from_arf:
+          type: boolean
+          default: false
+          description: Replay from ARF storage instead of calling source
+        skip_guardrails:
+          type: boolean
+          default: false
+          description: Skip usage guardrails (entity count checks)
+      description: Miscellaneous execution behavior flags.
+      title: BehaviorConfig
+    ValidationErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorDetail'
+          description: List of validation errors
+      required:
+      - detail
+      description: 'Response returned when request validation fails (HTTP 422).
+
+
+        This occurs when the request body contains invalid data, such as
+
+        malformed URLs, invalid event types, or missing required fields.'
+      title: ValidationErrorResponse
+    CollectionUpdate:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Updated display name for the collection. Must be between 4 and 64 characters.
+        sync_config:
+          oneOf:
+          - $ref: '#/components/schemas/SyncConfig'
+          - type: 'null'
+          description: Default sync configuration for all syncs in this collection. This provides collection-level defaults that can be overridden at sync or job level.
+      description: 'Schema for updating an existing collection.
+
+
+        Allows updating the collection''s display name and default sync configuration.
+
+        The readable_id is immutable to maintain stable API endpoints and references.'
+      title: CollectionUpdate
+    SyncConfig:
+      type: object
+      properties:
+        destinations:
+          $ref: '#/components/schemas/DestinationConfig'
+        handlers:
+          $ref: '#/components/schemas/HandlerConfig'
+        cursor:
+          $ref: '#/components/schemas/CursorConfig'
+        behavior:
+          $ref: '#/components/schemas/BehaviorConfig'
+      description: "Sync configuration with automatic env var loading.\n\nEnv vars use double underscore as delimiter:\n    SYNC_CONFIG__HANDLERS__ENABLE_VECTOR_HANDLERS=false"
+      title: SyncConfig
+    CollectionCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Human-readable display name for the collection. This appears in the UI and should clearly describe the data contained within (e.g., 'Finance Data').
+        readable_id:
+          type:
+          - string
+          - 'null'
+          description: URL-safe unique identifier used in API endpoints. Must contain only lowercase letters, numbers, and hyphens. If not provided, it will be automatically generated from the collection name with a random suffix for uniqueness (e.g., 'finance-data-ab123').
+        sync_config:
+          oneOf:
+          - $ref: '#/components/schemas/SyncConfig'
+          - type: 'null'
+          description: Default sync configuration for all syncs in this collection. This provides collection-level defaults that can be overridden at sync or job level.
+      required:
+      - name
+      description: 'Schema for creating a new collection.
+
+
+        Collections serve as logical containers for organizing related data sources.
+
+        Once created, you can add source connections to populate the collection with data
+
+        from various sources like databases, APIs, and file systems.
+
+
+        You can optionally set a default sync configuration that will apply to all syncs
+
+        within this collection unless overridden at the sync or job level.'
+      title: CollectionCreate
+    HTTPValidationError:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+      title: HTTPValidationError
+    Collection:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Human-readable display name for the collection.
+        readable_id:
+          type: string
+          description: URL-safe unique identifier used in API endpoints. This becomes non-optional once the collection is created.
+        id:
+          type: string
+          format: uuid
+          description: Unique system identifier for the collection. This UUID is generated automatically and used for internal references.
+        sync_config:
+          oneOf:
+          - $ref: '#/components/schemas/SyncConfig'
+          - type: 'null'
+          description: Default sync configuration for all syncs in this collection. Overridable at sync and job level.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the collection was created (ISO 8601 format).
+        modified_at:
+          type: string
+          format: date-time
+          description: Timestamp when the collection was last modified (ISO 8601 format).
+        organization_id:
+          type: string
+          format: uuid
+          description: Identifier of the organization that owns this collection. Collections are isolated per organization.
+        created_by_email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Email address of the user who created this collection.
+        modified_by_email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Email address of the user who last modified this collection.
+        status:
+          $ref: '#/components/schemas/CollectionStatus'
+          description: 'Current operational status of the collection:<br/>• **NEEDS_SOURCE**: Collection has no authenticated connections, or connections exist but haven''t synced yet<br/>• **ACTIVE**: At least one connection has completed a sync or is currently syncing<br/>• **ERROR**: All connections have failed their last sync'
+        vector_size:
+          type: integer
+          description: Vector dimensions used by this collection (derived from deployment metadata).
+        embedding_model_name:
+          type: string
+          description: Name of the embedding model used for this collection (derived from deployment metadata).
+        source_connection_summaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceConnectionSummary'
+          description: Lightweight list of source connections attached to this collection. Contains only short_name and name, suitable for rendering icons in list views.
+      required:
+      - name
+      - readable_id
+      - id
+      - created_at
+      - modified_at
+      - organization_id
+      - vector_size
+      - embedding_model_name
+      description: 'API-facing collection schema with embedding metadata.
+
+
+        Extends CollectionRecord with vector_size and embedding_model_name, which
+
+        are resolved by the CollectionService from the deployment metadata and the
+
+        dense embedder registry.
+
+
+        Excludes vector_db_deployment_metadata_id (internal FK).'
+      title: Collection
+    NotFoundErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message describing what was not found
+      required:
+      - detail
+      description: Response returned when a resource is not found (HTTP 404).
+      title: NotFoundErrorResponse
+    HandlerConfig:
+      type: object
+      properties:
+        enable_vector_handlers:
+          type: boolean
+          default: true
+          description: Enable VectorDBHandler
+        enable_raw_data_handler:
+          type: boolean
+          default: true
+          description: Enable RawDataHandler (ARF)
+        enable_postgres_handler:
+          type: boolean
+          default: true
+          description: Enable EntityPostgresHandler
+      description: Controls which handlers run during sync.
+      title: HandlerConfig
+    SourceConnectionSummary:
+      type: object
+      properties:
+        short_name:
+          type: string
+        name:
+          type: string
+      required:
+      - short_name
+      - name
+      description: Lightweight summary of a source connection for collection list display.
+      title: SourceConnectionSummary
+  securitySchemes:
+    default:
+      type: apiKey
+      in: header
+      name: x-api-key

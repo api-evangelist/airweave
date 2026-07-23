@@ -1,0 +1,17 @@
+generated: '2026-07-17'
+method: generated
+source: https://github.com/airweave-ai/skills
+notes: >-
+  Airweave publishes official Agent Skills at github.com/airweave-ai/skills
+  (airweave-setup, airweave-search), installable via `npx skills add airweave-ai/skills`.
+  The skills below are API-Evangelist packaged operating instructions grounded in real
+  operationIds from openapi/airweave-openapi.json, mirroring the provider's two skills.
+skills:
+  - file: airweave-setup.md
+    name: Set up a collection and connect a source
+    api: openapi/airweave-openapi.json
+    operations: [create-collections-post, create-source-connections-post, run-source-connections-source-connection-id-run-post]
+  - file: airweave-search.md
+    name: Search an Airweave collection
+    api: openapi/airweave-openapi.json
+    operations: [instant, classic, agentic, stream-agentic]

@@ -1,0 +1,23 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.airweave.ai/connect
+families:
+  - name: Airweave Connect
+    description: >-
+      Hosted, embeddable UI widget that lets end users connect their own apps/data
+      sources from inside your product (no auth UI to build).
+    loaders:
+      - name: "@airweave/connect-react"
+        registry: npm
+        surface: React hook useAirweaveConnect
+        init: Pass getSessionToken callback plus onSuccess/onClose/onError handlers.
+      - name: "@airweave/connect-js"
+        registry: npm
+        surface: AirweaveConnect class (framework-agnostic)
+        init: Instantiate with config object containing getSessionToken and callbacks.
+      - name: iframe
+        registry: null
+        surface: Raw iframe from https://connect.airweave.ai
+        init: postMessage API for token exchange and event handling.
+    auth:
+      notes: All methods require a getSessionToken callback that fetches a short-lived session token from your backend.

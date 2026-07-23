@@ -1,0 +1,1266 @@
+openapi: 3.1.0
+info:
+  title: API Reference collections source-connections API
+  version: 1.0.0
+servers:
+- url: https://api.airweave.ai
+  description: Production
+- url: http://localhost:8001
+  description: Local
+tags:
+- name: source-connections
+paths:
+  /source-connections:
+    get:
+      operationId: list-source-connections-get
+      summary: List Source Connections
+      description: 'Retrieve all source connections for your organization.
+
+
+        Returns a lightweight list of source connections with essential fields for
+
+        display and navigation. Use the collection filter to see connections within
+
+        a specific collection.
+
+
+        For full connection details including sync history, use the GET /{id} endpoint.'
+      tags:
+      - source-connections
+      parameters:
+      - name: collection
+        in: query
+        description: Filter by collection readable ID
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      - name: skip
+        in: query
+        description: Number of connections to skip for pagination
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        description: Maximum number of connections to return (1-1000)
+        required: false
+        schema:
+          type: integer
+          default: 100
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of source connections
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SourceConnectionListItem'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+    post:
+      operationId: create-source-connections-post
+      summary: Create Source Connection
+      description: 'Create a new source connection to sync data from an external source.
+
+
+        The authentication method determines the creation flow:
+
+
+        - **Direct**: Provide credentials (API key, token) directly. Connection is created immediately.
+
+        - **OAuth Browser**: Returns a connection with an `auth_url` to redirect users for authentication.
+
+        - **OAuth Token**: Provide an existing OAuth token. Connection is created immediately.
+
+        - **Auth Provider**: Use a pre-configured auth provider (e.g., Composio, Pipedream).
+
+
+        After successful authentication, data sync can begin automatically or on-demand.'
+      tags:
+      - source-connections
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Created source connection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceConnection'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceConnectionCreate'
+  /source-connections/{source_connection_id}:
+    get:
+      operationId: get-source-connections-source-connection-id-get
+      summary: Get Source Connection
+      description: 'Retrieve details of a specific source connection.
+
+
+        Returns complete information about the connection including:
+
+        - Configuration settings
+
+        - Authentication status
+
+        - Sync schedule and history
+
+        - Entity statistics'
+      tags:
+      - source-connections
+      parameters:
+      - name: source_connection_id
+        in: path
+        description: Unique identifier of the source connection (UUID)
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Source connection details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceConnection'
+        '404':
+          description: Source Connection Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+    patch:
+      operationId: update-source-connections-source-connection-id-patch
+      summary: Update Source Connection
+      description: 'Update an existing source connection''s configuration.
+
+
+        You can modify:
+
+        - **Name and description**: Display information
+
+        - **Configuration**: Source-specific settings (e.g., repository name, filters)
+
+        - **Schedule**: Cron expression for automatic syncs
+
+        - **Authentication**: Update credentials (direct auth only)
+
+
+        Only include the fields you want to change; omitted fields retain their current values.'
+      tags:
+      - source-connections
+      parameters:
+      - name: source_connection_id
+        in: path
+        description: Unique identifier of the source connection to update (UUID)
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Updated source connection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceConnection'
+        '404':
+          description: Source Connection Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceConnectionUpdate'
+    delete:
+      operationId: delete-source-connections-source-connection-id-delete
+      summary: Delete Source Connection
+      description: "Permanently delete a source connection and all its synced data.\n\n**What happens when you delete:**\n\n1. Any running sync is cancelled and the API waits (up to 15 s) for the\n   worker to stop writing.\n2. The source connection, sync configuration, job history, and entity\n   metadata are cascade-deleted from the database.\n3. A background cleanup workflow is scheduled to remove data from the\n   vector database (Vespa) and raw data storage (ARF). This may take\n   several minutes for large datasets but does **not** block the response.\n\nThe API returns immediately after step 2. Vector database cleanup happens\nasynchronously -- the data becomes unsearchable as soon as the database\nrecords are deleted.\n\n**Warning**: This action cannot be undone."
+      tags:
+      - source-connections
+      parameters:
+      - name: source_connection_id
+        in: path
+        description: Unique identifier of the source connection to delete (UUID)
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Deleted source connection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceConnection'
+        '404':
+          description: Source Connection Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+  /source-connections/{source_connection_id}/jobs:
+    get:
+      operationId: get-source-connection-jobs-source-connections-source-connection-id-jobs-get
+      summary: List Sync Jobs
+      description: "Retrieve the sync job history for a source connection.\n\nReturns a list of sync jobs ordered by creation time (newest first). Each job\nincludes status, timing information, and entity counts.\n\nJob statuses:\n- **PENDING**: Job is queued, waiting for the worker to pick it up\n- **RUNNING**: Sync is actively pulling and processing data\n- **COMPLETED**: Sync finished successfully\n- **FAILED**: Sync encountered an unrecoverable error\n- **CANCELLING**: Cancellation has been requested. The worker is\n  gracefully stopping the pipeline and cleaning up destination data.\n- **CANCELLED**: Sync was cancelled. The worker has fully stopped\n  and destination data cleanup has been scheduled."
+      tags:
+      - source-connections
+      parameters:
+      - name: source_connection_id
+        in: path
+        description: Unique identifier of the source connection (UUID)
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: limit
+        in: query
+        description: Maximum number of jobs to return (1-1000)
+        required: false
+        schema:
+          type: integer
+          default: 100
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of sync jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SourceConnectionJob'
+        '404':
+          description: Source Connection Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+  /source-connections/{source_connection_id}/run:
+    post:
+      operationId: run-source-connections-source-connection-id-run-post
+      summary: Run Sync
+      description: 'Trigger a data synchronization job for a source connection.
+
+
+        Starts an asynchronous sync job that pulls the latest data from the connected
+
+        source. The job runs in the background and you can monitor its progress using
+
+        the jobs endpoint.
+
+
+        For continuous sync connections, this performs an incremental sync by default.
+
+        Use `force_full_sync=true` to perform a complete re-sync of all data.'
+      tags:
+      - source-connections
+      parameters:
+      - name: source_connection_id
+        in: path
+        description: Unique identifier of the source connection to sync (UUID)
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: force_full_sync
+        in: query
+        description: Force a full sync ignoring cursor data. Only applies to continuous sync connections. Non-continuous connections always perform full syncs.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Created sync job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceConnectionJob'
+        '404':
+          description: Source Connection Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        '409':
+          description: Sync Already Running
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+  /source-connections/{source_connection_id}/jobs/{job_id}/cancel:
+    post:
+      operationId: cancel-job-source-connections-source-connection-id-jobs-job-id-cancel-post
+      summary: Cancel Sync Job
+      description: "Request cancellation of a running sync job.\n\n**State lifecycle**: `PENDING` / `RUNNING` → `CANCELLING` → `CANCELLED`\n\n1. The API immediately marks the job as **CANCELLING** in the database.\n2. A cancellation signal is sent to the Temporal workflow.\n3. The worker receives the signal, gracefully stops the sync pipeline\n   (cancels worker pool, source stream), and marks the job as **CANCELLED**.\n\nAlready-processed entities are retained in the vector database.\nIf the worker is unresponsive, a background cleanup job will force the\ntransition to CANCELLED after 3 minutes.\n\n**Note**: Only jobs in `PENDING` or `RUNNING` state can be cancelled.\nAttempting to cancel a `COMPLETED`, `FAILED`, or `CANCELLED` job returns 400."
+      tags:
+      - source-connections
+      parameters:
+      - name: source_connection_id
+        in: path
+        description: Unique identifier of the source connection (UUID)
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: job_id
+        in: path
+        description: Unique identifier of the sync job to cancel (UUID)
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Job with cancellation status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceConnectionJob'
+        '404':
+          description: Job Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        '409':
+          description: Job Cannot Be Cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+components:
+  schemas:
+    OAuthTokenAuthentication:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: OAuth access token
+        refresh_token:
+          type:
+          - string
+          - 'null'
+          description: OAuth refresh token
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Token expiry time
+      required:
+      - access_token
+      description: OAuth authentication with pre-obtained token.
+      title: OAuthTokenAuthentication
+    ScheduleConfig:
+      type: object
+      properties:
+        cron:
+          type:
+          - string
+          - 'null'
+          description: Cron expression for scheduled syncs
+        continuous:
+          type: boolean
+          default: false
+          description: Enable continuous sync mode
+        cursor_field:
+          type:
+          - string
+          - 'null'
+          description: Field for incremental sync
+      description: Schedule configuration for syncs.
+      title: ScheduleConfig
+    SourceConnectionUpdate:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Updated display name for the connection
+        description:
+          type:
+          - string
+          - 'null'
+          description: Updated description
+        config:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Updated source-specific configuration
+        schedule:
+          oneOf:
+          - $ref: '#/components/schemas/ScheduleConfig'
+          - type: 'null'
+          description: Updated sync schedule configuration
+        authentication:
+          oneOf:
+          - $ref: '#/components/schemas/SourceConnectionUpdateAuthentication'
+          - type: 'null'
+          description: Updated authentication credentials (direct auth only)
+      description: 'Update an existing source connection''s configuration.
+
+
+        All fields are optional. Only include fields you want to change;
+
+        omitted fields retain their current values.'
+      title: SourceConnectionUpdate
+    ValidationError:
+      type: object
+      properties:
+        loc:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorLocItems'
+        msg:
+          type: string
+        type:
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+      title: HTTPValidationError
+    SourceConnectionErrorCategory:
+      type: string
+      enum:
+      - oauth_credentials_expired
+      - api_key_invalid
+      - auth_provider_account_gone
+      - auth_provider_credentials_invalid
+      - usage_limit_exceeded
+      - rate_limited
+      description: Error categories for credential/auth failures on source connections.
+      title: SourceConnectionErrorCategory
+    SyncDetails:
+      type: object
+      properties:
+        total_runs:
+          type: integer
+          default: 0
+        successful_runs:
+          type: integer
+          default: 0
+        failed_runs:
+          type: integer
+          default: 0
+        last_job:
+          oneOf:
+          - $ref: '#/components/schemas/SyncJobDetails'
+          - type: 'null'
+      description: Sync execution details.
+      title: SyncDetails
+    AuthProviderAuthentication:
+      type: object
+      properties:
+        provider_readable_id:
+          type: string
+          description: Auth provider readable ID
+        provider_config:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Provider-specific configuration
+      required:
+      - provider_readable_id
+      description: Authentication via external provider.
+      title: AuthProviderAuthentication
+    ValidationErrorLocItems:
+      oneOf:
+      - type: string
+      - type: integer
+      title: ValidationErrorLocItems
+    ConflictErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message describing the conflict
+      required:
+      - detail
+      description: 'Response returned when a resource conflict occurs (HTTP 409).
+
+
+        This typically occurs when attempting to create a resource that already exists,
+
+        or when an operation cannot be completed due to the current state of a resource.'
+      title: ConflictErrorResponse
+    SourceConnection:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the source connection
+        organization_id:
+          type: string
+          format: uuid
+          description: Organization this connection belongs to
+        name:
+          type: string
+          description: Display name of the connection
+        description:
+          type:
+          - string
+          - 'null'
+          description: Optional description of the connection's purpose
+        short_name:
+          type: string
+          description: Source type identifier
+        readable_collection_id:
+          type: string
+          description: Collection this connection belongs to
+        status:
+          $ref: '#/components/schemas/SourceConnectionStatus'
+          description: Current operational status of the connection
+        created_at:
+          type: string
+          format: date-time
+          description: When the connection was created (ISO 8601)
+        modified_at:
+          type: string
+          format: date-time
+          description: When the connection was last modified (ISO 8601)
+        auth:
+          $ref: '#/components/schemas/AuthenticationDetails'
+          description: Authentication status and details
+        config:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Source-specific configuration values
+        schedule:
+          oneOf:
+          - $ref: '#/components/schemas/ScheduleDetails'
+          - type: 'null'
+          description: Sync schedule configuration
+        sync:
+          oneOf:
+          - $ref: '#/components/schemas/SyncDetails'
+          - type: 'null'
+          description: Sync execution history and statistics
+        sync_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: ID of the associated sync (internal use)
+        entities:
+          oneOf:
+          - $ref: '#/components/schemas/EntitySummary'
+          - type: 'null'
+          description: Summary of synced entities by type
+        error_category:
+          oneOf:
+          - $ref: '#/components/schemas/SourceConnectionErrorCategory'
+          - type: 'null'
+          description: Error category when status is needs_reauth (e.g. oauth_credentials_expired)
+        error_message:
+          type:
+          - string
+          - 'null'
+          description: Human-readable error message when status is needs_reauth
+        provider_settings_url:
+          type:
+          - string
+          - 'null'
+          description: URL to the auth provider's settings dashboard (for auth_provider errors)
+        provider_short_name:
+          type:
+          - string
+          - 'null'
+          description: Auth provider short_name (e.g. 'composio', 'pipedream') for display
+        federated_search:
+          type: boolean
+          default: false
+          description: Whether this source uses federated (real-time) search instead of syncing
+      required:
+      - id
+      - organization_id
+      - name
+      - short_name
+      - readable_collection_id
+      - status
+      - created_at
+      - modified_at
+      - auth
+      description: 'Complete source connection details including auth, config, sync status, and entities.
+
+
+        This schema provides full information about a source connection, suitable for
+
+        detail views and monitoring sync progress.'
+      title: SourceConnection
+    EntityTypeStats:
+      type: object
+      properties:
+        count:
+          type: integer
+        last_updated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      required:
+      - count
+      description: Statistics for a specific entity type.
+      title: EntityTypeStats
+    ScheduleDetails:
+      type: object
+      properties:
+        cron:
+          type:
+          - string
+          - 'null'
+        next_run:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        continuous:
+          type: boolean
+          default: false
+        cursor_field:
+          type:
+          - string
+          - 'null'
+      description: Schedule information.
+      title: ScheduleDetails
+    AuthenticationMethod:
+      type: string
+      enum:
+      - direct
+      - oauth_browser
+      - oauth_token
+      - oauth_byoc
+      - auth_provider
+      description: Authentication methods for source connections.
+      title: AuthenticationMethod
+    SourceConnectionUpdateAuthentication:
+      oneOf:
+      - $ref: '#/components/schemas/DirectAuthentication'
+      - $ref: '#/components/schemas/OAuthTokenAuthentication'
+      - $ref: '#/components/schemas/OAuthBrowserAuthentication'
+      - $ref: '#/components/schemas/AuthProviderAuthentication'
+      description: Updated authentication credentials (direct auth only)
+      title: SourceConnectionUpdateAuthentication
+    SourceConnectionListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the source connection
+        name:
+          type: string
+          description: Display name of the connection
+        short_name:
+          type: string
+          description: Source type identifier
+        readable_collection_id:
+          type: string
+          description: Collection this connection belongs to
+        created_at:
+          type: string
+          format: date-time
+          description: When the connection was created (ISO 8601)
+        modified_at:
+          type: string
+          format: date-time
+          description: When the connection was last modified (ISO 8601)
+        is_authenticated:
+          type: boolean
+          description: Whether the connection has valid credentials
+        entity_count:
+          type: integer
+          default: 0
+          description: Total number of entities synced from this connection
+        federated_search:
+          type: boolean
+          default: false
+          description: Whether this source uses federated (real-time) search instead of syncing
+        auth_method:
+          $ref: '#/components/schemas/AuthenticationMethod'
+          description: Get authentication method from database value.
+        status:
+          $ref: '#/components/schemas/SourceConnectionStatus'
+          description: Compute connection status from current state.
+      required:
+      - id
+      - name
+      - short_name
+      - readable_collection_id
+      - created_at
+      - modified_at
+      - is_authenticated
+      - auth_method
+      - status
+      description: 'Lightweight source connection representation for list views.
+
+
+        Contains essential fields for display and navigation. For full details
+
+        including sync history and configuration, use the GET /{id} endpoint.'
+      title: SourceConnectionListItem
+    SyncJobStatus:
+      type: string
+      enum:
+      - created
+      - pending
+      - running
+      - completed
+      - failed
+      - cancelling
+      - cancelled
+      description: Sync job status enum.
+      title: SyncJobStatus
+    ValidationErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorDetail'
+          description: List of validation errors
+      required:
+      - detail
+      description: 'Response returned when request validation fails (HTTP 422).
+
+
+        This occurs when the request body contains invalid data, such as
+
+        malformed URLs, invalid event types, or missing required fields.'
+      title: ValidationErrorResponse
+    EntitySummary:
+      type: object
+      properties:
+        total_entities:
+          type: integer
+          default: 0
+        by_type:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/EntityTypeStats'
+        entity_id:
+          type: string
+        name:
+          type: string
+        entity_type:
+          type: string
+        source_name:
+          type: string
+        relevance_score:
+          type:
+          - number
+          - 'null'
+          format: double
+      description: Entity state summary.
+      title: EntitySummary
+    DirectAuthentication:
+      type: object
+      properties:
+        credentials:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Authentication credentials
+      required:
+      - credentials
+      description: Direct authentication with API keys or passwords.
+      title: DirectAuthentication
+    AuthenticationDetails:
+      type: object
+      properties:
+        method:
+          $ref: '#/components/schemas/AuthenticationMethod'
+        authenticated:
+          type: boolean
+        authenticated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        auth_url:
+          type:
+          - string
+          - 'null'
+          description: For pending OAuth flows
+        auth_url_expires:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        redirect_url:
+          type:
+          - string
+          - 'null'
+        claim_token:
+          type:
+          - string
+          - 'null'
+          description: One-time token to verify OAuth flow ownership. Only returned when creating an OAuth browser connection.
+        provider_readable_id:
+          type:
+          - string
+          - 'null'
+        provider_id:
+          type:
+          - string
+          - 'null'
+      required:
+      - method
+      - authenticated
+      description: Authentication information.
+      title: AuthenticationDetails
+    SourceConnectionStatus:
+      type: string
+      enum:
+      - active
+      - pending_auth
+      - syncing
+      - error
+      - needs_reauth
+      - inactive
+      - pending_sync
+      description: Source connection status enum - represents overall connection state.
+      title: SourceConnectionStatus
+    RateLimitErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message explaining the rate limit
+      required:
+      - detail
+      description: 'Response returned when rate limit is exceeded (HTTP 429).
+
+
+        The API enforces rate limits to ensure fair usage. When exceeded,
+
+        wait for the duration specified in the Retry-After header before retrying.'
+      title: RateLimitErrorResponse
+    ValidationErrorDetail:
+      type: object
+      properties:
+        loc:
+          type: array
+          items:
+            type: string
+          description: Location of the error (e.g., ['body', 'url'])
+        msg:
+          type: string
+          description: Human-readable error message
+        type:
+          type: string
+          description: Error type identifier
+      required:
+      - loc
+      - msg
+      - type
+      description: Details about a validation error for a specific field.
+      title: ValidationErrorDetail
+    SourceConnectionCreateAuthentication:
+      oneOf:
+      - $ref: '#/components/schemas/DirectAuthentication'
+      - $ref: '#/components/schemas/OAuthTokenAuthentication'
+      - $ref: '#/components/schemas/OAuthBrowserAuthentication'
+      - $ref: '#/components/schemas/AuthProviderAuthentication'
+      description: Authentication configuration. Type is auto-detected from provided fields.
+      title: SourceConnectionCreateAuthentication
+    SourceConnectionJob:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the sync job
+        source_connection_id:
+          type: string
+          format: uuid
+          description: ID of the source connection this job belongs to
+        status:
+          $ref: '#/components/schemas/SyncJobStatus'
+          description: 'Current status: PENDING, RUNNING, COMPLETED, FAILED, CANCELLED, or CANCELLING'
+        started_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the job started execution (ISO 8601)
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the job finished (ISO 8601). Null if still running.
+        duration_seconds:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Total execution time in seconds. Null if still running.
+        entities_inserted:
+          type: integer
+          default: 0
+          description: Number of new entities created during this sync
+        entities_updated:
+          type: integer
+          default: 0
+          description: Number of existing entities updated during this sync
+        entities_deleted:
+          type: integer
+          default: 0
+          description: Number of entities removed during this sync
+        entities_failed:
+          type: integer
+          default: 0
+          description: Number of entities that failed to process
+        error:
+          type:
+          - string
+          - 'null'
+          description: Error message if the job failed
+        error_category:
+          oneOf:
+          - $ref: '#/components/schemas/SourceConnectionErrorCategory'
+          - type: 'null'
+          description: Error category for credential errors (e.g. oauth_credentials_expired)
+        error_details:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Additional error context for debugging
+      required:
+      - id
+      - source_connection_id
+      - status
+      description: 'A sync job representing a single synchronization run.
+
+
+        Sync jobs track the execution of data synchronization from a source connection.
+
+        Each job includes timing information, entity counts, and error details if applicable.'
+      title: SourceConnectionJob
+    SourceConnectionCreate:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Display name for the connection. If not provided, defaults to '{Source Name} Connection'.
+        short_name:
+          type: string
+          description: Source type identifier (e.g., 'slack', 'github', 'notion')
+        readable_collection_id:
+          type: string
+          description: The readable ID of the collection to add this connection to
+        description:
+          type:
+          - string
+          - 'null'
+          description: Optional description of what this connection is used for
+        config:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Source-specific configuration (e.g., repository name, filters)
+        schedule:
+          oneOf:
+          - $ref: '#/components/schemas/ScheduleConfig'
+          - type: 'null'
+          description: Optional sync schedule configuration
+        sync_immediately:
+          type:
+          - boolean
+          - 'null'
+          description: Run initial sync after creation. Defaults to True for direct/token/auth_provider, False for OAuth browser/BYOC flows (which sync after authentication)
+        authentication:
+          oneOf:
+          - $ref: '#/components/schemas/SourceConnectionCreateAuthentication'
+          - type: 'null'
+          description: Authentication configuration. Type is auto-detected from provided fields.
+        redirect_url:
+          type:
+          - string
+          - 'null'
+          description: URL to redirect to after OAuth flow completes (only used for OAuth flows)
+      required:
+      - short_name
+      - readable_collection_id
+      description: 'Create a source connection with authentication configuration.
+
+
+        Source connections link a data source (e.g., GitHub, Slack) to a collection.
+
+        The authentication method determines how credentials are provided and whether
+
+        the connection is created immediately or requires an OAuth flow.'
+      title: SourceConnectionCreate
+    SyncJobDetails:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/SyncJobStatus'
+        started_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        duration_seconds:
+          type:
+          - number
+          - 'null'
+          format: double
+        entities_inserted:
+          type: integer
+          default: 0
+        entities_updated:
+          type: integer
+          default: 0
+        entities_deleted:
+          type: integer
+          default: 0
+        entities_failed:
+          type: integer
+          default: 0
+        error:
+          type:
+          - string
+          - 'null'
+        error_category:
+          oneOf:
+          - $ref: '#/components/schemas/SourceConnectionErrorCategory'
+          - type: 'null'
+      required:
+      - id
+      - status
+      description: Sync job details.
+      title: SyncJobDetails
+    OAuthBrowserAuthentication:
+      type: object
+      properties:
+        redirect_uri:
+          type:
+          - string
+          - 'null'
+          description: OAuth redirect URI
+        client_id:
+          type:
+          - string
+          - 'null'
+          description: OAuth2 client ID (for custom apps)
+        client_secret:
+          type:
+          - string
+          - 'null'
+          description: OAuth2 client secret (for custom apps)
+        consumer_key:
+          type:
+          - string
+          - 'null'
+          description: OAuth1 consumer key (for custom apps)
+        consumer_secret:
+          type:
+          - string
+          - 'null'
+          description: OAuth1 consumer secret (for custom apps)
+      description: 'OAuth authentication via browser flow.
+
+
+        Supports both OAuth2 and OAuth1 BYOC (Bring Your Own Client):
+
+        - OAuth2 BYOC: Provide client_id + client_secret
+
+        - OAuth1 BYOC: Provide consumer_key + consumer_secret'
+      title: OAuthBrowserAuthentication
+    NotFoundErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message describing what was not found
+      required:
+      - detail
+      description: Response returned when a resource is not found (HTTP 404).
+      title: NotFoundErrorResponse
+  securitySchemes:
+    default:
+      type: apiKey
+      in: header
+      name: x-api-key

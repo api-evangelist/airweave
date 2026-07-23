@@ -1,0 +1,39 @@
+generated: '2026-07-17'
+method: searched
+type: Webhooks
+source: https://docs.airweave.ai/webhooks/types-and-formats
+transport:
+  delivery: HTTP POST
+  content_type: application/json
+  provider: svix
+  headers:
+    - svix-id            # unique message identifier
+    - svix-timestamp     # unix timestamp
+    - svix-signature     # HMAC-SHA256 signature for verification
+  retry: 4xx/5xx responses trigger retries; return 2xx for success.
+envelope:
+  fields:
+    - {name: event_type, type: string, desc: The event identifier}
+    - {name: timestamp, type: string, desc: ISO 8601 time the event occurred}
+  sync_fields: [sync_id, sync_job_id, collection_id, collection_readable_id, collection_name, source_connection_id, source_type]
+  completion_fields: [entities_inserted, entities_updated, entities_deleted, entities_skipped, chunks_written]
+  failure_fields: [error]
+events:
+  - {name: sync.pending, desc: Sync job queued}
+  - {name: sync.running, desc: Sync job processing started}
+  - {name: sync.completed, desc: Sync job finished successfully}
+  - {name: sync.failed, desc: Sync job encountered an error}
+  - {name: sync.cancelled, desc: Sync job manually cancelled}
+  - {name: source_connection.created, desc: New connection record created}
+  - {name: source_connection.auth_completed, desc: OAuth flow completed}
+  - {name: source_connection.deleted, desc: Connection removed}
+  - {name: collection.created, desc: New collection created}
+  - {name: collection.updated, desc: Collection properties changed}
+  - {name: collection.deleted, desc: Collection removed}
+management_api:
+  - /webhooks/subscriptions
+  - /webhooks/subscriptions/{subscription_id}
+  - /webhooks/messages
+notes: >-
+  Airweave documents a webhook event surface (Svix-backed) but does not publish an
+  AsyncAPI document; captured here as a Webhooks catalog.

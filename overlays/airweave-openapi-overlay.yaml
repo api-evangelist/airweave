@@ -1,0 +1,25 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Airweave
+  version: 1.0.0
+extends: openapi/airweave-openapi.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-slug: airweave
+      x-apievangelist-artifacts:
+        authentication: authentication/airweave-authentication.yml
+        conventions: conventions/airweave-conventions.yml
+        errors: errors/airweave-problem-types.yml
+        rate_limits: rate-limits/airweave-rate-limits.yml
+        webhooks: asyncapi/airweave-webhooks.yml
+        mcp: mcp/airweave-mcp.yml
+        data_model: data-model/airweave-data-model.yml
+  - target: $.info
+    update:
+      x-apievangelist-agent-ready: true
+      x-apievangelist-mcp-server: https://mcp.airweave.ai/mcp
+  - target: $.servers
+    update:
+      - url: https://api.airweave.ai
+        description: Production

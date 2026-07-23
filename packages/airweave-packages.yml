@@ -1,0 +1,46 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.airweave.ai/
+packages:
+  - language: python
+    registry: pypi
+    name: airweave-sdk
+    url: https://pypi.org/project/airweave-sdk/
+    install: pip install airweave-sdk
+    official: true
+    notes: Official Python SDK (sync + async clients), generated with Fern.
+  - language: javascript
+    registry: npm
+    name: "@airweave/sdk"
+    url: https://www.npmjs.com/package/@airweave/sdk
+    install: npm install @airweave/sdk
+    official: true
+    notes: Official TypeScript/JavaScript SDK.
+  - language: python
+    registry: pypi
+    name: airweave-cli
+    url: https://pypi.org/project/airweave-cli/
+    install: pip install airweave-cli
+    official: true
+    notes: Official command-line interface (Python).
+  - language: javascript
+    registry: npm
+    name: "@airweave/cli"
+    url: https://www.npmjs.com/package/@airweave/cli
+    install: npm install -g @airweave/cli
+    official: true
+    notes: Official command-line interface (npm distribution).
+  - language: javascript
+    registry: npm
+    name: "@airweave/connect-react"
+    url: https://www.npmjs.com/package/@airweave/connect-react
+    install: npm install @airweave/connect-react
+    official: true
+    notes: React bindings for the Airweave Connect embeddable UI (useAirweaveConnect hook).
+  - language: javascript
+    registry: npm
+    name: "@airweave/connect-js"
+    url: https://www.npmjs.com/package/@airweave/connect-js
+    install: npm install @airweave/connect-js
+    official: true
+    notes: Framework-agnostic loader for the Airweave Connect embeddable UI (AirweaveConnect class).

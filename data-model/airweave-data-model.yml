@@ -1,0 +1,35 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/airweave-openapi.json
+entities:
+  - name: Collection
+    id: readable_id
+    summary: A searchable collection that aggregates one or more source connections.
+    endpoints: ["/collections", "/collections/{readable_id}"]
+  - name: SourceConnection
+    id: source_connection_id
+    summary: A configured connection from a source (app/database) into a collection.
+    endpoints: ["/source-connections", "/source-connections/{source_connection_id}"]
+  - name: SourceConnectionJob
+    id: job_id
+    summary: A sync job run for a source connection.
+    endpoints: ["/source-connections/{source_connection_id}/jobs"]
+  - name: Source
+    id: short_name
+    summary: A connector definition in the Airweave catalog (50+ sources).
+    endpoints: ["/sources", "/sources/{short_name}"]
+  - name: WebhookSubscription
+    id: subscription_id
+    summary: A registered endpoint that receives lifecycle event notifications (Svix-backed).
+    endpoints: ["/webhooks/subscriptions", "/webhooks/subscriptions/{subscription_id}"]
+  - name: WebhookMessage
+    id: message_id
+    summary: A delivered (or attempted) webhook message with delivery attempts.
+    endpoints: ["/webhooks/messages", "/webhooks/messages/{message_id}"]
+relationships:
+  - {from: SourceConnection, type: belongs_to, to: Collection, via: collection_readable_id}
+  - {from: SourceConnectionJob, type: belongs_to, to: SourceConnection, via: source_connection_id}
+  - {from: SourceConnection, type: has_one, to: Source, via: source_type}
+  - {from: WebhookMessage, type: belongs_to, to: WebhookSubscription, via: subscription_id}
+  - {from: Collection, type: has_many, to: SourceConnection, via: collection_readable_id}
+  - {from: SourceConnection, type: has_many, to: SourceConnectionJob, via: source_connection_id}

@@ -1,0 +1,26 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.airweave.ai/rate-limits
+scope: per organization / API key
+window: minute
+signaling:
+  headers:
+    - RateLimit-Limit       # max requests allowed per minute
+    - RateLimit-Remaining   # requests still available in the current window
+    - RateLimit-Reset       # Unix timestamp when the limit resets
+  over_limit_status: 429
+  retry_header: Retry-After  # seconds to wait before retrying
+rate_limits:
+  - plan: Developer
+    limit_count: 10
+    interval: minute
+  - plan: Pro
+    limit_count: 100
+    interval: minute
+  - plan: Team
+    limit_count: 250
+    interval: minute
+  - plan: Enterprise
+    limit_count: null
+    interval: minute
+    notes: Unlimited

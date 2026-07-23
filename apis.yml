@@ -1,21 +1,118 @@
 aid: airweave
 name: Airweave
-description: 'Airweave is a company surfaced as a portfolio company of homebrew and added to the API Evangelist
-  network as a stub for enrichment. Sector: ai. This profile is a lead awaiting the enrichment pipeline.'
+description: >-
+  Airweave is an open-source (MIT) context-retrieval layer that lets AI agents and RAG
+  pipelines search across 50+ connected apps and databases through a single API. It syncs
+  data from sources like Slack, Notion, GitHub, Google Drive, and Postgres, then exposes
+  instant (sub-second vector), classic (LLM-planned), and agentic (multi-step) search over
+  unified collections. Query it via the REST API, official Python and TypeScript SDKs, a
+  CLI, an embeddable Connect UI widget, or a hosted Model Context Protocol (MCP) server,
+  with real-time Svix-backed webhooks for sync and source-connection lifecycle events.
 url: https://raw.githubusercontent.com/api-evangelist/airweave/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - homebrew
-x-tier: stub
+x-tier: enriched
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://github.com/airweave-ai.png
 specificationVersion: '0.20'
 created: '2026-07-17'
 modified: '2026-07-17'
 tags:
 - Company
 - Ai
-apis: []
+- Search
+- RAG
+- Retrieval
+- Agents
+- MCP
+- Vector Search
+- Data Integration
+- Context
+apis:
+- aid: airweave:airweave-collections-api
+  name: Airweave collections API
+  description: The collections API from Airweave — 2 operation(s) for collections.
+  humanURL: https://docs.airweave.ai/api-reference
+  baseURL: https://api.airweave.ai
+  tags:
+  - collections
+  properties:
+  - type: OpenAPI
+    url: openapi/airweave-collections-api-openapi.yml
+  - type: Documentation
+    url: https://docs.airweave.ai/welcome
+  - type: APIReference
+    url: https://docs.airweave.ai/api-reference
+- aid: airweave:airweave-collections-search-api
+  name: Airweave collections > search API
+  description: The collections > search API from Airweave — 4 operation(s) for collections > search.
+  humanURL: https://docs.airweave.ai/api-reference
+  baseURL: https://api.airweave.ai
+  tags:
+  - collections > search
+  properties:
+  - type: OpenAPI
+    url: openapi/airweave-collections-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.airweave.ai/welcome
+  - type: APIReference
+    url: https://docs.airweave.ai/api-reference
+- aid: airweave:airweave-source-connections-api
+  name: Airweave source-connections API
+  description: The source-connections API from Airweave — 5 operation(s) for source-connections.
+  humanURL: https://docs.airweave.ai/api-reference
+  baseURL: https://api.airweave.ai
+  tags:
+  - source-connections
+  properties:
+  - type: OpenAPI
+    url: openapi/airweave-source-connections-api-openapi.yml
+  - type: Documentation
+    url: https://docs.airweave.ai/welcome
+  - type: APIReference
+    url: https://docs.airweave.ai/api-reference
+- aid: airweave:airweave-sources-api
+  name: Airweave sources API
+  description: The sources API from Airweave — 2 operation(s) for sources.
+  humanURL: https://docs.airweave.ai/api-reference
+  baseURL: https://api.airweave.ai
+  tags:
+  - sources
+  properties:
+  - type: OpenAPI
+    url: openapi/airweave-sources-api-openapi.yml
+  - type: Documentation
+    url: https://docs.airweave.ai/welcome
+  - type: APIReference
+    url: https://docs.airweave.ai/api-reference
+- aid: airweave:airweave-webhooks-api
+  name: Airweave webhooks API
+  description: The webhooks API from Airweave — 5 operation(s) for webhooks.
+  humanURL: https://docs.airweave.ai/api-reference
+  baseURL: https://api.airweave.ai
+  tags:
+  - webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/airweave-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.airweave.ai/welcome
+  - type: APIReference
+    url: https://docs.airweave.ai/api-reference
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -24,3 +121,68 @@ maintainers:
 common:
 - type: Website
   url: https://airweave.ai
+- type: DeveloperPortal
+  url: https://docs.airweave.ai/welcome
+- type: Documentation
+  url: https://docs.airweave.ai/welcome
+- type: APIReference
+  url: https://docs.airweave.ai/api-reference
+- type: GettingStarted
+  url: https://docs.airweave.ai/quickstart
+- type: GitHubOrganization
+  url: https://github.com/airweave-ai
+- type: Blog
+  url: https://airweave.ai/blog
+- type: Support
+  url: https://airweave.ai/contact
+- type: SignUp
+  url: https://app.airweave.ai/
+- type: Pricing
+  url: https://airweave.ai/#pricing
+- type: TermsOfService
+  url: https://airweave.ai/terms-conditions
+- type: PrivacyPolicy
+  url: https://airweave.ai/privacy-policy
+- type: LLMsTxt
+  url: llms/airweave-llms.txt
+- type: Packages
+  url: packages/airweave-packages.yml
+- type: SDKs
+  url: packages/airweave-packages.yml
+- type: CLI
+  url: cli/airweave-cli.yml
+- type: MCPServer
+  url: mcp/airweave-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: WellKnown
+  url: well-known/airweave-well-known.yml
+- type: Webhooks
+  url: asyncapi/airweave-webhooks.yml
+- type: Conventions
+  url: conventions/airweave-conventions.yml
+- type: ErrorCatalog
+  url: errors/airweave-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/airweave-lifecycle.yml
+- type: RateLimits
+  url: rate-limits/airweave-rate-limits.yml
+- type: Conformance
+  url: conformance/airweave-conformance.yml
+- type: DataModel
+  url: data-model/airweave-data-model.yml
+- type: Components
+  url: components/airweave-components.yml
+- type: Overlay
+  url: overlays/airweave-openapi-overlay.yaml
+- type: AgenticAccess
+  url: agentic-access/airweave-agentic-access.yml
+- type: DomainSecurity
+  url: security/airweave-domain-security.yml
+- type: Authentication
+  url: authentication/airweave-authentication.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

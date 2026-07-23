@@ -1,0 +1,28 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/airweave-openapi.json
+standards:
+  - id: openapi-3.1
+    conforms: true
+    evidence: Public API published as OpenAPI 3.1.0 (docs.airweave.ai/openapi/api-reference.yaml).
+  - id: api-key-auth
+    conforms: true
+    evidence: securityScheme apiKey in header x-api-key.
+  - id: oauth2
+    conforms: true
+    evidence: MCP server and Connect widget support OAuth 2.0 via Auth0 (dynamic client registration at /register).
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Error responses are custom JSON envelopes, not application/problem+json.
+  - id: rfc9727-api-catalog
+    conforms: true
+    evidence: /.well-known/api-catalog linkset published on docs.airweave.ai.
+  - id: webhooks-svix
+    conforms: true
+    evidence: Webhook delivery uses Svix with svix-signature (HMAC-SHA256) verification.
+  - id: rate-limit-headers
+    conforms: true
+    evidence: Responses carry RateLimit-Limit/Remaining/Reset and Retry-After on 429.
+  - id: mcp-2025-03-26
+    conforms: true
+    evidence: Official Streamable-HTTP MCP server at mcp.airweave.ai/mcp.

@@ -1,0 +1,31 @@
+generated: '2026-07-17'
+method: searched
+hosts:
+  - host: https://docs.airweave.ai
+    documents:
+      - path: /.well-known/api-catalog       # RFC 9727
+        status: 200
+        file: airweave-api-catalog.json
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://airweave.ai
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+  - host: https://api.airweave.ai
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+notes: >-
+  docs.airweave.ai publishes an RFC 9727 API catalog linkset pointing to the public
+  OpenAPI at https://docs.airweave.ai/openapi/api-reference.yaml.

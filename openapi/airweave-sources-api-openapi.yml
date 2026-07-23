@@ -1,0 +1,344 @@
+openapi: 3.1.0
+info:
+  title: API Reference collections sources API
+  version: 1.0.0
+servers:
+- url: https://api.airweave.ai
+  description: Production
+- url: http://localhost:8001
+  description: Local
+tags:
+- name: sources
+paths:
+  /sources:
+    get:
+      operationId: list-sources-get
+      summary: List Sources
+      description: 'Retrieve all available data source connectors.
+
+
+        Returns the complete catalog of source types that Airweave can connect to,
+
+        including their authentication methods, configuration requirements, and
+
+        supported features. Use this endpoint to discover which integrations are
+
+        available for your organization.
+
+
+        Each source includes:
+
+        - **Authentication methods**: How to connect (OAuth, API key, etc.)
+
+        - **Configuration schemas**: What settings are required or optional
+
+        - **Supported auth providers**: Pre-configured OAuth providers available'
+      tags:
+      - sources
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Source'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+  /sources/{short_name}:
+    get:
+      operationId: get-sources-short-name-get
+      summary: Get Source
+      description: 'Retrieve detailed information about a specific data source connector.
+
+
+        Returns the complete configuration for a source type, including:
+
+
+        - **Authentication fields**: Schema for credentials required to connect
+
+        - **Configuration fields**: Schema for optional settings and customization
+
+        - **Supported auth providers**: Pre-configured OAuth providers available for this source
+
+
+        Use this endpoint before creating a source connection to understand what
+
+        authentication and configuration values are required.'
+      tags:
+      - sources
+      parameters:
+      - name: short_name
+        in: path
+        description: Technical identifier of the source type (e.g., 'github', 'stripe', 'slack')
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+        '404':
+          description: Source Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '429':
+          description: Rate Limit Exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorResponse'
+components:
+  schemas:
+    ValidationErrorLocItems:
+      oneOf:
+      - type: string
+      - type: integer
+      title: ValidationErrorLocItems
+    Fields:
+      type: object
+      properties:
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigField'
+      required:
+      - fields
+      description: Fields model.
+      title: Fields
+    Source:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Human-readable name of the data source connector (e.g., 'GitHub', 'Stripe', 'PostgreSQL').
+        description:
+          type:
+          - string
+          - 'null'
+          description: Detailed description explaining what data this source can extract and its typical use cases.
+        auth_methods:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of supported authentication methods (e.g., 'direct', 'oauth_browser').
+        oauth_type:
+          type:
+          - string
+          - 'null'
+          description: OAuth token type for OAuth sources (e.g., 'access_only', 'with_refresh').
+        requires_byoc:
+          type: boolean
+          default: false
+          description: Whether this OAuth source requires users to bring their own client.
+        auth_config_class:
+          type:
+          - string
+          - 'null'
+          description: Python class name that defines the authentication configuration fields required for this source (only for DIRECT auth).
+        config_class:
+          type:
+          - string
+          - 'null'
+          description: Python class name that defines the source-specific configuration options and parameters.
+        short_name:
+          type: string
+          description: Technical identifier used internally to reference this source type. Must be unique across all sources.
+        class_name:
+          type: string
+          description: Python class name of the source implementation that handles data extraction logic.
+        output_entity_definitions:
+          type: array
+          items:
+            type: string
+          description: List of entity definition short names that this source can produce (e.g., ['asana_task_entity', 'asana_project_entity']).
+        labels:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Categorization tags to help users discover and filter sources by domain or use case.
+        supports_continuous:
+          type: boolean
+          default: false
+          description: Whether this source supports cursor-based continuous syncing for incremental data extraction.
+        federated_search:
+          type: boolean
+          default: false
+          description: Whether this source uses federated search instead of traditional syncing.
+        supports_temporal_relevance:
+          type: boolean
+          default: true
+          description: Whether this source's entities have timestamps that enable recency-based ranking.
+        supports_access_control:
+          type: boolean
+          default: false
+          description: Whether this source supports document-level access control.
+        rate_limit_level:
+          type:
+          - string
+          - 'null'
+          description: 'Rate limiting level for this source: ''org'' (organization-wide), ''connection'' (per-connection/per-user), or None (no rate limiting).'
+        feature_flag:
+          type:
+          - string
+          - 'null'
+          description: Feature flag required to access this source. If set, only organizations with this feature enabled can see/use this source.
+        supports_browse_tree:
+          type: boolean
+          default: false
+          description: Whether this source supports lazy-loaded browse tree for selective node syncing.
+        auth_fields:
+          oneOf:
+          - $ref: '#/components/schemas/Fields'
+          - type: 'null'
+          description: Schema definition for authentication fields required to connect to this source.
+        config_fields:
+          $ref: '#/components/schemas/Fields'
+          description: Schema definition for configuration fields required to customize this source.
+        supported_auth_providers:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of auth provider short names that support this source.
+      required:
+      - name
+      - short_name
+      - class_name
+      - config_fields
+      description: 'Complete source representation with authentication and configuration schemas.
+
+
+        Served from the in-memory SourceRegistry — no database row needed.'
+      title: Source
+    ValidationError:
+      type: object
+      properties:
+        loc:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorLocItems'
+        msg:
+          type: string
+        type:
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ConfigField:
+      type: object
+      properties:
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+        required:
+          type: boolean
+          default: true
+        items_type:
+          type:
+          - string
+          - 'null'
+        feature_flag:
+          type:
+          - string
+          - 'null'
+        is_secret:
+          type: boolean
+          default: false
+        enum_values:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      required:
+      - name
+      - title
+      - type
+      description: Config field model.
+      title: ConfigField
+    HTTPValidationError:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+      title: HTTPValidationError
+    NotFoundErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message describing what was not found
+      required:
+      - detail
+      description: Response returned when a resource is not found (HTTP 404).
+      title: NotFoundErrorResponse
+    RateLimitErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message explaining the rate limit
+      required:
+      - detail
+      description: 'Response returned when rate limit is exceeded (HTTP 429).
+
+
+        The API enforces rate limits to ensure fair usage. When exceeded,
+
+        wait for the duration specified in the Retry-After header before retrying.'
+      title: RateLimitErrorResponse
+  securitySchemes:
+    default:
+      type: apiKey
+      in: header
+      name: x-api-key

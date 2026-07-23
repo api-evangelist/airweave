@@ -1,0 +1,42 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.airweave.ai/cli
+package:
+  pypi: airweave-cli
+  npm: "@airweave/cli"
+install:
+  - pip install airweave-cli
+  - npm install -g @airweave/cli
+config_env:
+  - AIRWEAVE_API_KEY
+  - AIRWEAVE_BASE_URL        # default https://api.airweave.ai
+  - AIRWEAVE_COLLECTION
+  - AIRWEAVE_AUTH0_DOMAIN
+  - AIRWEAVE_AUTH0_CLIENT_ID
+  - AIRWEAVE_AUTH0_AUDIENCE
+commands:
+  - group: auth
+    subcommands:
+      - {name: login, desc: Browser or API-key authentication}
+      - {name: status, desc: Check current auth state}
+      - {name: logout, desc: Clear credentials}
+  - group: collections
+    subcommands:
+      - {name: list, desc: Display all collections}
+      - {name: create, desc: Add new collection}
+      - {name: get, desc: Retrieve collection details}
+  - group: search
+    subcommands:
+      - {name: "<query>", desc: Query a collection (instant/classic/agentic modes)}
+  - group: sources
+    subcommands:
+      - {name: list, desc: Show source connections}
+      - {name: add, desc: Connect new data source}
+      - {name: sync, desc: Trigger data synchronization}
+flags:
+  - {flag: "--collection", short: "-c", purpose: Target collection}
+  - {flag: "--mode", short: "-m", purpose: Search mode (instant/classic/agentic)}
+  - {flag: "--top-k", short: "-k", purpose: Result count limit}
+  - {flag: "--filter", short: "-f", purpose: JSON filter conditions}
+  - {flag: "--json", short: null, purpose: Force JSON output}
+  - {flag: "--quiet", short: "-q", purpose: Suppress interactive elements}
