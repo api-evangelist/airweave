@@ -1,0 +1,226 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference collections webhooks API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.airweave.ai/webhooks/messages",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "event_types",
+                "value": "",
+                "type": "query",
+                "description": "Filter messages by event type(s). Accepts multiple values, e.g., `?event_types=sync.completed&event_types=sync.failed`."
+              }
+            ]
+          },
+          "docs": "Retrieve all webhook messages for your organization.\n\nWebhook messages represent payloads that were sent (or attempted to be sent)\nto your subscribed endpoints. Each message contains the event type, payload data,\nand delivery status information.\n\nUse the `event_types` query parameter to filter messages by specific event types,\nsuch as `sync.completed` or `sync.failed`."
+        },
+        {
+          "info": {
+            "name": "Get Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.airweave.ai/webhooks/messages/:message_id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "message_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the message to retrieve (UUID)."
+              },
+              {
+                "name": "include_attempts",
+                "value": "",
+                "type": "query",
+                "description": "Include delivery attempts for this message. Each attempt includes the HTTP response code, response body, and timestamp."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific webhook message by its ID.\n\nReturns the full message details including the event type, payload data,\ntimestamp, and delivery channel information. Use this to inspect the\nexact payload that was sent to your webhook endpoints.\n\nUse `include_attempts=true` to also retrieve delivery attempts for this message,\nwhich include HTTP response codes, response bodies, and timestamps for debugging\ndelivery failures."
+        },
+        {
+          "info": {
+            "name": "List Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.airweave.ai/webhooks/subscriptions",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "List all webhook subscriptions for your organization.\n\nReturns all configured webhook endpoints, including their URLs, subscribed\nevent types, and current status (enabled/disabled). Use this to audit\nyour webhook configuration or find a specific subscription."
+        },
+        {
+          "info": {
+            "name": "Create Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.airweave.ai/webhooks/subscriptions",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new webhook subscription.\n\nWebhook subscriptions allow you to receive real-time notifications when events\noccur in Airweave. When you create a subscription, you specify:\n\n- **URL**: The HTTPS endpoint where events will be delivered\n- **Event Types**: Which events you want to receive (e.g., `sync.completed`, `sync.failed`)\n- **Secret** (optional): A custom signing secret for verifying webhook signatures\n\nAfter creation, Airweave will send HTTP POST requests to your URL whenever\nmatching "
+        },
+        {
+          "info": {
+            "name": "Get Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.airweave.ai/webhooks/subscriptions/:subscription_id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "subscription_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription to retrieve (UUID)."
+              },
+              {
+                "name": "include_secret",
+                "value": "",
+                "type": "query",
+                "description": "Include the signing secret for webhook signature verification. Keep this secret secure and use it to verify the 'svix-signature' header."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific webhook subscription with its recent delivery attempts.\n\nReturns the subscription configuration along with a history of message delivery\nattempts. This is useful for debugging delivery issues or verifying that your\nendpoint is correctly receiving events.\n\nUse `include_secret=true` to also retrieve the signing secret for webhook\nsignature verification. Keep this secret secure."
+        },
+        {
+          "info": {
+            "name": "Update Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.airweave.ai/webhooks/subscriptions/:subscription_id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "subscription_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription to update (UUID)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing webhook subscription.\n\nUse this endpoint to modify a subscription's configuration. You can:\n\n- **Change the URL**: Update where events are delivered\n- **Update event types**: Modify which events trigger notifications\n- **Enable/disable**: Temporarily pause delivery without deleting the subscription\n- **Recover messages**: When re-enabling, optionally recover missed messages\n\nOnly include the fields you want to change. Omitted fields will retain their\ncurrent values.\n\nWhen re-e"
+        },
+        {
+          "info": {
+            "name": "Delete Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.airweave.ai/webhooks/subscriptions/:subscription_id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "subscription_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription to delete (UUID)."
+              }
+            ]
+          },
+          "docs": "Permanently delete a webhook subscription.\n\nOnce deleted, Airweave will stop sending events to this endpoint immediately.\nThis action cannot be undone. Any pending message deliveries will be cancelled.\n\nIf you want to temporarily stop receiving events, consider disabling the\nsubscription instead using the PATCH endpoint."
+        },
+        {
+          "info": {
+            "name": "Recover Failed Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.airweave.ai/webhooks/subscriptions/:subscription_id/recover",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "subscription_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the subscription to recover messages for (UUID)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retry failed message deliveries for a webhook subscription.\n\nTriggers a recovery process that replays all failed messages within the\nspecified time window. This is useful when:\n\n- Your endpoint was temporarily down and you want to catch up\n- You've fixed a bug in your webhook handler\n- You want to reprocess events after re-enabling a disabled subscription\n\nMessages are retried in chronological order. Successfully delivered messages\nare skipped; only failed or pending messages are retried."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

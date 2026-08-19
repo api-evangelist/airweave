@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference collections API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "collections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.airweave.ai/collections",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of collections to skip for pagination"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of collections to return (1-1000)"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search term to filter collections by name or readable_id"
+              }
+            ]
+          },
+          "docs": "Retrieve all collections belonging to your organization.\n\nCollections are containers that group related data from one or more source\nconnections, enabling unified search across multiple data sources.\n\nResults are sorted by creation date (newest first) and support pagination\nand text search filtering."
+        },
+        {
+          "info": {
+            "name": "Create Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.airweave.ai/collections",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new collection in your organization.\n\nCollections are containers for organizing and searching across data from multiple\nsources. After creation, add source connections to begin syncing data.\n\nThe collection will be assigned a unique `readable_id` based on the name you provide,\nwhich is used in URLs and API calls. You can optionally configure:\n\n- **Sync schedule**: How frequently to automatically sync data from all sources\n- **Custom readable_id**: Provide your own identifier (must be un"
+        },
+        {
+          "info": {
+            "name": "Get Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.airweave.ai/collections/:readable_id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "readable_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique readable identifier of the collection (e.g., 'finance-data-ab123')"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific collection by its readable ID.\n\nReturns the complete collection configuration including sync settings, status,\nand metadata. Use this to check the current state of a collection or to get\nconfiguration details before making updates."
+        },
+        {
+          "info": {
+            "name": "Update Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.airweave.ai/collections/:readable_id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "readable_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique readable identifier of the collection to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing collection's properties.\n\nYou can modify:\n- **Name**: The display name shown in the UI\n- **Sync configuration**: Schedule settings for automatic data synchronization\n\nNote that the `readable_id` cannot be changed after creation to maintain stable\nAPI endpoints and preserve existing integrations."
+        },
+        {
+          "info": {
+            "name": "Delete Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.airweave.ai/collections/:readable_id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "readable_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique readable identifier of the collection to delete"
+              }
+            ]
+          },
+          "docs": "Permanently delete a collection and all associated data.\n\nThis operation:\n- Removes all synced data from the vector database\n- Deletes all source connections within the collection\n- Cancels any scheduled sync jobs\n- Cleans up all related resources\n\n**Warning**: This action cannot be undone. All data will be permanently deleted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

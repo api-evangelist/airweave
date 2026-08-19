@@ -1,0 +1,248 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference collections source-connections API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "source-connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Source Connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.airweave.ai/source-connections",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "Filter by collection readable ID"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of connections to skip for pagination"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of connections to return (1-1000)"
+              }
+            ]
+          },
+          "docs": "Retrieve all source connections for your organization.\n\nReturns a lightweight list of source connections with essential fields for\ndisplay and navigation. Use the collection filter to see connections within\na specific collection.\n\nFor full connection details including sync history, use the GET /{id} endpoint."
+        },
+        {
+          "info": {
+            "name": "Create Source Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.airweave.ai/source-connections",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new source connection to sync data from an external source.\n\nThe authentication method determines the creation flow:\n\n- **Direct**: Provide credentials (API key, token) directly. Connection is created immediately.\n- **OAuth Browser**: Returns a connection with an `auth_url` to redirect users for authentication.\n- **OAuth Token**: Provide an existing OAuth token. Connection is created immediately.\n- **Auth Provider**: Use a pre-configured auth provider (e.g., Composio, Pipedream).\n\nAfter"
+        },
+        {
+          "info": {
+            "name": "Get Source Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.airweave.ai/source-connections/:source_connection_id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source_connection_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the source connection (UUID)"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific source connection.\n\nReturns complete information about the connection including:\n- Configuration settings\n- Authentication status\n- Sync schedule and history\n- Entity statistics"
+        },
+        {
+          "info": {
+            "name": "Update Source Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.airweave.ai/source-connections/:source_connection_id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source_connection_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the source connection to update (UUID)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing source connection's configuration.\n\nYou can modify:\n- **Name and description**: Display information\n- **Configuration**: Source-specific settings (e.g., repository name, filters)\n- **Schedule**: Cron expression for automatic syncs\n- **Authentication**: Update credentials (direct auth only)\n\nOnly include the fields you want to change; omitted fields retain their current values."
+        },
+        {
+          "info": {
+            "name": "Delete Source Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.airweave.ai/source-connections/:source_connection_id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source_connection_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the source connection to delete (UUID)"
+              }
+            ]
+          },
+          "docs": "Permanently delete a source connection and all its synced data.\n\n**What happens when you delete:**\n\n1. Any running sync is cancelled and the API waits (up to 15 s) for the\n   worker to stop writing.\n2. The source connection, sync configuration, job history, and entity\n   metadata are cascade-deleted from the database.\n3. A background cleanup workflow is scheduled to remove data from the\n   vector database (Vespa) and raw data storage (ARF). This may take\n   several minutes for large datasets but"
+        },
+        {
+          "info": {
+            "name": "List Sync Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.airweave.ai/source-connections/:source_connection_id/jobs",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source_connection_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the source connection (UUID)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of jobs to return (1-1000)"
+              }
+            ]
+          },
+          "docs": "Retrieve the sync job history for a source connection.\n\nReturns a list of sync jobs ordered by creation time (newest first). Each job\nincludes status, timing information, and entity counts.\n\nJob statuses:\n- **PENDING**: Job is queued, waiting for the worker to pick it up\n- **RUNNING**: Sync is actively pulling and processing data\n- **COMPLETED**: Sync finished successfully\n- **FAILED**: Sync encountered an unrecoverable error\n- **CANCELLING**: Cancellation has been requested. The worker is\n  gra"
+        },
+        {
+          "info": {
+            "name": "Run Sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.airweave.ai/source-connections/:source_connection_id/run",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source_connection_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the source connection to sync (UUID)"
+              },
+              {
+                "name": "force_full_sync",
+                "value": "",
+                "type": "query",
+                "description": "Force a full sync ignoring cursor data. Only applies to continuous sync connections. Non-continuous connections always perform full syncs."
+              }
+            ]
+          },
+          "docs": "Trigger a data synchronization job for a source connection.\n\nStarts an asynchronous sync job that pulls the latest data from the connected\nsource. The job runs in the background and you can monitor its progress using\nthe jobs endpoint.\n\nFor continuous sync connections, this performs an incremental sync by default.\nUse `force_full_sync=true` to perform a complete re-sync of all data."
+        },
+        {
+          "info": {
+            "name": "Cancel Sync Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.airweave.ai/source-connections/:source_connection_id/jobs/:job_id/cancel",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source_connection_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the source connection (UUID)"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the sync job to cancel (UUID)"
+              }
+            ]
+          },
+          "docs": "Request cancellation of a running sync job.\n\n**State lifecycle**: `PENDING` / `RUNNING` → `CANCELLING` → `CANCELLED`\n\n1. The API immediately marks the job as **CANCELLING** in the database.\n2. A cancellation signal is sent to the Temporal workflow.\n3. The worker receives the signal, gracefully stops the sync pipeline\n   (cancels worker pool, source stream), and marks the job as **CANCELLED**.\n\nAlready-processed entities are retained in the vector database.\nIf the worker is unresponsive, a backgr"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

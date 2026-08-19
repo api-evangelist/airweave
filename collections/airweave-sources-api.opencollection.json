@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference collections sources API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.airweave.ai/sources",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve all available data source connectors.\n\nReturns the complete catalog of source types that Airweave can connect to,\nincluding their authentication methods, configuration requirements, and\nsupported features. Use this endpoint to discover which integrations are\navailable for your organization.\n\nEach source includes:\n- **Authentication methods**: How to connect (OAuth, API key, etc.)\n- **Configuration schemas**: What settings are required or optional\n- **Supported auth providers**: Pre-conf"
+        },
+        {
+          "info": {
+            "name": "Get Source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.airweave.ai/sources/:short_name",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "short_name",
+                "value": "",
+                "type": "path",
+                "description": "Technical identifier of the source type (e.g., 'github', 'stripe', 'slack')"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific data source connector.\n\nReturns the complete configuration for a source type, including:\n\n- **Authentication fields**: Schema for credentials required to connect\n- **Configuration fields**: Schema for optional settings and customization\n- **Supported auth providers**: Pre-configured OAuth providers available for this source\n\nUse this endpoint before creating a source connection to understand what\nauthentication and configuration values are required."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

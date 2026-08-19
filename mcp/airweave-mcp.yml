@@ -4,31 +4,36 @@ status: published
 source: https://docs.airweave.ai/mcp-server
 server:
   name: airweave
-  transport: http          # Streamable HTTP (MCP 2025-03-26)
+  transport: http
   url: https://mcp.airweave.ai/mcp
   auth:
-    - method: api-key
-      headers:
-        - X-API-Key
-        - X-Collection-Readable-ID
-    - method: oauth2
-      notes: OAuth 2.0 via Auth0 with dynamic client registration at /register; use mcp-remote for the browser flow.
+  - method: api-key
+    headers:
+    - X-API-Key
+    - X-Collection-Readable-ID
+  - method: oauth2
+    notes: OAuth 2.0 via Auth0 with dynamic client registration at /register; use mcp-remote for the browser
+      flow.
   listed:
-    - Cursor
-    - Claude Desktop
-    - Claude Code
-    - VS Code
-    - Google Antigravity MCP Store
+  - Cursor
+  - Claude Desktop
+  - Claude Code
+  - VS Code
+  - Google Antigravity MCP Store
 tools:
-  - name: "search-{collection}"
-    description: >-
-      Search an Airweave collection. Supports three tiers: instant (sub-second vector
-      search), classic (LLM-planned strategy ~2-5s), and agentic (multi-step navigation).
-      Parameters include query, tier, limit, offset, retrieval strategy, thinking mode,
-      and metadata filters.
-    source_operation: openapi/airweave-openapi.json#instant
-  - name: get-config
-    description: Returns server configuration (collection ID, base URL, available tools).
-notes: >-
-  Official hosted/remote MCP server operated by Airweave. Stateless HTTP service with
-  per-request authentication and per-request collection selection via headers.
+- name: search-{collection}
+  description: 'Search an Airweave collection. Supports three tiers: instant (sub-second vector search),
+    classic (LLM-planned strategy ~2-5s), and agentic (multi-step navigation). Parameters include query,
+    tier, limit, offset, retrieval strategy, thinking mode, and metadata filters.'
+  source_operation: openapi/airweave-openapi.json#instant
+- name: get-config
+  description: Returns server configuration (collection ID, base URL, available tools).
+notes: Official hosted/remote MCP server operated by Airweave. Stateless HTTP service with per-request
+  authentication and per-request collection selection via headers.
+deployment:
+  mode: remote
+  endpoint: https://mcp.airweave.ai/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census

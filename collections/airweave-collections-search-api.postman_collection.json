@@ -1,0 +1,775 @@
+{
+  "item": [
+    {
+      "id": "1f2adf3a-19ad-432f-a320-cbaf1c7588b6",
+      "name": "collections > search",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c7ba68b7-866f-40f8-8fef-d59011e683e7",
+          "name": "Instant Search",
+          "request": {
+            "name": "Instant Search",
+            "description": {
+              "content": "Direct vector search.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":readable_id",
+                "search",
+                "instant"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "readable_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"retrieval_strategy\": \"<string>\",\n  \"filter\": [\n    {\n      \"conditions\": [\n        {\n          \"field\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"field\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"conditions\": [\n        {\n          \"field\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"field\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"limit\": 100,\n  \"offset\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3fe490e3-de18-43db-82d2-dad6f1da3208",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id",
+                    "search",
+                    "instant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"retrieval_strategy\": \"semantic\",\n  \"filter\": [\n    {\n      \"conditions\": [\n        {\n          \"field\": \"airweave_system_metadata.source_name\",\n          \"operator\": \"greater_than\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"airweave_system_metadata.entity_type\",\n          \"operator\": \"less_than_or_equal\",\n          \"value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"conditions\": [\n        {\n          \"field\": \"breadcrumbs.entity_id\",\n          \"operator\": \"contains\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"breadcrumbs.entity_type\",\n          \"operator\": \"not_in\",\n          \"value\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"limit\": 100,\n  \"offset\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"entity_id\": \"string\",\n      \"name\": \"string\",\n      \"relevance_score\": 3637.928572852591,\n      \"breadcrumbs\": [\n        {\n          \"entity_id\": \"string\",\n          \"name\": \"string\",\n          \"entity_type\": \"string\"\n        },\n        {\n          \"entity_id\": \"string\",\n          \"name\": \"string\",\n          \"entity_type\": \"string\"\n        }\n      ],\n      \"textual_representation\": \"string\",\n      \"airweave_system_metadata\": {\n        \"source_name\": \"string\",\n        \"entity_type\": \"string\",\n        \"chunk_index\": 4019,\n        \"original_entity_id\": \"string\",\n        \"sync_id\": \"string\",\n        \"sync_job_id\": \"string\"\n      },\n      \"access\": {\n        \"viewers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_public\": true\n      },\n      \"web_url\": \"string\",\n      \"raw_source_fields\": {\n        \"key_0\": {}\n      },\n      \"created_at\": \"2019-05-25T00:40:27.716Z\",\n      \"updated_at\": \"1976-04-24T01:04:48.817Z\",\n      \"url\": \"string\"\n    },\n    {\n      \"entity_id\": \"string\",\n      \"name\": \"string\",\n      \"relevance_score\": 9007.381859421921,\n      \"breadcrumbs\": [\n        {\n          \"entity_id\": \"string\",\n          \"name\": \"string\",\n          \"entity_type\": \"string\"\n        },\n        {\n          \"entity_id\": \"string\",\n          \"name\": \"string\",\n          \"entity_type\": \"string\"\n        }\n      ],\n      \"textual_representation\": \"string\",\n      \"airweave_system_metadata\": {\n        \"source_name\": \"string\",\n        \"entity_type\": \"string\",\n        \"chunk_index\": 5691,\n        \"original_entity_id\": \"string\",\n        \"sync_id\": \"string\",\n        \"sync_job_id\": \"string\"\n      },\n      \"access\": {\n        \"viewers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_public\": false\n      },\n      \"web_url\": \"string\",\n      \"raw_source_fields\": {\n        \"key_0\": {}\n      },\n      \"created_at\": \"1984-11-29T11:46:45.642Z\",\n      \"updated_at\": \"1990-05-05T12:01:22.313Z\",\n      \"url\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9bd95a98-03b7-495d-8fcb-8f4aa9121748",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id",
+                    "search",
+                    "instant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"retrieval_strategy\": \"semantic\",\n  \"filter\": [\n    {\n      \"conditions\": [\n        {\n          \"field\": \"airweave_system_metadata.source_name\",\n          \"operator\": \"greater_than\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"airweave_system_metadata.entity_type\",\n          \"operator\": \"less_than_or_equal\",\n          \"value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"conditions\": [\n        {\n          \"field\": \"breadcrumbs.entity_id\",\n          \"operator\": \"contains\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"breadcrumbs.entity_type\",\n          \"operator\": \"not_in\",\n          \"value\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"limit\": 100,\n  \"offset\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "976d8390-a3cf-4891-9522-b00fa50cedbd",
+          "name": "Classic Search",
+          "request": {
+            "name": "Classic Search",
+            "description": {
+              "content": "AI-optimized search.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":readable_id",
+                "search",
+                "classic"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "readable_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"filter\": [\n    {\n      \"conditions\": [\n        {\n          \"field\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"field\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"conditions\": [\n        {\n          \"field\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"field\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"limit\": 100,\n  \"offset\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ef6de1ed-fa0a-4f50-830d-3a286b51ec08",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id",
+                    "search",
+                    "classic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"filter\": [\n    {\n      \"conditions\": [\n        {\n          \"field\": \"created_at\",\n          \"operator\": \"less_than\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"updated_at\",\n          \"operator\": \"not_equals\",\n          \"value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"conditions\": [\n        {\n          \"field\": \"breadcrumbs.entity_type\",\n          \"operator\": \"greater_than\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"breadcrumbs.name\",\n          \"operator\": \"not_equals\",\n          \"value\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"limit\": 100,\n  \"offset\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"entity_id\": \"string\",\n      \"name\": \"string\",\n      \"relevance_score\": 3637.928572852591,\n      \"breadcrumbs\": [\n        {\n          \"entity_id\": \"string\",\n          \"name\": \"string\",\n          \"entity_type\": \"string\"\n        },\n        {\n          \"entity_id\": \"string\",\n          \"name\": \"string\",\n          \"entity_type\": \"string\"\n        }\n      ],\n      \"textual_representation\": \"string\",\n      \"airweave_system_metadata\": {\n        \"source_name\": \"string\",\n        \"entity_type\": \"string\",\n        \"chunk_index\": 4019,\n        \"original_entity_id\": \"string\",\n        \"sync_id\": \"string\",\n        \"sync_job_id\": \"string\"\n      },\n      \"access\": {\n        \"viewers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_public\": true\n      },\n      \"web_url\": \"string\",\n      \"raw_source_fields\": {\n        \"key_0\": {}\n      },\n      \"created_at\": \"2019-05-25T00:40:27.716Z\",\n      \"updated_at\": \"1976-04-24T01:04:48.817Z\",\n      \"url\": \"string\"\n    },\n    {\n      \"entity_id\": \"string\",\n      \"name\": \"string\",\n      \"relevance_score\": 9007.381859421921,\n      \"breadcrumbs\": [\n        {\n          \"entity_id\": \"string\",\n          \"name\": \"string\",\n          \"entity_type\": \"string\"\n        },\n        {\n          \"entity_id\": \"string\",\n          \"name\": \"string\",\n          \"entity_type\": \"string\"\n        }\n      ],\n      \"textual_representation\": \"string\",\n      \"airweave_system_metadata\": {\n        \"source_name\": \"string\",\n        \"entity_type\": \"string\",\n        \"chunk_index\": 5691,\n        \"original_entity_id\": \"string\",\n        \"sync_id\": \"string\",\n        \"sync_job_id\": \"string\"\n      },\n      \"access\": {\n        \"viewers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_public\": false\n      },\n      \"web_url\": \"string\",\n      \"raw_source_fields\": {\n        \"key_0\": {}\n      },\n      \"created_at\": \"1984-11-29T11:46:45.642Z\",\n      \"updated_at\": \"1990-05-05T12:01:22.313Z\",\n      \"url\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cba505fd-b4fd-43e9-91ed-705b8be695be",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id",
+                    "search",
+                    "classic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"filter\": [\n    {\n      \"conditions\": [\n        {\n          \"field\": \"created_at\",\n          \"operator\": \"less_than\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"updated_at\",\n          \"operator\": \"not_equals\",\n          \"value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"conditions\": [\n        {\n          \"field\": \"breadcrumbs.entity_type\",\n          \"operator\": \"greater_than\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"breadcrumbs.name\",\n          \"operator\": \"not_equals\",\n          \"value\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"limit\": 100,\n  \"offset\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5aba5c16-3ee6-4dc8-a298-31efe3630ab9",
+          "name": "Agentic Search",
+          "request": {
+            "name": "Agentic Search",
+            "description": {
+              "content": "Agent that iteratively searches, reads, navigates hierarchies, and collects results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":readable_id",
+                "search",
+                "agentic"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "readable_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"thinking\": false,\n  \"filter\": [\n    {\n      \"conditions\": [\n        {\n          \"field\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"field\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"conditions\": [\n        {\n          \"field\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"field\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"limit\": \"<integer,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9dbf2157-f31c-4064-b601-8ec1d55a55fa",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id",
+                    "search",
+                    "agentic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"thinking\": false,\n  \"filter\": [\n    {\n      \"conditions\": [\n        {\n          \"field\": \"breadcrumbs.entity_type\",\n          \"operator\": \"less_than\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"airweave_system_metadata.entity_type\",\n          \"operator\": \"less_than\",\n          \"value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"conditions\": [\n        {\n          \"field\": \"airweave_system_metadata.sync_id\",\n          \"operator\": \"less_than\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"airweave_system_metadata.chunk_index\",\n          \"operator\": \"less_than_or_equal\",\n          \"value\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"limit\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"entity_id\": \"string\",\n      \"name\": \"string\",\n      \"relevance_score\": 3637.928572852591,\n      \"breadcrumbs\": [\n        {\n          \"entity_id\": \"string\",\n          \"name\": \"string\",\n          \"entity_type\": \"string\"\n        },\n        {\n          \"entity_id\": \"string\",\n          \"name\": \"string\",\n          \"entity_type\": \"string\"\n        }\n      ],\n      \"textual_representation\": \"string\",\n      \"airweave_system_metadata\": {\n        \"source_name\": \"string\",\n        \"entity_type\": \"string\",\n        \"chunk_index\": 4019,\n        \"original_entity_id\": \"string\",\n        \"sync_id\": \"string\",\n        \"sync_job_id\": \"string\"\n      },\n      \"access\": {\n        \"viewers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_public\": true\n      },\n      \"web_url\": \"string\",\n      \"raw_source_fields\": {\n        \"key_0\": {}\n      },\n      \"created_at\": \"2019-05-25T00:40:27.716Z\",\n      \"updated_at\": \"1976-04-24T01:04:48.817Z\",\n      \"url\": \"string\"\n    },\n    {\n      \"entity_id\": \"string\",\n      \"name\": \"string\",\n      \"relevance_score\": 9007.381859421921,\n      \"breadcrumbs\": [\n        {\n          \"entity_id\": \"string\",\n          \"name\": \"string\",\n          \"entity_type\": \"string\"\n        },\n        {\n          \"entity_id\": \"string\",\n          \"name\": \"string\",\n          \"entity_type\": \"string\"\n        }\n      ],\n      \"textual_representation\": \"string\",\n      \"airweave_system_metadata\": {\n        \"source_name\": \"string\",\n        \"entity_type\": \"string\",\n        \"chunk_index\": 5691,\n        \"original_entity_id\": \"string\",\n        \"sync_id\": \"string\",\n        \"sync_job_id\": \"string\"\n      },\n      \"access\": {\n        \"viewers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"is_public\": false\n      },\n      \"web_url\": \"string\",\n      \"raw_source_fields\": {\n        \"key_0\": {}\n      },\n      \"created_at\": \"1984-11-29T11:46:45.642Z\",\n      \"updated_at\": \"1990-05-05T12:01:22.313Z\",\n      \"url\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2380950d-e2e7-4ccf-b320-734cef732d9d",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id",
+                    "search",
+                    "agentic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"thinking\": false,\n  \"filter\": [\n    {\n      \"conditions\": [\n        {\n          \"field\": \"breadcrumbs.entity_type\",\n          \"operator\": \"less_than\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"airweave_system_metadata.entity_type\",\n          \"operator\": \"less_than\",\n          \"value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"conditions\": [\n        {\n          \"field\": \"airweave_system_metadata.sync_id\",\n          \"operator\": \"less_than\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"airweave_system_metadata.chunk_index\",\n          \"operator\": \"less_than_or_equal\",\n          \"value\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"limit\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "238d84d7-2513-498d-9b5c-9424dca725a1",
+          "name": "Stream Agentic Search",
+          "request": {
+            "name": "Stream Agentic Search",
+            "description": {
+              "content": "Streaming agentic search via Server-Sent Events. Returns real-time events as the agent searches.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":readable_id",
+                "search",
+                "agentic",
+                "stream"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "readable_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/event-stream"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"thinking\": false,\n  \"filter\": [\n    {\n      \"conditions\": [\n        {\n          \"field\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"field\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"conditions\": [\n        {\n          \"field\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"field\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"limit\": \"<integer,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cd159e4f-100f-4935-aefd-cdd4944b7ea7",
+              "name": "SSE stream of agentic search events.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id",
+                    "search",
+                    "agentic",
+                    "stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/event-stream"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"thinking\": false,\n  \"filter\": [\n    {\n      \"conditions\": [\n        {\n          \"field\": \"breadcrumbs.entity_type\",\n          \"operator\": \"less_than\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"airweave_system_metadata.entity_type\",\n          \"operator\": \"less_than\",\n          \"value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"conditions\": [\n        {\n          \"field\": \"airweave_system_metadata.sync_id\",\n          \"operator\": \"less_than\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"airweave_system_metadata.chunk_index\",\n          \"operator\": \"less_than_or_equal\",\n          \"value\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"limit\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/event-stream"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8d8e2235-18d5-4914-a1cd-0a04ec2b4fbe",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id",
+                    "search",
+                    "agentic",
+                    "stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"thinking\": false,\n  \"filter\": [\n    {\n      \"conditions\": [\n        {\n          \"field\": \"breadcrumbs.entity_type\",\n          \"operator\": \"less_than\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"airweave_system_metadata.entity_type\",\n          \"operator\": \"less_than\",\n          \"value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"conditions\": [\n        {\n          \"field\": \"airweave_system_metadata.sync_id\",\n          \"operator\": \"less_than\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"airweave_system_metadata.chunk_index\",\n          \"operator\": \"less_than_or_equal\",\n          \"value\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"limit\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.airweave.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "849c3c89-d4e0-44b5-812c-fd0264e53cdc",
+    "name": "API Reference collections collections > search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

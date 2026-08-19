@@ -1,0 +1,1250 @@
+{
+  "item": [
+    {
+      "id": "e38e446b-a1f2-4773-9c7d-a68fad6670d1",
+      "name": "collections",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9281ec98-16f7-4b1a-ba9c-0ce3915bfae4",
+          "name": "List Collections",
+          "request": {
+            "name": "List Collections",
+            "description": {
+              "content": "Retrieve all collections belonging to your organization.\n\nCollections are containers that group related data from one or more source\nconnections, enabling unified search across multiple data sources.\n\nResults are sorted by creation date (newest first) and support pagination\nand text search filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Number of collections to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of collections to return (1-1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search term to filter collections by name or readable_id"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ed341af9-6d5f-426c-ba18-0382d8ee22e3",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"readable_id\": \"string\",\n    \"id\": \"1bffe638-6962-638c-498d-b988eb87fd8b\",\n    \"created_at\": \"1963-02-11T08:02:25.185Z\",\n    \"modified_at\": \"1967-01-22T00:42:39.988Z\",\n    \"organization_id\": \"600eb843-4d7c-e3c2-75d5-d0bb2473ea84\",\n    \"vector_size\": 9603,\n    \"embedding_model_name\": \"string\",\n    \"sync_config\": {\n      \"destinations\": {\n        \"skip_vespa\": false,\n        \"target_destinations\": [\n          \"d8b40899-4a6b-f84e-ef08-3001d4a6d2fe\",\n          \"0e7d715a-82e1-58a0-d273-173d5cab8127\"\n        ],\n        \"exclude_destinations\": [\n          \"1924e949-1f88-4287-9035-712bc9d99400\",\n          \"fe0e25cc-5755-0a83-11f7-e6124962f251\"\n        ]\n      },\n      \"handlers\": {\n        \"enable_vector_handlers\": true,\n        \"enable_raw_data_handler\": true,\n        \"enable_postgres_handler\": true\n      },\n      \"cursor\": {\n        \"skip_load\": false,\n        \"skip_updates\": false\n      },\n      \"behavior\": {\n        \"skip_hash_comparison\": false,\n        \"replay_from_arf\": false,\n        \"skip_guardrails\": false\n      }\n    },\n    \"created_by_email\": \"LLAD@uvZoZxudFIQWLOIGQGgLuyUzb.nayb\",\n    \"modified_by_email\": \"xUUHxV6HgU@ajIKAe.ktx\",\n    \"status\": \"ACTIVE\",\n    \"source_connection_summaries\": [\n      {\n        \"short_name\": \"string\",\n        \"name\": \"string\"\n      },\n      {\n        \"short_name\": \"string\",\n        \"name\": \"string\"\n      }\n    ]\n  },\n  {\n    \"name\": \"string\",\n    \"readable_id\": \"string\",\n    \"id\": \"acedd55b-973a-6e51-0ff4-f9ea5449accf\",\n    \"created_at\": \"1987-02-11T21:45:54.533Z\",\n    \"modified_at\": \"1954-01-01T04:14:36.744Z\",\n    \"organization_id\": \"940f813f-991a-00f5-7bc7-2fb7bb5e7fca\",\n    \"vector_size\": 9259,\n    \"embedding_model_name\": \"string\",\n    \"sync_config\": {\n      \"destinations\": {\n        \"skip_vespa\": false,\n        \"target_destinations\": [\n          \"38e14053-a314-7c6c-88be-4bd29ef19dd9\",\n          \"da06c8a5-b614-105f-ece6-e4bc79c869f4\"\n        ],\n        \"exclude_destinations\": [\n          \"737e7198-77a1-d96d-c6a0-1aef8e94d7b6\",\n          \"0bedb33f-10ae-e3c5-ce6b-f54306212f81\"\n        ]\n      },\n      \"handlers\": {\n        \"enable_vector_handlers\": true,\n        \"enable_raw_data_handler\": true,\n        \"enable_postgres_handler\": true\n      },\n      \"cursor\": {\n        \"skip_load\": false,\n        \"skip_updates\": false\n      },\n      \"behavior\": {\n        \"skip_hash_comparison\": false,\n        \"replay_from_arf\": false,\n        \"skip_guardrails\": false\n      }\n    },\n    \"created_by_email\": \"25zw4G@AQublCuNpVH.zemn\",\n    \"modified_by_email\": \"si-DhcxaI4FA2XV@LYIObbdyOyXBNCipLL.znuh\",\n    \"status\": \"ERROR\",\n    \"source_connection_summaries\": [\n      {\n        \"short_name\": \"string\",\n        \"name\": \"string\"\n      },\n      {\n        \"short_name\": \"string\",\n        \"name\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd5742ef-8f1b-4e8e-b25c-158fa98a79e5",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de515222-6aeb-4b5b-b174-bc1a3ce0e100",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9eee405d-fb22-4e5f-ac80-c81887d4e3fb",
+          "name": "Create Collection",
+          "request": {
+            "name": "Create Collection",
+            "description": {
+              "content": "Create a new collection in your organization.\n\nCollections are containers for organizing and searching across data from multiple\nsources. After creation, add source connections to begin syncing data.\n\nThe collection will be assigned a unique `readable_id` based on the name you provide,\nwhich is used in URLs and API calls. You can optionally configure:\n\n- **Sync schedule**: How frequently to automatically sync data from all sources\n- **Custom readable_id**: Provide your own identifier (must be unique and URL-safe)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"readable_id\": \"<string,null>\",\n  \"sync_config\": {\n    \"destinations\": {\n      \"skip_vespa\": false,\n      \"target_destinations\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"exclude_destinations\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"handlers\": {\n      \"enable_vector_handlers\": true,\n      \"enable_raw_data_handler\": true,\n      \"enable_postgres_handler\": true\n    },\n    \"cursor\": {\n      \"skip_load\": false,\n      \"skip_updates\": false\n    },\n    \"behavior\": {\n      \"skip_hash_comparison\": false,\n      \"replay_from_arf\": false,\n      \"skip_guardrails\": false\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a5202c29-7202-4f82-947e-ff8fa7b4b574",
+              "name": "Created collection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"readable_id\": \"<string,null>\",\n  \"sync_config\": {\n    \"destinations\": {\n      \"skip_vespa\": false,\n      \"target_destinations\": [\n        \"bced65d6-d651-be64-47ee-3f7b66985586\",\n        \"5390142e-5873-9601-ddb2-57d4be18c9e3\"\n      ],\n      \"exclude_destinations\": [\n        \"c3506813-126a-1c29-318e-470efcb175ec\",\n        \"1a1b2d1f-f8d4-fa22-c8e9-aa2eb88275cb\"\n      ]\n    },\n    \"handlers\": {\n      \"enable_vector_handlers\": true,\n      \"enable_raw_data_handler\": true,\n      \"enable_postgres_handler\": true\n    },\n    \"cursor\": {\n      \"skip_load\": false,\n      \"skip_updates\": false\n    },\n    \"behavior\": {\n      \"skip_hash_comparison\": false,\n      \"replay_from_arf\": false,\n      \"skip_guardrails\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"readable_id\": \"string\",\n  \"id\": \"3c76e77f-8e80-64fd-5806-3353542eafb6\",\n  \"created_at\": \"2003-03-07T09:37:51.529Z\",\n  \"modified_at\": \"1973-12-16T20:28:52.851Z\",\n  \"organization_id\": \"8e2db6e4-5f8b-baf8-59f4-cef85d9f1c9b\",\n  \"vector_size\": 9790,\n  \"embedding_model_name\": \"string\",\n  \"sync_config\": {\n    \"destinations\": {\n      \"skip_vespa\": false,\n      \"target_destinations\": [\n        \"9c56fa6f-d5a7-97a1-dbda-41cd7ac56482\",\n        \"3b538ade-e070-d0b2-7036-e3038d7fa0e5\"\n      ],\n      \"exclude_destinations\": [\n        \"dcdda454-8260-8579-c6a9-4faeaf6821a9\",\n        \"5faee20b-5e25-fc64-4e38-16bf3559c60d\"\n      ]\n    },\n    \"handlers\": {\n      \"enable_vector_handlers\": true,\n      \"enable_raw_data_handler\": true,\n      \"enable_postgres_handler\": true\n    },\n    \"cursor\": {\n      \"skip_load\": false,\n      \"skip_updates\": false\n    },\n    \"behavior\": {\n      \"skip_hash_comparison\": false,\n      \"replay_from_arf\": false,\n      \"skip_guardrails\": false\n    }\n  },\n  \"created_by_email\": \"PsyTXzyGQf@EqXgABRHyNVzrfUoYp.sh\",\n  \"modified_by_email\": \"JsnpPujw4Zb@XxIeeLJj.dsa\",\n  \"status\": \"ERROR\",\n  \"source_connection_summaries\": [\n    {\n      \"short_name\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"short_name\": \"string\",\n      \"name\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6edc025-ce90-4cc4-aed6-24f71f06347d",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"readable_id\": \"<string,null>\",\n  \"sync_config\": {\n    \"destinations\": {\n      \"skip_vespa\": false,\n      \"target_destinations\": [\n        \"bced65d6-d651-be64-47ee-3f7b66985586\",\n        \"5390142e-5873-9601-ddb2-57d4be18c9e3\"\n      ],\n      \"exclude_destinations\": [\n        \"c3506813-126a-1c29-318e-470efcb175ec\",\n        \"1a1b2d1f-f8d4-fa22-c8e9-aa2eb88275cb\"\n      ]\n    },\n    \"handlers\": {\n      \"enable_vector_handlers\": true,\n      \"enable_raw_data_handler\": true,\n      \"enable_postgres_handler\": true\n    },\n    \"cursor\": {\n      \"skip_load\": false,\n      \"skip_updates\": false\n    },\n    \"behavior\": {\n      \"skip_hash_comparison\": false,\n      \"replay_from_arf\": false,\n      \"skip_guardrails\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6726f814-2a74-45ab-94d6-89738a164dd3",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"readable_id\": \"<string,null>\",\n  \"sync_config\": {\n    \"destinations\": {\n      \"skip_vespa\": false,\n      \"target_destinations\": [\n        \"bced65d6-d651-be64-47ee-3f7b66985586\",\n        \"5390142e-5873-9601-ddb2-57d4be18c9e3\"\n      ],\n      \"exclude_destinations\": [\n        \"c3506813-126a-1c29-318e-470efcb175ec\",\n        \"1a1b2d1f-f8d4-fa22-c8e9-aa2eb88275cb\"\n      ]\n    },\n    \"handlers\": {\n      \"enable_vector_handlers\": true,\n      \"enable_raw_data_handler\": true,\n      \"enable_postgres_handler\": true\n    },\n    \"cursor\": {\n      \"skip_load\": false,\n      \"skip_updates\": false\n    },\n    \"behavior\": {\n      \"skip_hash_comparison\": false,\n      \"replay_from_arf\": false,\n      \"skip_guardrails\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1720cb96-4108-4d39-9b17-e3175bd71a7b",
+          "name": "Get Collection",
+          "request": {
+            "name": "Get Collection",
+            "description": {
+              "content": "Retrieve details of a specific collection by its readable ID.\n\nReturns the complete collection configuration including sync settings, status,\nand metadata. Use this to check the current state of a collection or to get\nconfiguration details before making updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":readable_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "readable_id",
+                  "description": "(Required) The unique readable identifier of the collection (e.g., 'finance-data-ab123')"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b2832e2-e5b2-4f00-a3a2-72f8520426e6",
+              "name": "Collection details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) The unique readable identifier of the collection (e.g., 'finance-data-ab123')"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"readable_id\": \"string\",\n  \"id\": \"3c76e77f-8e80-64fd-5806-3353542eafb6\",\n  \"created_at\": \"2003-03-07T09:37:51.529Z\",\n  \"modified_at\": \"1973-12-16T20:28:52.851Z\",\n  \"organization_id\": \"8e2db6e4-5f8b-baf8-59f4-cef85d9f1c9b\",\n  \"vector_size\": 9790,\n  \"embedding_model_name\": \"string\",\n  \"sync_config\": {\n    \"destinations\": {\n      \"skip_vespa\": false,\n      \"target_destinations\": [\n        \"9c56fa6f-d5a7-97a1-dbda-41cd7ac56482\",\n        \"3b538ade-e070-d0b2-7036-e3038d7fa0e5\"\n      ],\n      \"exclude_destinations\": [\n        \"dcdda454-8260-8579-c6a9-4faeaf6821a9\",\n        \"5faee20b-5e25-fc64-4e38-16bf3559c60d\"\n      ]\n    },\n    \"handlers\": {\n      \"enable_vector_handlers\": true,\n      \"enable_raw_data_handler\": true,\n      \"enable_postgres_handler\": true\n    },\n    \"cursor\": {\n      \"skip_load\": false,\n      \"skip_updates\": false\n    },\n    \"behavior\": {\n      \"skip_hash_comparison\": false,\n      \"replay_from_arf\": false,\n      \"skip_guardrails\": false\n    }\n  },\n  \"created_by_email\": \"PsyTXzyGQf@EqXgABRHyNVzrfUoYp.sh\",\n  \"modified_by_email\": \"JsnpPujw4Zb@XxIeeLJj.dsa\",\n  \"status\": \"ERROR\",\n  \"source_connection_summaries\": [\n    {\n      \"short_name\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"short_name\": \"string\",\n      \"name\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6996c154-08a1-4305-ae1d-28c748e38bee",
+              "name": "Collection Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) The unique readable identifier of the collection (e.g., 'finance-data-ab123')"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57b52b9e-e227-4278-9680-9092e72cca03",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) The unique readable identifier of the collection (e.g., 'finance-data-ab123')"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aee717df-3962-4eb4-9ef6-11da68d17407",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) The unique readable identifier of the collection (e.g., 'finance-data-ab123')"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4b72f3b-0d93-4e42-a6d9-7963b05cc791",
+          "name": "Update Collection",
+          "request": {
+            "name": "Update Collection",
+            "description": {
+              "content": "Update an existing collection's properties.\n\nYou can modify:\n- **Name**: The display name shown in the UI\n- **Sync configuration**: Schedule settings for automatic data synchronization\n\nNote that the `readable_id` cannot be changed after creation to maintain stable\nAPI endpoints and preserve existing integrations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":readable_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "readable_id",
+                  "description": "(Required) The unique readable identifier of the collection to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string,null>\",\n  \"sync_config\": {\n    \"destinations\": {\n      \"skip_vespa\": false,\n      \"target_destinations\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"exclude_destinations\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"handlers\": {\n      \"enable_vector_handlers\": true,\n      \"enable_raw_data_handler\": true,\n      \"enable_postgres_handler\": true\n    },\n    \"cursor\": {\n      \"skip_load\": false,\n      \"skip_updates\": false\n    },\n    \"behavior\": {\n      \"skip_hash_comparison\": false,\n      \"replay_from_arf\": false,\n      \"skip_guardrails\": false\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d9d1823c-7b4c-4463-ae3f-609067eace39",
+              "name": "Updated collection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) The unique readable identifier of the collection to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string,null>\",\n  \"sync_config\": {\n    \"destinations\": {\n      \"skip_vespa\": false,\n      \"target_destinations\": [\n        \"00b933b4-52c3-fe64-28e6-70ac3c5b4a31\",\n        \"91559905-88ea-a3c0-da55-d86290475a40\"\n      ],\n      \"exclude_destinations\": [\n        \"12449750-9f51-5f8a-2cb0-c2432d9ee09f\",\n        \"6d827865-fdf3-6da3-ac37-d9a5f832e392\"\n      ]\n    },\n    \"handlers\": {\n      \"enable_vector_handlers\": true,\n      \"enable_raw_data_handler\": true,\n      \"enable_postgres_handler\": true\n    },\n    \"cursor\": {\n      \"skip_load\": false,\n      \"skip_updates\": false\n    },\n    \"behavior\": {\n      \"skip_hash_comparison\": false,\n      \"replay_from_arf\": false,\n      \"skip_guardrails\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"readable_id\": \"string\",\n  \"id\": \"3c76e77f-8e80-64fd-5806-3353542eafb6\",\n  \"created_at\": \"2003-03-07T09:37:51.529Z\",\n  \"modified_at\": \"1973-12-16T20:28:52.851Z\",\n  \"organization_id\": \"8e2db6e4-5f8b-baf8-59f4-cef85d9f1c9b\",\n  \"vector_size\": 9790,\n  \"embedding_model_name\": \"string\",\n  \"sync_config\": {\n    \"destinations\": {\n      \"skip_vespa\": false,\n      \"target_destinations\": [\n        \"9c56fa6f-d5a7-97a1-dbda-41cd7ac56482\",\n        \"3b538ade-e070-d0b2-7036-e3038d7fa0e5\"\n      ],\n      \"exclude_destinations\": [\n        \"dcdda454-8260-8579-c6a9-4faeaf6821a9\",\n        \"5faee20b-5e25-fc64-4e38-16bf3559c60d\"\n      ]\n    },\n    \"handlers\": {\n      \"enable_vector_handlers\": true,\n      \"enable_raw_data_handler\": true,\n      \"enable_postgres_handler\": true\n    },\n    \"cursor\": {\n      \"skip_load\": false,\n      \"skip_updates\": false\n    },\n    \"behavior\": {\n      \"skip_hash_comparison\": false,\n      \"replay_from_arf\": false,\n      \"skip_guardrails\": false\n    }\n  },\n  \"created_by_email\": \"PsyTXzyGQf@EqXgABRHyNVzrfUoYp.sh\",\n  \"modified_by_email\": \"JsnpPujw4Zb@XxIeeLJj.dsa\",\n  \"status\": \"ERROR\",\n  \"source_connection_summaries\": [\n    {\n      \"short_name\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"short_name\": \"string\",\n      \"name\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f1ed9f2-2cc6-4c40-a668-a271630be1a8",
+              "name": "Collection Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) The unique readable identifier of the collection to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string,null>\",\n  \"sync_config\": {\n    \"destinations\": {\n      \"skip_vespa\": false,\n      \"target_destinations\": [\n        \"00b933b4-52c3-fe64-28e6-70ac3c5b4a31\",\n        \"91559905-88ea-a3c0-da55-d86290475a40\"\n      ],\n      \"exclude_destinations\": [\n        \"12449750-9f51-5f8a-2cb0-c2432d9ee09f\",\n        \"6d827865-fdf3-6da3-ac37-d9a5f832e392\"\n      ]\n    },\n    \"handlers\": {\n      \"enable_vector_handlers\": true,\n      \"enable_raw_data_handler\": true,\n      \"enable_postgres_handler\": true\n    },\n    \"cursor\": {\n      \"skip_load\": false,\n      \"skip_updates\": false\n    },\n    \"behavior\": {\n      \"skip_hash_comparison\": false,\n      \"replay_from_arf\": false,\n      \"skip_guardrails\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b45c9092-e454-4906-9921-4b369bf929f6",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) The unique readable identifier of the collection to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string,null>\",\n  \"sync_config\": {\n    \"destinations\": {\n      \"skip_vespa\": false,\n      \"target_destinations\": [\n        \"00b933b4-52c3-fe64-28e6-70ac3c5b4a31\",\n        \"91559905-88ea-a3c0-da55-d86290475a40\"\n      ],\n      \"exclude_destinations\": [\n        \"12449750-9f51-5f8a-2cb0-c2432d9ee09f\",\n        \"6d827865-fdf3-6da3-ac37-d9a5f832e392\"\n      ]\n    },\n    \"handlers\": {\n      \"enable_vector_handlers\": true,\n      \"enable_raw_data_handler\": true,\n      \"enable_postgres_handler\": true\n    },\n    \"cursor\": {\n      \"skip_load\": false,\n      \"skip_updates\": false\n    },\n    \"behavior\": {\n      \"skip_hash_comparison\": false,\n      \"replay_from_arf\": false,\n      \"skip_guardrails\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a2d702f-fe7b-4d4f-9f17-759f94493750",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) The unique readable identifier of the collection to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string,null>\",\n  \"sync_config\": {\n    \"destinations\": {\n      \"skip_vespa\": false,\n      \"target_destinations\": [\n        \"00b933b4-52c3-fe64-28e6-70ac3c5b4a31\",\n        \"91559905-88ea-a3c0-da55-d86290475a40\"\n      ],\n      \"exclude_destinations\": [\n        \"12449750-9f51-5f8a-2cb0-c2432d9ee09f\",\n        \"6d827865-fdf3-6da3-ac37-d9a5f832e392\"\n      ]\n    },\n    \"handlers\": {\n      \"enable_vector_handlers\": true,\n      \"enable_raw_data_handler\": true,\n      \"enable_postgres_handler\": true\n    },\n    \"cursor\": {\n      \"skip_load\": false,\n      \"skip_updates\": false\n    },\n    \"behavior\": {\n      \"skip_hash_comparison\": false,\n      \"replay_from_arf\": false,\n      \"skip_guardrails\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96ff0deb-eb1f-4a2b-810b-a709627050b0",
+          "name": "Delete Collection",
+          "request": {
+            "name": "Delete Collection",
+            "description": {
+              "content": "Permanently delete a collection and all associated data.\n\nThis operation:\n- Removes all synced data from the vector database\n- Deletes all source connections within the collection\n- Cancels any scheduled sync jobs\n- Cleans up all related resources\n\n**Warning**: This action cannot be undone. All data will be permanently deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":readable_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "readable_id",
+                  "description": "(Required) The unique readable identifier of the collection to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c3be2711-2b0b-4a7e-bdac-6816b016accd",
+              "name": "Deleted collection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) The unique readable identifier of the collection to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"readable_id\": \"string\",\n  \"id\": \"3c76e77f-8e80-64fd-5806-3353542eafb6\",\n  \"created_at\": \"2003-03-07T09:37:51.529Z\",\n  \"modified_at\": \"1973-12-16T20:28:52.851Z\",\n  \"organization_id\": \"8e2db6e4-5f8b-baf8-59f4-cef85d9f1c9b\",\n  \"vector_size\": 9790,\n  \"embedding_model_name\": \"string\",\n  \"sync_config\": {\n    \"destinations\": {\n      \"skip_vespa\": false,\n      \"target_destinations\": [\n        \"9c56fa6f-d5a7-97a1-dbda-41cd7ac56482\",\n        \"3b538ade-e070-d0b2-7036-e3038d7fa0e5\"\n      ],\n      \"exclude_destinations\": [\n        \"dcdda454-8260-8579-c6a9-4faeaf6821a9\",\n        \"5faee20b-5e25-fc64-4e38-16bf3559c60d\"\n      ]\n    },\n    \"handlers\": {\n      \"enable_vector_handlers\": true,\n      \"enable_raw_data_handler\": true,\n      \"enable_postgres_handler\": true\n    },\n    \"cursor\": {\n      \"skip_load\": false,\n      \"skip_updates\": false\n    },\n    \"behavior\": {\n      \"skip_hash_comparison\": false,\n      \"replay_from_arf\": false,\n      \"skip_guardrails\": false\n    }\n  },\n  \"created_by_email\": \"PsyTXzyGQf@EqXgABRHyNVzrfUoYp.sh\",\n  \"modified_by_email\": \"JsnpPujw4Zb@XxIeeLJj.dsa\",\n  \"status\": \"ERROR\",\n  \"source_connection_summaries\": [\n    {\n      \"short_name\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"short_name\": \"string\",\n      \"name\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c0d6398-d88f-4f24-9255-02272e8a34b5",
+              "name": "Collection Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) The unique readable identifier of the collection to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a810e360-bf07-4573-96eb-8f81c2946156",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) The unique readable identifier of the collection to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be906420-9124-4292-8e2e-3f3feb9dd249",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":readable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "readable_id",
+                      "description": "(Required) The unique readable identifier of the collection to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.airweave.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0cdf6b14-ba7f-47ee-91c5-a85bf5dec37d",
+    "name": "API Reference collections API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

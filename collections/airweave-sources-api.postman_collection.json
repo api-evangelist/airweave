@@ -1,0 +1,446 @@
+{
+  "item": [
+    {
+      "id": "970aa972-4e03-4b62-85bf-ecc564b14514",
+      "name": "sources",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7e3ba976-dca6-4db1-b54c-a723d8ae8579",
+          "name": "List Sources",
+          "request": {
+            "name": "List Sources",
+            "description": {
+              "content": "Retrieve all available data source connectors.\n\nReturns the complete catalog of source types that Airweave can connect to,\nincluding their authentication methods, configuration requirements, and\nsupported features. Use this endpoint to discover which integrations are\navailable for your organization.\n\nEach source includes:\n- **Authentication methods**: How to connect (OAuth, API key, etc.)\n- **Configuration schemas**: What settings are required or optional\n- **Supported auth providers**: Pre-configured OAuth providers available",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7645453-6e6a-49af-b281-dbf7835dc6f4",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"short_name\": \"string\",\n    \"class_name\": \"string\",\n    \"config_fields\": {\n      \"fields\": [\n        {\n          \"name\": \"string\",\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"description\": \"string\",\n          \"required\": true,\n          \"items_type\": \"string\",\n          \"feature_flag\": \"string\",\n          \"is_secret\": false,\n          \"enum_values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"name\": \"string\",\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"description\": \"string\",\n          \"required\": true,\n          \"items_type\": \"string\",\n          \"feature_flag\": \"string\",\n          \"is_secret\": false,\n          \"enum_values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    \"description\": \"string\",\n    \"auth_methods\": [\n      \"string\",\n      \"string\"\n    ],\n    \"oauth_type\": \"string\",\n    \"requires_byoc\": false,\n    \"auth_config_class\": \"string\",\n    \"config_class\": \"string\",\n    \"output_entity_definitions\": [\n      \"string\",\n      \"string\"\n    ],\n    \"labels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"supports_continuous\": false,\n    \"federated_search\": false,\n    \"supports_temporal_relevance\": true,\n    \"supports_access_control\": false,\n    \"rate_limit_level\": \"string\",\n    \"feature_flag\": \"string\",\n    \"supports_browse_tree\": false,\n    \"auth_fields\": {\n      \"fields\": [\n        {\n          \"name\": \"string\",\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"description\": \"string\",\n          \"required\": true,\n          \"items_type\": \"string\",\n          \"feature_flag\": \"string\",\n          \"is_secret\": false,\n          \"enum_values\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"name\": \"string\",\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"description\": \"string\",\n          \"required\": true,\n          \"items_type\": \"string\",\n          \"feature_flag\": \"string\",\n          \"is_secret\": false,\n          \"enum_values\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    },\n    \"supported_auth_providers\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"name\": \"string\",\n    \"short_name\": \"string\",\n    \"class_name\": \"string\",\n    \"config_fields\": {\n      \"fields\": [\n        {\n          \"name\": \"string\",\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"description\": \"string\",\n          \"required\": true,\n          \"items_type\": \"string\",\n          \"feature_flag\": \"string\",\n          \"is_secret\": false,\n          \"enum_values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"name\": \"string\",\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"description\": \"string\",\n          \"required\": true,\n          \"items_type\": \"string\",\n          \"feature_flag\": \"string\",\n          \"is_secret\": false,\n          \"enum_values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    \"description\": \"string\",\n    \"auth_methods\": [\n      \"string\",\n      \"string\"\n    ],\n    \"oauth_type\": \"string\",\n    \"requires_byoc\": false,\n    \"auth_config_class\": \"string\",\n    \"config_class\": \"string\",\n    \"output_entity_definitions\": [\n      \"string\",\n      \"string\"\n    ],\n    \"labels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"supports_continuous\": false,\n    \"federated_search\": false,\n    \"supports_temporal_relevance\": true,\n    \"supports_access_control\": false,\n    \"rate_limit_level\": \"string\",\n    \"feature_flag\": \"string\",\n    \"supports_browse_tree\": false,\n    \"auth_fields\": {\n      \"fields\": [\n        {\n          \"name\": \"string\",\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"description\": \"string\",\n          \"required\": true,\n          \"items_type\": \"string\",\n          \"feature_flag\": \"string\",\n          \"is_secret\": false,\n          \"enum_values\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"name\": \"string\",\n          \"title\": \"string\",\n          \"type\": \"string\",\n          \"description\": \"string\",\n          \"required\": true,\n          \"items_type\": \"string\",\n          \"feature_flag\": \"string\",\n          \"is_secret\": false,\n          \"enum_values\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ]\n    },\n    \"supported_auth_providers\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e17b96db-dbb3-40f7-adc3-61a75ef2c4dd",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e444c54-99f3-4f84-bcc2-f1f56c8d695d",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d904237d-6d10-4077-a0eb-4db7669617f8",
+          "name": "Get Source",
+          "request": {
+            "name": "Get Source",
+            "description": {
+              "content": "Retrieve detailed information about a specific data source connector.\n\nReturns the complete configuration for a source type, including:\n\n- **Authentication fields**: Schema for credentials required to connect\n- **Configuration fields**: Schema for optional settings and customization\n- **Supported auth providers**: Pre-configured OAuth providers available for this source\n\nUse this endpoint before creating a source connection to understand what\nauthentication and configuration values are required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sources",
+                ":short_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "short_name",
+                  "description": "(Required) Technical identifier of the source type (e.g., 'github', 'stripe', 'slack')"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6962c69e-5188-4750-ac94-1a68f9c63d69",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sources",
+                    ":short_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "short_name",
+                      "description": "(Required) Technical identifier of the source type (e.g., 'github', 'stripe', 'slack')"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"short_name\": \"string\",\n  \"class_name\": \"string\",\n  \"config_fields\": {\n    \"fields\": [\n      {\n        \"name\": \"string\",\n        \"title\": \"string\",\n        \"type\": \"string\",\n        \"description\": \"string\",\n        \"required\": true,\n        \"items_type\": \"string\",\n        \"feature_flag\": \"string\",\n        \"is_secret\": false,\n        \"enum_values\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"name\": \"string\",\n        \"title\": \"string\",\n        \"type\": \"string\",\n        \"description\": \"string\",\n        \"required\": true,\n        \"items_type\": \"string\",\n        \"feature_flag\": \"string\",\n        \"is_secret\": false,\n        \"enum_values\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  },\n  \"description\": \"string\",\n  \"auth_methods\": [\n    \"string\",\n    \"string\"\n  ],\n  \"oauth_type\": \"string\",\n  \"requires_byoc\": false,\n  \"auth_config_class\": \"string\",\n  \"config_class\": \"string\",\n  \"output_entity_definitions\": [\n    \"string\",\n    \"string\"\n  ],\n  \"labels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"supports_continuous\": false,\n  \"federated_search\": false,\n  \"supports_temporal_relevance\": true,\n  \"supports_access_control\": false,\n  \"rate_limit_level\": \"string\",\n  \"feature_flag\": \"string\",\n  \"supports_browse_tree\": false,\n  \"auth_fields\": {\n    \"fields\": [\n      {\n        \"name\": \"string\",\n        \"title\": \"string\",\n        \"type\": \"string\",\n        \"description\": \"string\",\n        \"required\": true,\n        \"items_type\": \"string\",\n        \"feature_flag\": \"string\",\n        \"is_secret\": false,\n        \"enum_values\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"name\": \"string\",\n        \"title\": \"string\",\n        \"type\": \"string\",\n        \"description\": \"string\",\n        \"required\": true,\n        \"items_type\": \"string\",\n        \"feature_flag\": \"string\",\n        \"is_secret\": false,\n        \"enum_values\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  },\n  \"supported_auth_providers\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30871e17-bb86-472c-ae7f-0d81eeff27c9",
+              "name": "Source Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sources",
+                    ":short_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "short_name",
+                      "description": "(Required) Technical identifier of the source type (e.g., 'github', 'stripe', 'slack')"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "964ddf54-ed8d-49d9-93d1-d760c98b0299",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sources",
+                    ":short_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "short_name",
+                      "description": "(Required) Technical identifier of the source type (e.g., 'github', 'stripe', 'slack')"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af3ac824-888b-4d6a-aec9-95391340f08a",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sources",
+                    ":short_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "short_name",
+                      "description": "(Required) Technical identifier of the source type (e.g., 'github', 'stripe', 'slack')"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.airweave.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fb5caa9c-a1de-4d61-83b9-b0817e8bee90",
+    "name": "API Reference collections sources API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

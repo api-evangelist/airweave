@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference collections collections > search API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "collections > search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Instant Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.airweave.ai/collections/:readable_id/search/instant",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "readable_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Direct vector search."
+        },
+        {
+          "info": {
+            "name": "Classic Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.airweave.ai/collections/:readable_id/search/classic",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "readable_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "AI-optimized search."
+        },
+        {
+          "info": {
+            "name": "Agentic Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.airweave.ai/collections/:readable_id/search/agentic",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "readable_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Agent that iteratively searches, reads, navigates hierarchies, and collects results."
+        },
+        {
+          "info": {
+            "name": "Stream Agentic Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.airweave.ai/collections/:readable_id/search/agentic/stream",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "readable_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Streaming agentic search via Server-Sent Events. Returns real-time events as the agent searches."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

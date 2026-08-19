@@ -1,0 +1,2230 @@
+{
+  "item": [
+    {
+      "id": "37dfca17-6dc0-4090-908f-2cf231696cb7",
+      "name": "source-connections",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5f8aa3cc-0629-4624-ba47-8c51b414db7c",
+          "name": "List Source Connections",
+          "request": {
+            "name": "List Source Connections",
+            "description": {
+              "content": "Retrieve all source connections for your organization.\n\nReturns a lightweight list of source connections with essential fields for\ndisplay and navigation. Use the collection filter to see connections within\na specific collection.\n\nFor full connection details including sync history, use the GET /{id} endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-connections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "collection",
+                  "value": "<string,null>",
+                  "description": "Filter by collection readable ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Number of connections to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of connections to return (1-1000)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "614ba637-357b-4aec-bdb0-6ad0e22d00eb",
+              "name": "List of source connections",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"423b55c0-63cc-01b2-f40e-a616b050047a\",\n    \"name\": \"string\",\n    \"short_name\": \"string\",\n    \"readable_collection_id\": \"string\",\n    \"created_at\": \"1990-11-05T23:11:39.907Z\",\n    \"modified_at\": \"1987-09-10T22:36:45.292Z\",\n    \"is_authenticated\": false,\n    \"auth_method\": \"oauth_browser\",\n    \"status\": \"error\",\n    \"entity_count\": 0,\n    \"federated_search\": false\n  },\n  {\n    \"id\": \"73998301-5856-23ec-4807-2b732bb417d9\",\n    \"name\": \"string\",\n    \"short_name\": \"string\",\n    \"readable_collection_id\": \"string\",\n    \"created_at\": \"1968-09-08T02:31:49.352Z\",\n    \"modified_at\": \"2014-08-29T04:43:46.294Z\",\n    \"is_authenticated\": true,\n    \"auth_method\": \"oauth_byoc\",\n    \"status\": \"error\",\n    \"entity_count\": 0,\n    \"federated_search\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da8d4905-0f5b-4153-9936-57896e5556b5",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "739a9d67-7de1-44a8-973c-70f1a112e14f",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4059b1c7-5933-4bdd-9df7-622be9867479",
+          "name": "Create Source Connection",
+          "request": {
+            "name": "Create Source Connection",
+            "description": {
+              "content": "Create a new source connection to sync data from an external source.\n\nThe authentication method determines the creation flow:\n\n- **Direct**: Provide credentials (API key, token) directly. Connection is created immediately.\n- **OAuth Browser**: Returns a connection with an `auth_url` to redirect users for authentication.\n- **OAuth Token**: Provide an existing OAuth token. Connection is created immediately.\n- **Auth Provider**: Use a pre-configured auth provider (e.g., Composio, Pipedream).\n\nAfter successful authentication, data sync can begin automatically or on-demand.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-connections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"short_name\": \"<string>\",\n  \"readable_collection_id\": \"<string>\",\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"config\": {\n    \"key_0\": {}\n  },\n  \"schedule\": {\n    \"cron\": \"<string,null>\",\n    \"continuous\": false,\n    \"cursor_field\": \"<string,null>\"\n  },\n  \"sync_immediately\": \"<boolean,null>\",\n  \"authentication\": {\n    \"credentials\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  },\n  \"redirect_url\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8592d738-c9d4-4601-b52b-bf3dbfc16e2b",
+              "name": "Created source connection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_name\": \"<string>\",\n  \"readable_collection_id\": \"<string>\",\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"config\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {},\n    \"key_3\": {},\n    \"key_4\": {}\n  },\n  \"schedule\": {\n    \"cron\": \"string\",\n    \"continuous\": false,\n    \"cursor_field\": \"string\"\n  },\n  \"sync_immediately\": \"<boolean,null>\",\n  \"authentication\": {\n    \"credentials\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  },\n  \"redirect_url\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"d5606a5a-6c35-157e-f8d4-719981134621\",\n  \"organization_id\": \"d43276f4-f575-aa1a-5f3b-b06e30ab3338\",\n  \"name\": \"string\",\n  \"short_name\": \"string\",\n  \"readable_collection_id\": \"string\",\n  \"status\": \"pending_sync\",\n  \"created_at\": \"1954-01-23T16:52:39.694Z\",\n  \"modified_at\": \"1968-07-10T05:55:43.106Z\",\n  \"auth\": {\n    \"method\": \"oauth_token\",\n    \"authenticated\": true,\n    \"authenticated_at\": \"2012-05-11T13:52:13.473Z\",\n    \"expires_at\": \"1973-04-19T20:47:03.854Z\",\n    \"auth_url\": \"string\",\n    \"auth_url_expires\": \"1998-01-22T02:36:11.828Z\",\n    \"redirect_url\": \"string\",\n    \"claim_token\": \"string\",\n    \"provider_readable_id\": \"string\",\n    \"provider_id\": \"string\"\n  },\n  \"description\": \"string\",\n  \"config\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"schedule\": {\n    \"cron\": \"string\",\n    \"next_run\": \"2017-09-12T04:50:47.849Z\",\n    \"continuous\": false,\n    \"cursor_field\": \"string\"\n  },\n  \"sync\": {\n    \"total_runs\": 0,\n    \"successful_runs\": 0,\n    \"failed_runs\": 0,\n    \"last_job\": {\n      \"id\": \"daa4c9c6-01a5-0c1d-f8e9-0619a343c9f9\",\n      \"status\": \"created\",\n      \"started_at\": \"1997-12-10T08:33:38.469Z\",\n      \"completed_at\": \"1984-03-17T18:49:18.660Z\",\n      \"duration_seconds\": 2328.7602389774997,\n      \"entities_inserted\": 0,\n      \"entities_updated\": 0,\n      \"entities_deleted\": 0,\n      \"entities_failed\": 0,\n      \"error\": \"string\",\n      \"error_category\": \"rate_limited\"\n    }\n  },\n  \"sync_id\": \"1b84cc09-435c-cf7b-3afe-a2a3096b449d\",\n  \"entities\": {\n    \"total_entities\": 0,\n    \"by_type\": {\n      \"key_0\": {\n        \"count\": 9939,\n        \"last_updated\": \"1976-03-08T11:01:38.549Z\"\n      },\n      \"key_1\": {\n        \"count\": 6849,\n        \"last_updated\": \"2010-04-03T17:47:14.863Z\"\n      }\n    },\n    \"entity_id\": \"string\",\n    \"name\": \"string\",\n    \"entity_type\": \"string\",\n    \"source_name\": \"string\",\n    \"relevance_score\": 2226.156796438531\n  },\n  \"error_category\": \"auth_provider_credentials_invalid\",\n  \"error_message\": \"string\",\n  \"provider_settings_url\": \"string\",\n  \"provider_short_name\": \"string\",\n  \"federated_search\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "004fc7ba-32a3-4e29-8bed-3a5fc69e39cf",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_name\": \"<string>\",\n  \"readable_collection_id\": \"<string>\",\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"config\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {},\n    \"key_3\": {},\n    \"key_4\": {}\n  },\n  \"schedule\": {\n    \"cron\": \"string\",\n    \"continuous\": false,\n    \"cursor_field\": \"string\"\n  },\n  \"sync_immediately\": \"<boolean,null>\",\n  \"authentication\": {\n    \"credentials\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  },\n  \"redirect_url\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fa46a7e-a791-4aa1-9a13-9e272eede6dc",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"short_name\": \"<string>\",\n  \"readable_collection_id\": \"<string>\",\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"config\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {},\n    \"key_3\": {},\n    \"key_4\": {}\n  },\n  \"schedule\": {\n    \"cron\": \"string\",\n    \"continuous\": false,\n    \"cursor_field\": \"string\"\n  },\n  \"sync_immediately\": \"<boolean,null>\",\n  \"authentication\": {\n    \"credentials\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  },\n  \"redirect_url\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8dc298dd-8dc7-411d-8de0-cd6080519a76",
+          "name": "Get Source Connection",
+          "request": {
+            "name": "Get Source Connection",
+            "description": {
+              "content": "Retrieve details of a specific source connection.\n\nReturns complete information about the connection including:\n- Configuration settings\n- Authentication status\n- Sync schedule and history\n- Entity statistics",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-connections",
+                ":source_connection_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "source_connection_id",
+                  "description": "(Required) Unique identifier of the source connection (UUID)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3fc4b0c5-7810-4af8-9666-812a5b00bcdc",
+              "name": "Source connection details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"d5606a5a-6c35-157e-f8d4-719981134621\",\n  \"organization_id\": \"d43276f4-f575-aa1a-5f3b-b06e30ab3338\",\n  \"name\": \"string\",\n  \"short_name\": \"string\",\n  \"readable_collection_id\": \"string\",\n  \"status\": \"pending_sync\",\n  \"created_at\": \"1954-01-23T16:52:39.694Z\",\n  \"modified_at\": \"1968-07-10T05:55:43.106Z\",\n  \"auth\": {\n    \"method\": \"oauth_token\",\n    \"authenticated\": true,\n    \"authenticated_at\": \"2012-05-11T13:52:13.473Z\",\n    \"expires_at\": \"1973-04-19T20:47:03.854Z\",\n    \"auth_url\": \"string\",\n    \"auth_url_expires\": \"1998-01-22T02:36:11.828Z\",\n    \"redirect_url\": \"string\",\n    \"claim_token\": \"string\",\n    \"provider_readable_id\": \"string\",\n    \"provider_id\": \"string\"\n  },\n  \"description\": \"string\",\n  \"config\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"schedule\": {\n    \"cron\": \"string\",\n    \"next_run\": \"2017-09-12T04:50:47.849Z\",\n    \"continuous\": false,\n    \"cursor_field\": \"string\"\n  },\n  \"sync\": {\n    \"total_runs\": 0,\n    \"successful_runs\": 0,\n    \"failed_runs\": 0,\n    \"last_job\": {\n      \"id\": \"daa4c9c6-01a5-0c1d-f8e9-0619a343c9f9\",\n      \"status\": \"created\",\n      \"started_at\": \"1997-12-10T08:33:38.469Z\",\n      \"completed_at\": \"1984-03-17T18:49:18.660Z\",\n      \"duration_seconds\": 2328.7602389774997,\n      \"entities_inserted\": 0,\n      \"entities_updated\": 0,\n      \"entities_deleted\": 0,\n      \"entities_failed\": 0,\n      \"error\": \"string\",\n      \"error_category\": \"rate_limited\"\n    }\n  },\n  \"sync_id\": \"1b84cc09-435c-cf7b-3afe-a2a3096b449d\",\n  \"entities\": {\n    \"total_entities\": 0,\n    \"by_type\": {\n      \"key_0\": {\n        \"count\": 9939,\n        \"last_updated\": \"1976-03-08T11:01:38.549Z\"\n      },\n      \"key_1\": {\n        \"count\": 6849,\n        \"last_updated\": \"2010-04-03T17:47:14.863Z\"\n      }\n    },\n    \"entity_id\": \"string\",\n    \"name\": \"string\",\n    \"entity_type\": \"string\",\n    \"source_name\": \"string\",\n    \"relevance_score\": 2226.156796438531\n  },\n  \"error_category\": \"auth_provider_credentials_invalid\",\n  \"error_message\": \"string\",\n  \"provider_settings_url\": \"string\",\n  \"provider_short_name\": \"string\",\n  \"federated_search\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c819eb0-65e4-4042-9d29-90de9e3c81fd",
+              "name": "Source Connection Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88d92bdc-3b72-43fe-ac91-f147c96109f5",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "737f6233-3fe1-4e7f-aaf3-068913eaf824",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "63f2c9b2-ed64-4c14-be23-1f5d7bc97a40",
+          "name": "Update Source Connection",
+          "request": {
+            "name": "Update Source Connection",
+            "description": {
+              "content": "Update an existing source connection's configuration.\n\nYou can modify:\n- **Name and description**: Display information\n- **Configuration**: Source-specific settings (e.g., repository name, filters)\n- **Schedule**: Cron expression for automatic syncs\n- **Authentication**: Update credentials (direct auth only)\n\nOnly include the fields you want to change; omitted fields retain their current values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-connections",
+                ":source_connection_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "source_connection_id",
+                  "description": "(Required) Unique identifier of the source connection to update (UUID)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"config\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"schedule\": {\n    \"cron\": \"<string,null>\",\n    \"continuous\": false,\n    \"cursor_field\": \"<string,null>\"\n  },\n  \"authentication\": {\n    \"credentials\": {\n      \"key_0\": {}\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "74d2e055-6015-48d2-8e69-eae467564310",
+              "name": "Updated source connection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection to update (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"config\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"schedule\": {\n    \"cron\": \"string\",\n    \"continuous\": false,\n    \"cursor_field\": \"string\"\n  },\n  \"authentication\": {\n    \"credentials\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"d5606a5a-6c35-157e-f8d4-719981134621\",\n  \"organization_id\": \"d43276f4-f575-aa1a-5f3b-b06e30ab3338\",\n  \"name\": \"string\",\n  \"short_name\": \"string\",\n  \"readable_collection_id\": \"string\",\n  \"status\": \"pending_sync\",\n  \"created_at\": \"1954-01-23T16:52:39.694Z\",\n  \"modified_at\": \"1968-07-10T05:55:43.106Z\",\n  \"auth\": {\n    \"method\": \"oauth_token\",\n    \"authenticated\": true,\n    \"authenticated_at\": \"2012-05-11T13:52:13.473Z\",\n    \"expires_at\": \"1973-04-19T20:47:03.854Z\",\n    \"auth_url\": \"string\",\n    \"auth_url_expires\": \"1998-01-22T02:36:11.828Z\",\n    \"redirect_url\": \"string\",\n    \"claim_token\": \"string\",\n    \"provider_readable_id\": \"string\",\n    \"provider_id\": \"string\"\n  },\n  \"description\": \"string\",\n  \"config\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"schedule\": {\n    \"cron\": \"string\",\n    \"next_run\": \"2017-09-12T04:50:47.849Z\",\n    \"continuous\": false,\n    \"cursor_field\": \"string\"\n  },\n  \"sync\": {\n    \"total_runs\": 0,\n    \"successful_runs\": 0,\n    \"failed_runs\": 0,\n    \"last_job\": {\n      \"id\": \"daa4c9c6-01a5-0c1d-f8e9-0619a343c9f9\",\n      \"status\": \"created\",\n      \"started_at\": \"1997-12-10T08:33:38.469Z\",\n      \"completed_at\": \"1984-03-17T18:49:18.660Z\",\n      \"duration_seconds\": 2328.7602389774997,\n      \"entities_inserted\": 0,\n      \"entities_updated\": 0,\n      \"entities_deleted\": 0,\n      \"entities_failed\": 0,\n      \"error\": \"string\",\n      \"error_category\": \"rate_limited\"\n    }\n  },\n  \"sync_id\": \"1b84cc09-435c-cf7b-3afe-a2a3096b449d\",\n  \"entities\": {\n    \"total_entities\": 0,\n    \"by_type\": {\n      \"key_0\": {\n        \"count\": 9939,\n        \"last_updated\": \"1976-03-08T11:01:38.549Z\"\n      },\n      \"key_1\": {\n        \"count\": 6849,\n        \"last_updated\": \"2010-04-03T17:47:14.863Z\"\n      }\n    },\n    \"entity_id\": \"string\",\n    \"name\": \"string\",\n    \"entity_type\": \"string\",\n    \"source_name\": \"string\",\n    \"relevance_score\": 2226.156796438531\n  },\n  \"error_category\": \"auth_provider_credentials_invalid\",\n  \"error_message\": \"string\",\n  \"provider_settings_url\": \"string\",\n  \"provider_short_name\": \"string\",\n  \"federated_search\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33a80b7a-2d81-47a5-a3bf-c2e6f4e31c68",
+              "name": "Source Connection Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection to update (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"config\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"schedule\": {\n    \"cron\": \"string\",\n    \"continuous\": false,\n    \"cursor_field\": \"string\"\n  },\n  \"authentication\": {\n    \"credentials\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "591e0c7d-5224-4297-8a97-2c6034bd2b7b",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection to update (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"config\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"schedule\": {\n    \"cron\": \"string\",\n    \"continuous\": false,\n    \"cursor_field\": \"string\"\n  },\n  \"authentication\": {\n    \"credentials\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2163a9c7-e029-4c38-b3af-17f4116d7715",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection to update (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"config\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"schedule\": {\n    \"cron\": \"string\",\n    \"continuous\": false,\n    \"cursor_field\": \"string\"\n  },\n  \"authentication\": {\n    \"credentials\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "664b8441-bd44-4e8a-a722-0b0a0b300323",
+          "name": "Delete Source Connection",
+          "request": {
+            "name": "Delete Source Connection",
+            "description": {
+              "content": "Permanently delete a source connection and all its synced data.\n\n**What happens when you delete:**\n\n1. Any running sync is cancelled and the API waits (up to 15 s) for the\n   worker to stop writing.\n2. The source connection, sync configuration, job history, and entity\n   metadata are cascade-deleted from the database.\n3. A background cleanup workflow is scheduled to remove data from the\n   vector database (Vespa) and raw data storage (ARF). This may take\n   several minutes for large datasets but does **not** block the response.\n\nThe API returns immediately after step 2. Vector database cleanup happens\nasynchronously -- the data becomes unsearchable as soon as the database\nrecords are deleted.\n\n**Warning**: This action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-connections",
+                ":source_connection_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "source_connection_id",
+                  "description": "(Required) Unique identifier of the source connection to delete (UUID)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0355aa23-0ee3-4d48-86bd-97e1bc2493b0",
+              "name": "Deleted source connection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection to delete (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"d5606a5a-6c35-157e-f8d4-719981134621\",\n  \"organization_id\": \"d43276f4-f575-aa1a-5f3b-b06e30ab3338\",\n  \"name\": \"string\",\n  \"short_name\": \"string\",\n  \"readable_collection_id\": \"string\",\n  \"status\": \"pending_sync\",\n  \"created_at\": \"1954-01-23T16:52:39.694Z\",\n  \"modified_at\": \"1968-07-10T05:55:43.106Z\",\n  \"auth\": {\n    \"method\": \"oauth_token\",\n    \"authenticated\": true,\n    \"authenticated_at\": \"2012-05-11T13:52:13.473Z\",\n    \"expires_at\": \"1973-04-19T20:47:03.854Z\",\n    \"auth_url\": \"string\",\n    \"auth_url_expires\": \"1998-01-22T02:36:11.828Z\",\n    \"redirect_url\": \"string\",\n    \"claim_token\": \"string\",\n    \"provider_readable_id\": \"string\",\n    \"provider_id\": \"string\"\n  },\n  \"description\": \"string\",\n  \"config\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"schedule\": {\n    \"cron\": \"string\",\n    \"next_run\": \"2017-09-12T04:50:47.849Z\",\n    \"continuous\": false,\n    \"cursor_field\": \"string\"\n  },\n  \"sync\": {\n    \"total_runs\": 0,\n    \"successful_runs\": 0,\n    \"failed_runs\": 0,\n    \"last_job\": {\n      \"id\": \"daa4c9c6-01a5-0c1d-f8e9-0619a343c9f9\",\n      \"status\": \"created\",\n      \"started_at\": \"1997-12-10T08:33:38.469Z\",\n      \"completed_at\": \"1984-03-17T18:49:18.660Z\",\n      \"duration_seconds\": 2328.7602389774997,\n      \"entities_inserted\": 0,\n      \"entities_updated\": 0,\n      \"entities_deleted\": 0,\n      \"entities_failed\": 0,\n      \"error\": \"string\",\n      \"error_category\": \"rate_limited\"\n    }\n  },\n  \"sync_id\": \"1b84cc09-435c-cf7b-3afe-a2a3096b449d\",\n  \"entities\": {\n    \"total_entities\": 0,\n    \"by_type\": {\n      \"key_0\": {\n        \"count\": 9939,\n        \"last_updated\": \"1976-03-08T11:01:38.549Z\"\n      },\n      \"key_1\": {\n        \"count\": 6849,\n        \"last_updated\": \"2010-04-03T17:47:14.863Z\"\n      }\n    },\n    \"entity_id\": \"string\",\n    \"name\": \"string\",\n    \"entity_type\": \"string\",\n    \"source_name\": \"string\",\n    \"relevance_score\": 2226.156796438531\n  },\n  \"error_category\": \"auth_provider_credentials_invalid\",\n  \"error_message\": \"string\",\n  \"provider_settings_url\": \"string\",\n  \"provider_short_name\": \"string\",\n  \"federated_search\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5109431-49dc-4c62-a0bf-73babd0902c6",
+              "name": "Source Connection Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection to delete (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fddd223-3e73-4056-a8c4-f9e5a43832d7",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection to delete (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb540f50-ccf0-4fe3-abaf-940803ab54b5",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection to delete (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d4602f3-195a-4799-aae2-6d3cf08d7c9f",
+          "name": "List Sync Jobs",
+          "request": {
+            "name": "List Sync Jobs",
+            "description": {
+              "content": "Retrieve the sync job history for a source connection.\n\nReturns a list of sync jobs ordered by creation time (newest first). Each job\nincludes status, timing information, and entity counts.\n\nJob statuses:\n- **PENDING**: Job is queued, waiting for the worker to pick it up\n- **RUNNING**: Sync is actively pulling and processing data\n- **COMPLETED**: Sync finished successfully\n- **FAILED**: Sync encountered an unrecoverable error\n- **CANCELLING**: Cancellation has been requested. The worker is\n  gracefully stopping the pipeline and cleaning up destination data.\n- **CANCELLED**: Sync was cancelled. The worker has fully stopped\n  and destination data cleanup has been scheduled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-connections",
+                ":source_connection_id",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of jobs to return (1-1000)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "source_connection_id",
+                  "description": "(Required) Unique identifier of the source connection (UUID)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b956faee-3eca-4227-aae2-ee894c31f5da",
+              "name": "List of sync jobs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"c66ee19d-5d9d-fa54-581d-c2b081cfbfaf\",\n    \"source_connection_id\": \"0bb86572-05f1-73b8-ec91-67e1e9b365ef\",\n    \"status\": \"completed\",\n    \"started_at\": \"2013-04-01T01:31:09.345Z\",\n    \"completed_at\": \"1981-11-05T20:32:13.311Z\",\n    \"duration_seconds\": 6941.461052805233,\n    \"entities_inserted\": 0,\n    \"entities_updated\": 0,\n    \"entities_deleted\": 0,\n    \"entities_failed\": 0,\n    \"error\": \"string\",\n    \"error_category\": \"oauth_credentials_expired\",\n    \"error_details\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    }\n  },\n  {\n    \"id\": \"f35e71f7-3809-8c5b-0717-78d307ba5f5b\",\n    \"source_connection_id\": \"22507acb-e7d2-20bf-3d39-5d8dae0b9bf4\",\n    \"status\": \"cancelled\",\n    \"started_at\": \"1994-01-13T13:37:21.864Z\",\n    \"completed_at\": \"2024-12-11T10:41:27.469Z\",\n    \"duration_seconds\": 3819.682964796105,\n    \"entities_inserted\": 0,\n    \"entities_updated\": 0,\n    \"entities_deleted\": 0,\n    \"entities_failed\": 0,\n    \"error\": \"string\",\n    \"error_category\": \"api_key_invalid\",\n    \"error_details\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7858dec8-98e3-43a5-8c14-4d98fbe2e2aa",
+              "name": "Source Connection Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "738de214-3317-47c3-8911-e417ecacf8bd",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71bba027-4b36-4676-97bb-a6c590af7da9",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed0dde34-4462-4bc7-b6cf-6e68a14529ae",
+          "name": "Run Sync",
+          "request": {
+            "name": "Run Sync",
+            "description": {
+              "content": "Trigger a data synchronization job for a source connection.\n\nStarts an asynchronous sync job that pulls the latest data from the connected\nsource. The job runs in the background and you can monitor its progress using\nthe jobs endpoint.\n\nFor continuous sync connections, this performs an incremental sync by default.\nUse `force_full_sync=true` to perform a complete re-sync of all data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-connections",
+                ":source_connection_id",
+                "run"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force_full_sync",
+                  "value": "false",
+                  "description": "Force a full sync ignoring cursor data. Only applies to continuous sync connections. Non-continuous connections always perform full syncs."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "source_connection_id",
+                  "description": "(Required) Unique identifier of the source connection to sync (UUID)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3713ffc0-4e26-4d8e-b627-5a9bfa0a532e",
+              "name": "Created sync job",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force_full_sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection to sync (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"556d68e0-1c38-bb94-9cec-7e6156769238\",\n  \"source_connection_id\": \"8be79ddb-c0b3-cd3b-f8a1-0f5e08bad4df\",\n  \"status\": \"running\",\n  \"started_at\": \"1962-10-09T15:30:21.467Z\",\n  \"completed_at\": \"2018-10-11T14:14:23.689Z\",\n  \"duration_seconds\": 6946.1978696994465,\n  \"entities_inserted\": 0,\n  \"entities_updated\": 0,\n  \"entities_deleted\": 0,\n  \"entities_failed\": 0,\n  \"error\": \"string\",\n  \"error_category\": \"oauth_credentials_expired\",\n  \"error_details\": {\n    \"key_0\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b6ff4be-37e6-4dac-b514-0a7773ffb43b",
+              "name": "Source Connection Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force_full_sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection to sync (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40a66e42-35f1-48ea-95a8-58420bcb8922",
+              "name": "Sync Already Running",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force_full_sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection to sync (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c41cf1a5-956f-4867-8527-0f79f6c9e03d",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force_full_sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection to sync (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "068d0cc0-bd47-45ee-a774-c48c6ebe39cd",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force_full_sync",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection to sync (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0b4d45c-de02-4b71-8487-b45e3e16a7a8",
+          "name": "Cancel Sync Job",
+          "request": {
+            "name": "Cancel Sync Job",
+            "description": {
+              "content": "Request cancellation of a running sync job.\n\n**State lifecycle**: `PENDING` / `RUNNING` → `CANCELLING` → `CANCELLED`\n\n1. The API immediately marks the job as **CANCELLING** in the database.\n2. A cancellation signal is sent to the Temporal workflow.\n3. The worker receives the signal, gracefully stops the sync pipeline\n   (cancels worker pool, source stream), and marks the job as **CANCELLED**.\n\nAlready-processed entities are retained in the vector database.\nIf the worker is unresponsive, a background cleanup job will force the\ntransition to CANCELLED after 3 minutes.\n\n**Note**: Only jobs in `PENDING` or `RUNNING` state can be cancelled.\nAttempting to cancel a `COMPLETED`, `FAILED`, or `CANCELLED` job returns 400.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "source-connections",
+                ":source_connection_id",
+                "jobs",
+                ":job_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "source_connection_id",
+                  "description": "(Required) Unique identifier of the source connection (UUID)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "job_id",
+                  "description": "(Required) Unique identifier of the sync job to cancel (UUID)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7dc6f0c7-6b88-4e59-ae29-5bdc08335948",
+              "name": "Job with cancellation status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id",
+                    "jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection (UUID)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "job_id",
+                      "description": "(Required) Unique identifier of the sync job to cancel (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"556d68e0-1c38-bb94-9cec-7e6156769238\",\n  \"source_connection_id\": \"8be79ddb-c0b3-cd3b-f8a1-0f5e08bad4df\",\n  \"status\": \"running\",\n  \"started_at\": \"1962-10-09T15:30:21.467Z\",\n  \"completed_at\": \"2018-10-11T14:14:23.689Z\",\n  \"duration_seconds\": 6946.1978696994465,\n  \"entities_inserted\": 0,\n  \"entities_updated\": 0,\n  \"entities_deleted\": 0,\n  \"entities_failed\": 0,\n  \"error\": \"string\",\n  \"error_category\": \"oauth_credentials_expired\",\n  \"error_details\": {\n    \"key_0\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0807297f-3e1c-43f2-b3ed-5b712c1edfef",
+              "name": "Job Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id",
+                    "jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection (UUID)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "job_id",
+                      "description": "(Required) Unique identifier of the sync job to cancel (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "704bfcf4-3693-4b1d-8a88-875b13d9748a",
+              "name": "Job Cannot Be Cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id",
+                    "jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection (UUID)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "job_id",
+                      "description": "(Required) Unique identifier of the sync job to cancel (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab90f5bf-eb68-4a87-adb9-7ae8a601082d",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id",
+                    "jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection (UUID)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "job_id",
+                      "description": "(Required) Unique identifier of the sync job to cancel (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7a1ce7c-a217-4901-8b51-154081ec3dd8",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "source-connections",
+                    ":source_connection_id",
+                    "jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "source_connection_id",
+                      "description": "(Required) Unique identifier of the source connection (UUID)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "job_id",
+                      "description": "(Required) Unique identifier of the sync job to cancel (UUID)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.airweave.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bfa0e5f2-659e-4802-8401-5e57f7c7031e",
+    "name": "API Reference collections source-connections API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}
