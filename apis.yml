@@ -33,6 +33,17 @@ created: '2026-07-17'
 modified: '2026-07-17'
 tags:
 - Company
+- Artificial Intelligence
+- Search
+- RAG
+- Retrieval
+- Agents
+- MCP
+- Vector Search
+- Data Integration
+- Context
+tags_raw:
+- Company
 - Ai
 - Search
 - RAG
@@ -49,6 +60,8 @@ apis:
   humanURL: https://docs.airweave.ai/api-reference
   baseURL: https://api.airweave.ai
   tags:
+  - Collection
+  tags_raw:
   - collections
   properties:
   - type: OpenAPI
@@ -91,6 +104,8 @@ apis:
   humanURL: https://docs.airweave.ai/api-reference
   baseURL: https://api.airweave.ai
   tags:
+  - Sources
+  tags_raw:
   - sources
   properties:
   - type: OpenAPI
@@ -105,6 +120,8 @@ apis:
   humanURL: https://docs.airweave.ai/api-reference
   baseURL: https://api.airweave.ai
   tags:
+  - Webhook
+  tags_raw:
   - webhooks
   properties:
   - type: OpenAPI
