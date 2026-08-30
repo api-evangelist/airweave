@@ -102,6 +102,8 @@ apis:
   humanURL: https://docs.airweave.ai/api-reference
   baseURL: https://api.airweave.ai
   tags:
+  - Source connections
+  tags_raw:
   - source-connections
   properties:
   - type: OpenAPI
