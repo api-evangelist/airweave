@@ -1,0 +1,31 @@
+# Front Door AI Index — airweave — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: airweave
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: airweave.ai
+  final_host: airweave.ai
+  ownership: own
+  owner: airweave
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 118
+  host_score: 118
+  density: 47.87
+  words: 2465
+  tiers:
+    agentic: 52
+    core: 66
+    model: 0
+  ambiguous: 46
+  top_terms:
+    AI: 58
+    agent: 46
+    RAG: 23
+    AI agent: 19
+    LLMs: 8
+    embedding: 6
+    agentic: 4

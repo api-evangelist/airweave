@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference collections sources API
+  title: Reference Sources API
   version: 1.0.0
 servers:
 - url: https://api.airweave.ai
@@ -8,7 +8,7 @@ servers:
 - url: http://localhost:8001
   description: Local
 tags:
-- name: sources
+- name: Sources
 paths:
   /sources:
     get:
@@ -34,7 +34,7 @@ paths:
 
         - **Supported auth providers**: Pre-configured OAuth providers available'
       tags:
-      - sources
+      - Sources
       parameters:
       - name: x-api-key
         in: header
@@ -83,7 +83,7 @@ paths:
 
         authentication and configuration values are required.'
       tags:
-      - sources
+      - Sources
       parameters:
       - name: short_name
         in: path
@@ -123,22 +123,37 @@ paths:
                 $ref: '#/components/schemas/RateLimitErrorResponse'
 components:
   schemas:
-    ValidationErrorLocItems:
-      oneOf:
-      - type: string
-      - type: integer
-      title: ValidationErrorLocItems
-    Fields:
+    RateLimitErrorResponse:
       type: object
       properties:
-        fields:
+        detail:
+          type: string
+          description: Error message explaining the rate limit
+      required:
+      - detail
+      description: 'Response returned when rate limit is exceeded (HTTP 429).
+
+
+        The API enforces rate limits to ensure fair usage. When exceeded,
+
+        wait for the duration specified in the Retry-After header before retrying.'
+      title: RateLimitErrorResponse
+    ValidationError:
+      type: object
+      properties:
+        loc:
           type: array
           items:
-            $ref: '#/components/schemas/ConfigField'
+            $ref: '#/components/schemas/ValidationErrorLocItems'
+        msg:
+          type: string
+        type:
+          type: string
       required:
-      - fields
-      description: Fields model.
-      title: Fields
+      - loc
+      - msg
+      - type
+      title: ValidationError
     Source:
       type: object
       properties:
@@ -249,22 +264,11 @@ components:
 
         Served from the in-memory SourceRegistry — no database row needed.'
       title: Source
-    ValidationError:
-      type: object
-      properties:
-        loc:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationErrorLocItems'
-        msg:
-          type: string
-        type:
-          type: string
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+    ValidationErrorLocItems:
+      oneOf:
+      - type: string
+      - type: integer
+      title: ValidationErrorLocItems
     ConfigField:
       type: object
       properties:
@@ -304,6 +308,17 @@ components:
       - type
       description: Config field model.
       title: ConfigField
+    Fields:
+      type: object
+      properties:
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigField'
+      required:
+      - fields
+      description: Fields model.
+      title: Fields
     HTTPValidationError:
       type: object
       properties:
@@ -322,21 +337,6 @@ components:
       - detail
       description: Response returned when a resource is not found (HTTP 404).
       title: NotFoundErrorResponse
-    RateLimitErrorResponse:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: Error message explaining the rate limit
-      required:
-      - detail
-      description: 'Response returned when rate limit is exceeded (HTTP 429).
-
-
-        The API enforces rate limits to ensure fair usage. When exceeded,
-
-        wait for the duration specified in the Retry-After header before retrying.'
-      title: RateLimitErrorResponse
   securitySchemes:
     default:
       type: apiKey

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference collections API
+  title: Reference Collections API
   version: 1.0.0
 servers:
 - url: https://api.airweave.ai
@@ -8,7 +8,7 @@ servers:
 - url: http://localhost:8001
   description: Local
 tags:
-- name: collections
+- name: Collections
 paths:
   /collections:
     get:
@@ -26,7 +26,7 @@ paths:
 
         and text search filtering.'
       tags:
-      - collections
+      - Collections
       parameters:
       - name: skip
         in: query
@@ -94,7 +94,7 @@ paths:
 
         - **Custom readable_id**: Provide your own identifier (must be unique and URL-safe)'
       tags:
-      - collections
+      - Collections
       parameters:
       - name: x-api-key
         in: header
@@ -138,7 +138,7 @@ paths:
 
         configuration details before making updates.'
       tags:
-      - collections
+      - Collections
       parameters:
       - name: readable_id
         in: path
@@ -193,7 +193,7 @@ paths:
 
         API endpoints and preserve existing integrations.'
       tags:
-      - collections
+      - Collections
       parameters:
       - name: readable_id
         in: path
@@ -255,7 +255,7 @@ paths:
 
         **Warning**: This action cannot be undone. All data will be permanently deleted.'
       tags:
-      - collections
+      - Collections
       parameters:
       - name: readable_id
         in: path
@@ -295,6 +295,42 @@ paths:
                 $ref: '#/components/schemas/RateLimitErrorResponse'
 components:
   schemas:
+    ValidationError:
+      type: object
+      properties:
+        loc:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorLocItems'
+        msg:
+          type: string
+        type:
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    RateLimitErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message explaining the rate limit
+      required:
+      - detail
+      description: 'Response returned when rate limit is exceeded (HTTP 429).
+
+
+        The API enforces rate limits to ensure fair usage. When exceeded,
+
+        wait for the duration specified in the Retry-After header before retrying.'
+      title: RateLimitErrorResponse
+    ValidationErrorLocItems:
+      oneOf:
+      - type: string
+      - type: integer
+      title: ValidationErrorLocItems
     CursorConfig:
       type: object
       properties:
@@ -308,11 +344,23 @@ components:
           description: Don't persist cursor progress
       description: Controls incremental sync cursor behavior.
       title: CursorConfig
-    ValidationErrorLocItems:
-      oneOf:
-      - type: string
-      - type: integer
-      title: ValidationErrorLocItems
+    HandlerConfig:
+      type: object
+      properties:
+        enable_vector_handlers:
+          type: boolean
+          default: true
+          description: Enable VectorDBHandler
+        enable_raw_data_handler:
+          type: boolean
+          default: true
+          description: Enable RawDataHandler (ARF)
+        enable_postgres_handler:
+          type: boolean
+          default: true
+          description: Enable EntityPostgresHandler
+      description: Controls which handlers run during sync.
+      title: HandlerConfig
     ValidationErrorDetail:
       type: object
       properties:
@@ -333,21 +381,18 @@ components:
       - type
       description: Details about a validation error for a specific field.
       title: ValidationErrorDetail
-    RateLimitErrorResponse:
+    SourceConnectionSummary:
       type: object
       properties:
-        detail:
+        short_name:
           type: string
-          description: Error message explaining the rate limit
+        name:
+          type: string
       required:
-      - detail
-      description: 'Response returned when rate limit is exceeded (HTTP 429).
-
-
-        The API enforces rate limits to ensure fair usage. When exceeded,
-
-        wait for the duration specified in the Retry-After header before retrying.'
-      title: RateLimitErrorResponse
+      - short_name
+      - name
+      description: Lightweight summary of a source connection for collection list display.
+      title: SourceConnectionSummary
     DestinationConfig:
       type: object
       properties:
@@ -373,137 +418,6 @@ components:
           description: Skip these destination UUIDs
       description: Controls where entities are written.
       title: DestinationConfig
-    CollectionStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - NEEDS SOURCE
-      - ERROR
-      description: Collection status enum.
-      title: CollectionStatus
-    ValidationError:
-      type: object
-      properties:
-        loc:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationErrorLocItems'
-        msg:
-          type: string
-        type:
-          type: string
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    BehaviorConfig:
-      type: object
-      properties:
-        skip_hash_comparison:
-          type: boolean
-          default: false
-          description: Force INSERT for all entities
-        replay_from_arf:
-          type: boolean
-          default: false
-          description: Replay from ARF storage instead of calling source
-        skip_guardrails:
-          type: boolean
-          default: false
-          description: Skip usage guardrails (entity count checks)
-      description: Miscellaneous execution behavior flags.
-      title: BehaviorConfig
-    ValidationErrorResponse:
-      type: object
-      properties:
-        detail:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationErrorDetail'
-          description: List of validation errors
-      required:
-      - detail
-      description: 'Response returned when request validation fails (HTTP 422).
-
-
-        This occurs when the request body contains invalid data, such as
-
-        malformed URLs, invalid event types, or missing required fields.'
-      title: ValidationErrorResponse
-    CollectionUpdate:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: Updated display name for the collection. Must be between 4 and 64 characters.
-        sync_config:
-          oneOf:
-          - $ref: '#/components/schemas/SyncConfig'
-          - type: 'null'
-          description: Default sync configuration for all syncs in this collection. This provides collection-level defaults that can be overridden at sync or job level.
-      description: 'Schema for updating an existing collection.
-
-
-        Allows updating the collection''s display name and default sync configuration.
-
-        The readable_id is immutable to maintain stable API endpoints and references.'
-      title: CollectionUpdate
-    SyncConfig:
-      type: object
-      properties:
-        destinations:
-          $ref: '#/components/schemas/DestinationConfig'
-        handlers:
-          $ref: '#/components/schemas/HandlerConfig'
-        cursor:
-          $ref: '#/components/schemas/CursorConfig'
-        behavior:
-          $ref: '#/components/schemas/BehaviorConfig'
-      description: "Sync configuration with automatic env var loading.\n\nEnv vars use double underscore as delimiter:\n    SYNC_CONFIG__HANDLERS__ENABLE_VECTOR_HANDLERS=false"
-      title: SyncConfig
-    CollectionCreate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Human-readable display name for the collection. This appears in the UI and should clearly describe the data contained within (e.g., 'Finance Data').
-        readable_id:
-          type:
-          - string
-          - 'null'
-          description: URL-safe unique identifier used in API endpoints. Must contain only lowercase letters, numbers, and hyphens. If not provided, it will be automatically generated from the collection name with a random suffix for uniqueness (e.g., 'finance-data-ab123').
-        sync_config:
-          oneOf:
-          - $ref: '#/components/schemas/SyncConfig'
-          - type: 'null'
-          description: Default sync configuration for all syncs in this collection. This provides collection-level defaults that can be overridden at sync or job level.
-      required:
-      - name
-      description: 'Schema for creating a new collection.
-
-
-        Collections serve as logical containers for organizing related data sources.
-
-        Once created, you can add source connections to populate the collection with data
-
-        from various sources like databases, APIs, and file systems.
-
-
-        You can optionally set a default sync configuration that will apply to all syncs
-
-        within this collection unless overridden at the sync or job level.'
-      title: CollectionCreate
-    HTTPValidationError:
-      type: object
-      properties:
-        detail:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
-      title: HTTPValidationError
     Collection:
       type: object
       properties:
@@ -581,6 +495,71 @@ components:
 
         Excludes vector_db_deployment_metadata_id (internal FK).'
       title: Collection
+    HTTPValidationError:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+      title: HTTPValidationError
+    CollectionCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Human-readable display name for the collection. This appears in the UI and should clearly describe the data contained within (e.g., 'Finance Data').
+        readable_id:
+          type:
+          - string
+          - 'null'
+          description: URL-safe unique identifier used in API endpoints. Must contain only lowercase letters, numbers, and hyphens. If not provided, it will be automatically generated from the collection name with a random suffix for uniqueness (e.g., 'finance-data-ab123').
+        sync_config:
+          oneOf:
+          - $ref: '#/components/schemas/SyncConfig'
+          - type: 'null'
+          description: Default sync configuration for all syncs in this collection. This provides collection-level defaults that can be overridden at sync or job level.
+      required:
+      - name
+      description: 'Schema for creating a new collection.
+
+
+        Collections serve as logical containers for organizing related data sources.
+
+        Once created, you can add source connections to populate the collection with data
+
+        from various sources like databases, APIs, and file systems.
+
+
+        You can optionally set a default sync configuration that will apply to all syncs
+
+        within this collection unless overridden at the sync or job level.'
+      title: CollectionCreate
+    CollectionStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - NEEDS SOURCE
+      - ERROR
+      description: Collection status enum.
+      title: CollectionStatus
+    BehaviorConfig:
+      type: object
+      properties:
+        skip_hash_comparison:
+          type: boolean
+          default: false
+          description: Force INSERT for all entities
+        replay_from_arf:
+          type: boolean
+          default: false
+          description: Replay from ARF storage instead of calling source
+        skip_guardrails:
+          type: boolean
+          default: false
+          description: Skip usage guardrails (entity count checks)
+      description: Miscellaneous execution behavior flags.
+      title: BehaviorConfig
     NotFoundErrorResponse:
       type: object
       properties:
@@ -591,35 +570,56 @@ components:
       - detail
       description: Response returned when a resource is not found (HTTP 404).
       title: NotFoundErrorResponse
-    HandlerConfig:
+    SyncConfig:
       type: object
       properties:
-        enable_vector_handlers:
-          type: boolean
-          default: true
-          description: Enable VectorDBHandler
-        enable_raw_data_handler:
-          type: boolean
-          default: true
-          description: Enable RawDataHandler (ARF)
-        enable_postgres_handler:
-          type: boolean
-          default: true
-          description: Enable EntityPostgresHandler
-      description: Controls which handlers run during sync.
-      title: HandlerConfig
-    SourceConnectionSummary:
+        destinations:
+          $ref: '#/components/schemas/DestinationConfig'
+        handlers:
+          $ref: '#/components/schemas/HandlerConfig'
+        cursor:
+          $ref: '#/components/schemas/CursorConfig'
+        behavior:
+          $ref: '#/components/schemas/BehaviorConfig'
+      description: "Sync configuration with automatic env var loading.\n\nEnv vars use double underscore as delimiter:\n    SYNC_CONFIG__HANDLERS__ENABLE_VECTOR_HANDLERS=false"
+      title: SyncConfig
+    ValidationErrorResponse:
       type: object
       properties:
-        short_name:
-          type: string
-        name:
-          type: string
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorDetail'
+          description: List of validation errors
       required:
-      - short_name
-      - name
-      description: Lightweight summary of a source connection for collection list display.
-      title: SourceConnectionSummary
+      - detail
+      description: 'Response returned when request validation fails (HTTP 422).
+
+
+        This occurs when the request body contains invalid data, such as
+
+        malformed URLs, invalid event types, or missing required fields.'
+      title: ValidationErrorResponse
+    CollectionUpdate:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Updated display name for the collection. Must be between 4 and 64 characters.
+        sync_config:
+          oneOf:
+          - $ref: '#/components/schemas/SyncConfig'
+          - type: 'null'
+          description: Default sync configuration for all syncs in this collection. This provides collection-level defaults that can be overridden at sync or job level.
+      description: 'Schema for updating an existing collection.
+
+
+        Allows updating the collection''s display name and default sync configuration.
+
+        The readable_id is immutable to maintain stable API endpoints and references.'
+      title: CollectionUpdate
   securitySchemes:
     default:
       type: apiKey

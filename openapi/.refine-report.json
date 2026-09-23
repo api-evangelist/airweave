@@ -1,11 +1,7 @@
 {
   "provider": "airweave",
   "sources": [
-    "airweave-collections-api-openapi.yml",
-    "airweave-collections-search-api-openapi.yml",
-    "airweave-source-connections-api-openapi.yml",
-    "airweave-sources-api-openapi.yml",
-    "airweave-webhooks-api-openapi.yml"
+    "_original/airweave-openapi.json"
   ],
   "outputs": [
     "airweave-collections-api-openapi.yml",
@@ -17,6 +13,21 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "airweave-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "airweave-openapi.json: declared missing tag: collections",
+    "airweave-openapi.json: declared missing tag: collections > search",
+    "airweave-openapi.json: declared missing tag: source-connections",
+    "airweave-openapi.json: declared missing tag: sources",
+    "airweave-openapi.json: declared missing tag: webhooks",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "airweave-collections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "airweave-collections-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "airweave-source-connections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "airweave-sources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "airweave-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

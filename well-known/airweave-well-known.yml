@@ -1,31 +1,56 @@
-generated: '2026-07-17'
+generated: '2026-09-19'
 method: searched
 hosts:
-  - host: https://docs.airweave.ai
-    documents:
-      - path: /.well-known/api-catalog       # RFC 9727
-        status: 200
-        file: airweave-api-catalog.json
-      - path: /.well-known/security.txt
-        status: 404
-      - path: /.well-known/openid-configuration
-        status: 404
-      - path: /.well-known/oauth-authorization-server
-        status: 404
-      - path: /.well-known/ai-plugin.json
-        status: 404
-  - host: https://airweave.ai
-    documents:
-      - path: /.well-known/security.txt
-        status: 404
-      - path: /.well-known/api-catalog
-        status: 404
-  - host: https://api.airweave.ai
-    documents:
-      - path: /.well-known/openid-configuration
-        status: 404
-      - path: /.well-known/oauth-authorization-server
-        status: 404
-notes: >-
-  docs.airweave.ai publishes an RFC 9727 API catalog linkset pointing to the public
-  OpenAPI at https://docs.airweave.ai/openapi/api-reference.yaml.
+- host: https://docs.airweave.ai
+  documents:
+  - path: /.well-known/api-catalog
+    status: 200
+    file: airweave-api-catalog.json
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://airweave.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+- host: https://api.airweave.ai
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+- host: https://mcp.airweave.ai
+  documents:
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: airweave-mcp-oauth-protected-resource.json
+    bytes: 188
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: airweave-mcp-oauth-authorization-server.json
+    bytes: 607
+  path_echo_control: passed
+notes: docs.airweave.ai publishes an RFC 9727 API catalog linkset pointing to the public OpenAPI at https://docs.airweave.ai/openapi/api-reference.yaml.
+x-mcp-probe:
+  probed: '2026-09-19'
+  issue: roadmap#321, roadmap#337
+  documents:
+  - host: https://mcp.airweave.ai
+    path: /.well-known/oauth-protected-resource
+    file: airweave-mcp-oauth-protected-resource.json
+  - host: https://mcp.airweave.ai
+    path: /.well-known/oauth-authorization-server
+    file: airweave-mcp-oauth-authorization-server.json
+  validated_on: resource (RFC 9728) / issuer (RFC 8414, OIDC)
+  negative_control: one per host; a 2xx JSON object at an impossible path discards the host
+note: 'MCP-host OAuth discovery added 2026-09-19 (roadmap#321/#337): the harvest visits a provider''s
+  primary hosts, and RFC 9728 protected-resource metadata lives on the MCP host, so these documents existed
+  and were invisible to the scorer. Fetched live and validated on `resource`/`issuer`; one negative control
+  per host.'
