@@ -295,22 +295,39 @@ paths:
                 $ref: '#/components/schemas/RateLimitErrorResponse'
 components:
   schemas:
-    ValidationError:
+    CollectionStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - NEEDS SOURCE
+      - ERROR
+      description: Collection status enum.
+      title: CollectionStatus
+    HTTPValidationError:
       type: object
       properties:
-        loc:
+        detail:
           type: array
           items:
-            $ref: '#/components/schemas/ValidationErrorLocItems'
-        msg:
-          type: string
-        type:
-          type: string
+            $ref: '#/components/schemas/ValidationError'
+      title: HTTPValidationError
+    ValidationErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorDetail'
+          description: List of validation errors
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - detail
+      description: 'Response returned when request validation fails (HTTP 422).
+
+
+        This occurs when the request body contains invalid data, such as
+
+        malformed URLs, invalid event types, or missing required fields.'
+      title: ValidationErrorResponse
     RateLimitErrorResponse:
       type: object
       properties:
@@ -326,24 +343,36 @@ components:
 
         wait for the duration specified in the Retry-After header before retrying.'
       title: RateLimitErrorResponse
-    ValidationErrorLocItems:
-      oneOf:
-      - type: string
-      - type: integer
-      title: ValidationErrorLocItems
-    CursorConfig:
+    BehaviorConfig:
       type: object
       properties:
-        skip_load:
+        skip_hash_comparison:
           type: boolean
           default: false
-          description: Don't load cursor (fetch all entities)
-        skip_updates:
+          description: Force INSERT for all entities
+        replay_from_arf:
           type: boolean
           default: false
-          description: Don't persist cursor progress
-      description: Controls incremental sync cursor behavior.
-      title: CursorConfig
+          description: Replay from ARF storage instead of calling source
+        skip_guardrails:
+          type: boolean
+          default: false
+          description: Skip usage guardrails (entity count checks)
+      description: Miscellaneous execution behavior flags.
+      title: BehaviorConfig
+    SyncConfig:
+      type: object
+      properties:
+        destinations:
+          $ref: '#/components/schemas/DestinationConfig'
+        handlers:
+          $ref: '#/components/schemas/HandlerConfig'
+        cursor:
+          $ref: '#/components/schemas/CursorConfig'
+        behavior:
+          $ref: '#/components/schemas/BehaviorConfig'
+      description: "Sync configuration with automatic env var loading.\n\nEnv vars use double underscore as delimiter:\n    SYNC_CONFIG__HANDLERS__ENABLE_VECTOR_HANDLERS=false"
+      title: SyncConfig
     HandlerConfig:
       type: object
       properties:
@@ -361,63 +390,6 @@ components:
           description: Enable EntityPostgresHandler
       description: Controls which handlers run during sync.
       title: HandlerConfig
-    ValidationErrorDetail:
-      type: object
-      properties:
-        loc:
-          type: array
-          items:
-            type: string
-          description: Location of the error (e.g., ['body', 'url'])
-        msg:
-          type: string
-          description: Human-readable error message
-        type:
-          type: string
-          description: Error type identifier
-      required:
-      - loc
-      - msg
-      - type
-      description: Details about a validation error for a specific field.
-      title: ValidationErrorDetail
-    SourceConnectionSummary:
-      type: object
-      properties:
-        short_name:
-          type: string
-        name:
-          type: string
-      required:
-      - short_name
-      - name
-      description: Lightweight summary of a source connection for collection list display.
-      title: SourceConnectionSummary
-    DestinationConfig:
-      type: object
-      properties:
-        skip_vespa:
-          type: boolean
-          default: false
-          description: Skip writing to native Vespa
-        target_destinations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-            format: uuid
-          description: If set, ONLY write to these destination UUIDs
-        exclude_destinations:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-            format: uuid
-          description: Skip these destination UUIDs
-      description: Controls where entities are written.
-      title: DestinationConfig
     Collection:
       type: object
       properties:
@@ -495,14 +467,107 @@ components:
 
         Excludes vector_db_deployment_metadata_id (internal FK).'
       title: Collection
-    HTTPValidationError:
+    ValidationErrorDetail:
+      type: object
+      properties:
+        loc:
+          type: array
+          items:
+            type: string
+          description: Location of the error (e.g., ['body', 'url'])
+        msg:
+          type: string
+          description: Human-readable error message
+        type:
+          type: string
+          description: Error type identifier
+      required:
+      - loc
+      - msg
+      - type
+      description: Details about a validation error for a specific field.
+      title: ValidationErrorDetail
+    ValidationError:
+      type: object
+      properties:
+        loc:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorLocItems'
+        msg:
+          type: string
+        type:
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    NotFoundErrorResponse:
       type: object
       properties:
         detail:
-          type: array
+          type: string
+          description: Error message describing what was not found
+      required:
+      - detail
+      description: Response returned when a resource is not found (HTTP 404).
+      title: NotFoundErrorResponse
+    ValidationErrorLocItems:
+      oneOf:
+      - type: string
+      - type: integer
+      title: ValidationErrorLocItems
+    DestinationConfig:
+      type: object
+      properties:
+        skip_vespa:
+          type: boolean
+          default: false
+          description: Skip writing to native Vespa
+        target_destinations:
+          type:
+          - array
+          - 'null'
           items:
-            $ref: '#/components/schemas/ValidationError'
-      title: HTTPValidationError
+            type: string
+            format: uuid
+          description: If set, ONLY write to these destination UUIDs
+        exclude_destinations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Skip these destination UUIDs
+      description: Controls where entities are written.
+      title: DestinationConfig
+    SourceConnectionSummary:
+      type: object
+      properties:
+        short_name:
+          type: string
+        name:
+          type: string
+      required:
+      - short_name
+      - name
+      description: Lightweight summary of a source connection for collection list display.
+      title: SourceConnectionSummary
+    CursorConfig:
+      type: object
+      properties:
+        skip_load:
+          type: boolean
+          default: false
+          description: Don't load cursor (fetch all entities)
+        skip_updates:
+          type: boolean
+          default: false
+          description: Don't persist cursor progress
+      description: Controls incremental sync cursor behavior.
+      title: CursorConfig
     CollectionCreate:
       type: object
       properties:
@@ -535,71 +600,6 @@ components:
 
         within this collection unless overridden at the sync or job level.'
       title: CollectionCreate
-    CollectionStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - NEEDS SOURCE
-      - ERROR
-      description: Collection status enum.
-      title: CollectionStatus
-    BehaviorConfig:
-      type: object
-      properties:
-        skip_hash_comparison:
-          type: boolean
-          default: false
-          description: Force INSERT for all entities
-        replay_from_arf:
-          type: boolean
-          default: false
-          description: Replay from ARF storage instead of calling source
-        skip_guardrails:
-          type: boolean
-          default: false
-          description: Skip usage guardrails (entity count checks)
-      description: Miscellaneous execution behavior flags.
-      title: BehaviorConfig
-    NotFoundErrorResponse:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: Error message describing what was not found
-      required:
-      - detail
-      description: Response returned when a resource is not found (HTTP 404).
-      title: NotFoundErrorResponse
-    SyncConfig:
-      type: object
-      properties:
-        destinations:
-          $ref: '#/components/schemas/DestinationConfig'
-        handlers:
-          $ref: '#/components/schemas/HandlerConfig'
-        cursor:
-          $ref: '#/components/schemas/CursorConfig'
-        behavior:
-          $ref: '#/components/schemas/BehaviorConfig'
-      description: "Sync configuration with automatic env var loading.\n\nEnv vars use double underscore as delimiter:\n    SYNC_CONFIG__HANDLERS__ENABLE_VECTOR_HANDLERS=false"
-      title: SyncConfig
-    ValidationErrorResponse:
-      type: object
-      properties:
-        detail:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationErrorDetail'
-          description: List of validation errors
-      required:
-      - detail
-      description: 'Response returned when request validation fails (HTTP 422).
-
-
-        This occurs when the request body contains invalid data, such as
-
-        malformed URLs, invalid event types, or missing required fields.'
-      title: ValidationErrorResponse
     CollectionUpdate:
       type: object
       properties:

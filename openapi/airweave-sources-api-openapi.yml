@@ -123,6 +123,14 @@ paths:
                 $ref: '#/components/schemas/RateLimitErrorResponse'
 components:
   schemas:
+    HTTPValidationError:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+      title: HTTPValidationError
     RateLimitErrorResponse:
       type: object
       properties:
@@ -138,6 +146,56 @@ components:
 
         wait for the duration specified in the Retry-After header before retrying.'
       title: RateLimitErrorResponse
+    ConfigField:
+      type: object
+      properties:
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+        required:
+          type: boolean
+          default: true
+        items_type:
+          type:
+          - string
+          - 'null'
+        feature_flag:
+          type:
+          - string
+          - 'null'
+        is_secret:
+          type: boolean
+          default: false
+        enum_values:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      required:
+      - name
+      - title
+      - type
+      description: Config field model.
+      title: ConfigField
+    Fields:
+      type: object
+      properties:
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigField'
+      required:
+      - fields
+      description: Fields model.
+      title: Fields
     ValidationError:
       type: object
       properties:
@@ -154,6 +212,16 @@ components:
       - msg
       - type
       title: ValidationError
+    NotFoundErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message describing what was not found
+      required:
+      - detail
+      description: Response returned when a resource is not found (HTTP 404).
+      title: NotFoundErrorResponse
     Source:
       type: object
       properties:
@@ -269,74 +337,6 @@ components:
       - type: string
       - type: integer
       title: ValidationErrorLocItems
-    ConfigField:
-      type: object
-      properties:
-        name:
-          type: string
-        title:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        type:
-          type: string
-        required:
-          type: boolean
-          default: true
-        items_type:
-          type:
-          - string
-          - 'null'
-        feature_flag:
-          type:
-          - string
-          - 'null'
-        is_secret:
-          type: boolean
-          default: false
-        enum_values:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-      required:
-      - name
-      - title
-      - type
-      description: Config field model.
-      title: ConfigField
-    Fields:
-      type: object
-      properties:
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConfigField'
-      required:
-      - fields
-      description: Fields model.
-      title: Fields
-    HTTPValidationError:
-      type: object
-      properties:
-        detail:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
-      title: HTTPValidationError
-    NotFoundErrorResponse:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: Error message describing what was not found
-      required:
-      - detail
-      description: Response returned when a resource is not found (HTTP 404).
-      title: NotFoundErrorResponse
   securitySchemes:
     default:
       type: apiKey

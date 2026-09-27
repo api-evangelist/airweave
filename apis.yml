@@ -73,7 +73,7 @@ tags_raw:
 - Context
 apis:
 - aid: airweave:airweave-collections-api
-  name: Airweave collections API
+  name: Airweave Collections API
   description: The collections API from Airweave — 2 operation(s) for collections.
   humanURL: https://docs.airweave.ai/api-reference
   baseURL: https://api.airweave.ai
@@ -103,7 +103,7 @@ apis:
   - type: APIReference
     url: https://docs.airweave.ai/api-reference
 - aid: airweave:airweave-source-connections-api
-  name: Airweave source-connections API
+  name: Airweave Source Connections API
   description: The source-connections API from Airweave — 5 operation(s) for source-connections.
   humanURL: https://docs.airweave.ai/api-reference
   baseURL: https://api.airweave.ai
@@ -119,7 +119,7 @@ apis:
   - type: APIReference
     url: https://docs.airweave.ai/api-reference
 - aid: airweave:airweave-sources-api
-  name: Airweave sources API
+  name: Airweave Sources API
   description: The sources API from Airweave — 2 operation(s) for sources.
   humanURL: https://docs.airweave.ai/api-reference
   baseURL: https://api.airweave.ai
@@ -135,7 +135,7 @@ apis:
   - type: APIReference
     url: https://docs.airweave.ai/api-reference
 - aid: airweave:airweave-webhooks-api
-  name: Airweave webhooks API
+  name: Airweave Webhooks API
   description: The webhooks API from Airweave — 5 operation(s) for webhooks.
   humanURL: https://docs.airweave.ai/api-reference
   baseURL: https://api.airweave.ai
