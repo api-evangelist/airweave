@@ -131,97 +131,6 @@ components:
           items:
             $ref: '#/components/schemas/ValidationError'
       title: HTTPValidationError
-    RateLimitErrorResponse:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: Error message explaining the rate limit
-      required:
-      - detail
-      description: 'Response returned when rate limit is exceeded (HTTP 429).
-
-
-        The API enforces rate limits to ensure fair usage. When exceeded,
-
-        wait for the duration specified in the Retry-After header before retrying.'
-      title: RateLimitErrorResponse
-    ConfigField:
-      type: object
-      properties:
-        name:
-          type: string
-        title:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        type:
-          type: string
-        required:
-          type: boolean
-          default: true
-        items_type:
-          type:
-          - string
-          - 'null'
-        feature_flag:
-          type:
-          - string
-          - 'null'
-        is_secret:
-          type: boolean
-          default: false
-        enum_values:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-      required:
-      - name
-      - title
-      - type
-      description: Config field model.
-      title: ConfigField
-    Fields:
-      type: object
-      properties:
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConfigField'
-      required:
-      - fields
-      description: Fields model.
-      title: Fields
-    ValidationError:
-      type: object
-      properties:
-        loc:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationErrorLocItems'
-        msg:
-          type: string
-        type:
-          type: string
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    NotFoundErrorResponse:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: Error message describing what was not found
-      required:
-      - detail
-      description: Response returned when a resource is not found (HTTP 404).
-      title: NotFoundErrorResponse
     Source:
       type: object
       properties:
@@ -332,11 +241,102 @@ components:
 
         Served from the in-memory SourceRegistry — no database row needed.'
       title: Source
+    RateLimitErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message explaining the rate limit
+      required:
+      - detail
+      description: 'Response returned when rate limit is exceeded (HTTP 429).
+
+
+        The API enforces rate limits to ensure fair usage. When exceeded,
+
+        wait for the duration specified in the Retry-After header before retrying.'
+      title: RateLimitErrorResponse
+    NotFoundErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message describing what was not found
+      required:
+      - detail
+      description: Response returned when a resource is not found (HTTP 404).
+      title: NotFoundErrorResponse
+    ConfigField:
+      type: object
+      properties:
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+        required:
+          type: boolean
+          default: true
+        items_type:
+          type:
+          - string
+          - 'null'
+        feature_flag:
+          type:
+          - string
+          - 'null'
+        is_secret:
+          type: boolean
+          default: false
+        enum_values:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      required:
+      - name
+      - title
+      - type
+      description: Config field model.
+      title: ConfigField
     ValidationErrorLocItems:
       oneOf:
       - type: string
       - type: integer
       title: ValidationErrorLocItems
+    ValidationError:
+      type: object
+      properties:
+        loc:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorLocItems'
+        msg:
+          type: string
+        type:
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Fields:
+      type: object
+      properties:
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigField'
+      required:
+      - fields
+      description: Fields model.
+      title: Fields
   securitySchemes:
     default:
       type: apiKey
