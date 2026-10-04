@@ -123,14 +123,21 @@ paths:
                 $ref: '#/components/schemas/RateLimitErrorResponse'
 components:
   schemas:
-    HTTPValidationError:
+    RateLimitErrorResponse:
       type: object
       properties:
         detail:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
-      title: HTTPValidationError
+          type: string
+          description: Error message explaining the rate limit
+      required:
+      - detail
+      description: 'Response returned when rate limit is exceeded (HTTP 429).
+
+
+        The API enforces rate limits to ensure fair usage. When exceeded,
+
+        wait for the duration specified in the Retry-After header before retrying.'
+      title: RateLimitErrorResponse
     Source:
       type: object
       properties:
@@ -241,21 +248,30 @@ components:
 
         Served from the in-memory SourceRegistry — no database row needed.'
       title: Source
-    RateLimitErrorResponse:
+    ValidationError:
+      type: object
+      properties:
+        loc:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorLocItems'
+        msg:
+          type: string
+        type:
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
       type: object
       properties:
         detail:
-          type: string
-          description: Error message explaining the rate limit
-      required:
-      - detail
-      description: 'Response returned when rate limit is exceeded (HTTP 429).
-
-
-        The API enforces rate limits to ensure fair usage. When exceeded,
-
-        wait for the duration specified in the Retry-After header before retrying.'
-      title: RateLimitErrorResponse
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+      title: HTTPValidationError
     NotFoundErrorResponse:
       type: object
       properties:
@@ -266,6 +282,17 @@ components:
       - detail
       description: Response returned when a resource is not found (HTTP 404).
       title: NotFoundErrorResponse
+    Fields:
+      type: object
+      properties:
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigField'
+      required:
+      - fields
+      description: Fields model.
+      title: Fields
     ConfigField:
       type: object
       properties:
@@ -310,33 +337,6 @@ components:
       - type: string
       - type: integer
       title: ValidationErrorLocItems
-    ValidationError:
-      type: object
-      properties:
-        loc:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationErrorLocItems'
-        msg:
-          type: string
-        type:
-          type: string
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    Fields:
-      type: object
-      properties:
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConfigField'
-      required:
-      - fields
-      description: Fields model.
-      title: Fields
   securitySchemes:
     default:
       type: apiKey
