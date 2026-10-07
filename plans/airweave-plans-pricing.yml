@@ -1,0 +1,52 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://airweave.ai/#pricing
+sources:
+- https://airweave.ai/#pricing
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: tiered-subscription
+delivery:
+  delivery: open-core
+  method: page
+  read: '2026-10-07'
+  evidence: Yes. Airweave is open source and can be self-hosted or used via the hosted platform.
+  free_edition: Developer
+  managed_tier: Pro
+published: true
+note: Monthly/yearly toggle (yearly save 20%); prices shown monthly. Page states Airweave is open source
+  and can be self-hosted or used via hosted platform; no licence named.
+plan_count: 4
+currency: USD
+plans:
+- name: Developer
+  price_text: Free
+  period: month
+  included_quota: 10 source connections, 50 queries / mo, 50K entities synced / mo, Community Support
+- name: Pro
+  price_text: $16/mo
+  price: 16
+  currency: USD
+  period: month
+  included_quota: 50 source connections, 500 queries / mo, 100K entities synced / mo, 2 team members,
+    Email support
+- name: Startup
+  price_text: $239/mo
+  price: 239
+  currency: USD
+  period: month
+  included_quota: 1000 source connections, 5K queries / mo, 1M entities synced / mo, 10 team members,
+    Dedicated Slack support, Dedicated onboarding
+- name: Enterprise
+  price_text: Custom
+  period: none
+  included_quota: 'Unlimited source connections, Custom usage limits, Tailored onboarding, Dedicated priority
+    support; add-ons: custom integrations, on-prem deployment, SSO, RBAC, SLAs'
+rate_limit_statements:
+- 50 queries / mo
+- 500 queries / mo
+- 5K queries / mo
