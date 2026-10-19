@@ -48,3 +48,92 @@
     builder: Pipedream repo (component)
   status: not-a-workflow
   arazzo: null
+- slug: airweave-npm-registry
+  label: npm registry
+  partner: npm
+  partner_name: npm registry
+  category: official SDK (JavaScript/TypeScript)
+  type: register
+  channel: package-registry
+  evidence: https://www.npmjs.com/package/@airweave/cli
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@airweave/cli'
+      version: 0.1.15
+      released: '2026-03-24'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@airweave/cli
+      repo_leg: github-org:airweave-ai
+      publisher_leg: email:airweave.ai
+      matched_by: domain
+    - name: '@airweave/connect-js'
+      version: 0.9.62
+      released: '2026-04-07'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@airweave/connect-js
+      repo_leg: github-org:airweave-ai
+      publisher_leg: email:airweave.ai
+      matched_by: domain
+    - name: '@airweave/connect-react'
+      version: 0.9.62
+      released: '2026-04-07'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@airweave/connect-react
+      repo_leg: github-org:airweave-ai
+      publisher_leg: email:airweave.ai
+      matched_by: domain
+    - name: '@airweave/sdk'
+      version: 0.9.62
+      released: '2026-04-07'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@airweave/sdk
+      repo_leg: github-org:airweave-ai
+      publisher_leg: email:airweave.ai
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: airweave-pypi
+  label: PyPI
+  partner: pypi
+  partner_name: PyPI
+  category: official SDK (Python)
+  type: register
+  channel: package-registry
+  evidence: https://pypi.org/project/airweave-cli/
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: PyPI (public registry JSON)
+    spec_file: null
+    language: Python
+    packages:
+    - name: airweave-cli
+      version: 0.1.15
+      released: '2026-03-24'
+      released_field: upload_time
+      lapsed: false
+      page: https://pypi.org/project/airweave-cli/
+      repo_leg: github-org:airweave-ai
+      publisher_leg: email:airweave.ai
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
