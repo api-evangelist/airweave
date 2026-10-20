@@ -144,13 +144,78 @@ edges:
     builder: Pipedream repo (component)
   detected_by: sweep-workflow-automation.py
   first_seen: '2026-10-15'
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official CLI (npm registry)
+  evidence: https://www.npmjs.com/package/@airweave/cli
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public package index)
+    spec_file: null
+    packages:
+    - name: '@airweave/cli'
+      version: 0.1.15
+      released: '2026-03-24'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@airweave/cli
+      cli: bin airweave
+      repo_leg: github-org:airweave-ai
+      publisher_leg: email:airweave.ai
+      matched_by: domain
+    current: true
+    signal_note: 'the provider''s own command-line tool on a package manager: distribution, not an integration;
+      lapsed = no release in 24 months or deprecated / disabled by the manager'
+    detected_by: sweep-official-clis.py
+    detected: '2026-10-20'
+  detected_by: sweep-official-clis.py
+  first_seen: '2026-10-20'
+- partner_name: PyPI
+  partner: pypi
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official CLI (PyPI)
+  evidence: https://pypi.org/project/airweave-cli/
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: PyPI (public package index)
+    spec_file: null
+    packages:
+    - name: airweave-cli
+      version: 0.1.15
+      released: '2026-03-24'
+      released_field: upload_time
+      lapsed: false
+      page: https://pypi.org/project/airweave-cli/
+      cli: 'PyPI name/summary: The Airweave CLI for developers and AI agents.'
+      repo_leg: github-org:airweave-ai
+      publisher_leg: email:airweave.ai
+      matched_by: domain
+    current: true
+    signal_note: 'the provider''s own command-line tool on a package manager: distribution, not an integration;
+      lapsed = no release in 24 months or deprecated / disabled by the manager'
+    detected_by: sweep-official-clis.py
+    detected: '2026-10-20'
+  detected_by: sweep-official-clis.py
+  first_seen: '2026-10-20'
 generated: '2026-10-14'
 method: searched
 checked:
 - https://api.nuget.org/v3
+- https://cdn.winget.microsoft.com/cache
 - https://crates.io/api/v1
+- https://formulae.brew.sh/api/cask.json
+- https://formulae.brew.sh/api/formula.json
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
 - https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/
+- https://github.com/ScoopInstaller/Extras
+- https://github.com/ScoopInstaller/Main
 - https://proxy.golang.org
 - https://pypi.org/pypi
 - https://registry.modelcontextprotocol.io/v0/servers
