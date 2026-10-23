@@ -342,3 +342,9 @@ components:
       type: apiKey
       in: header
       name: x-api-key
+x-provenance:
+  method: harvested
+  publisher: Airweave
+  source: https://docs.airweave.ai/openapi.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
