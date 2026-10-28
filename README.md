@@ -64,6 +64,146 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Airweave is a company surfaced as a portfolio company of homebrew and added to the API Evangelist network as a stub for enrichment. Sector: ai. This profile is a lead awaiting the enrichment pipeline.
+Airweave is an open-source (MIT) context-retrieval layer that lets AI agents and RAG pipelines search across 50+ connected apps and databases through a single API. It syncs data from sources like Slack, Notion, GitHub, Google Drive, and Postgres, then exposes instant (sub-second vector), classic (LLM-planned), and agentic (multi-step) search over unified collections. Query it via the REST API, official Python and TypeScript SDKs, a CLI, an embeddable Connect UI widget, or a hosted Model Context Protocol (MCP) server, with real-time Svix-backed webhooks for sync and source-connection lifecycle events.
 
-Backed by: homebrew — https://airweave.ai
+**Areas:** Company · Artificial Intelligence · Search · RAG · Retrieval · Agents · MCP · Vector Search · Data Integration · Context
+
+## Airweave on APIs.io
+
+Everything profiled for Airweave is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/airweave/](https://apis.io/providers/airweave/)** — or go straight to one of the APIs or properties below.
+
+### APIs (5)
+
+- [Airweave Collections API](https://apis.io/apis/airweave/airweave-collections-api/) — The collections API from Airweave — 2 operation(s) for collections.
+- [Airweave collections > search API](https://apis.io/apis/airweave/airweave-collections-search-api/) — The collections > search API from Airweave — 4 operation(s) for collections > search.
+- [Airweave Source Connections API](https://apis.io/apis/airweave/airweave-source-connections-api/) — The source-connections API from Airweave — 5 operation(s) for source-connections.
+- [Airweave Sources API](https://apis.io/apis/airweave/airweave-sources-api/) — The sources API from Airweave — 2 operation(s) for sources.
+- [Airweave Webhooks API](https://apis.io/apis/airweave/airweave-webhooks-api/) — The webhooks API from Airweave — 5 operation(s) for webhooks.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Airweave Webhooks](https://apis.io/asyncapis/airweave/airweave-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [airweave](https://apis.io/servers/airweave/airweave/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Airweave Agentic Access](https://apis.io/agentic-access/airweave/airweave-agentic-access/)
+
+#### Collections (5)
+
+Postman and Open Collection request collections.
+
+- [API Reference collections API](https://apis.io/collections/airweave/open-airweave-collections-api/)
+- [API Reference collections collections > search API](https://apis.io/collections/airweave/open-airweave-collections-search-api/)
+- [API Reference collections source-connections API](https://apis.io/collections/airweave/open-airweave-source-connections-api/)
+- [API Reference collections sources API](https://apis.io/collections/airweave/open-airweave-sources-api/)
+- [API Reference collections webhooks API](https://apis.io/collections/airweave/open-airweave-webhooks-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Airweave Openapi Overlay](https://apis.io/overlays/airweave/airweave-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Airweave Authentication](https://apis.io/security/airweave/airweave-authentication/)
+- [Airweave Domain Security](https://apis.io/security/airweave/airweave-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Airweave Plans Pricing](https://apis.io/plans/airweave/airweave-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Airweave Rate Limits](https://apis.io/rate-limits/airweave/airweave-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://airweave.ai)
+- [Documentation](https://docs.airweave.ai/welcome)
+- [Getting started](https://docs.airweave.ai/quickstart)
+- [API reference](https://docs.airweave.ai/api-reference)
+- [Pricing](https://airweave.ai/#pricing)
+- [Sign up](https://app.airweave.ai/)
+- [Support](https://airweave.ai/contact)
+- [Blog](https://airweave.ai/blog)
+- [Terms of service](https://airweave.ai/terms-conditions)
+- [Privacy policy](https://airweave.ai/privacy-policy)
+- [GitHub](https://github.com/airweave-ai)
+
+## API Evangelist rating
+
+**Kin Score 54.6** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 57.9 |
+| Contract governance | 4.5 |
+| Operational transparency | 42.1 |
+| Developer ergonomics | 73.2 |
+| Access clarity | 57.9 |
+
+**Agent readiness 60.6** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 22.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/airweave/](https://apis.io/providers/airweave/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Airweave: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/airweave/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
